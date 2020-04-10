@@ -1,0 +1,127 @@
+<!DOCTYPE html><html lang="[&quot;en&quot;,&quot;zh-TW&quot;,&quot;default&quot;]"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.0.0-rc.0" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.0.0-rc.0" type="image/png" sizes="32x32"><meta name="description" content="Previous       We have established connection to 4G LTE network                     Goal       We are going to turn the Raspberry Pi into a Router for our devices, pick your need:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Raspberry Pi as 4G LTE Router">
+<meta property="og:url" content="https://newjerseystyle.github.io/en/2020/Raspberry-Pi-as-4G-LTE-Router/index.html">
+<meta property="og:site_name" content="ExpShare">
+<meta property="og:description" content="Previous       We have established connection to 4G LTE network                     Goal       We are going to turn the Raspberry Pi into a Router for our devices, pick your need:">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-04-10T02:53:11.000Z">
+<meta property="article:modified_time" content="2020-04-10T09:19:36.041Z">
+<meta property="article:author" content="NewJerseyStyle">
+<meta property="article:tag" content="Raspberry Pi">
+<meta property="article:tag" content="NAT">
+<meta property="article:tag" content="WWAN">
+<meta property="article:tag" content="4G">
+<meta property="article:tag" content="Router">
+<meta name="twitter:card" content="summary"><meta name="keywords" content="NewJerseyStyle, ExpShare"><meta name="description" content="Share experience in software development"><title>Raspberry Pi as 4G LTE Router</title><link ref="canonical" href="https://newjerseystyle.github.io/en/2020/Raspberry-Pi-as-4G-LTE-Router/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.0.0-rc.0"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":false,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"carbon","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"Copy","copySuccess":"Copy Success","copyError":"Copy Error"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 4.2.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner header-inner--height header-inner--bgcolor"><nav class="header-nav header-nav--sticky"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/softdev/"><span class="header-nav-menu-item__icon"><i class="fas fa-laptop-code"></i></span><span class="header-nav-menu-item__text">Coding</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/toolz/"><span class="header-nav-menu-item__icon"><i class="fas fa-toolbox"></i></span><span class="header-nav-menu-item__text">Tools</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">Tags</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">Raspberry Pi as 4G LTE Router</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2020-04-10</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2020-04-10</span></span></div></header><div class="post-body"><!-- # Raspberry Pi as 4G LTE Router -->
+
+        <h2 id="Previous"   >
+          <a href="#Previous" class="heading-link"><i class="fas fa-link"></i></a>Previous</h2>
+      <p>We have <a href="/en/2020/Raspberry-Pi-connect-to-4G-LTE/">established connection to 4G LTE network</a></p>
+
+        <h2 id="Goal"   >
+          <a href="#Goal" class="heading-link"><i class="fas fa-link"></i></a>Goal</h2>
+      <p>We are going to turn the Raspberry Pi into a Router for our devices, pick your need:</p>
+<ul>
+<li><a href="#Wireless-Router">Goto Wireless router section</a></li>
+<li><a href="#Wired-Router">Goto Wired router section</a></li>
+</ul>
+
+        <h2 id="Wireless-Router"   >
+          <a href="#Wireless-Router" class="heading-link"><i class="fas fa-link"></i></a>Wireless Router</h2>
+      <p>Instead of reinventing the wheel, we follow the guide <span class="exturl"><a class="exturl__link"   href="https://sixfab.com/using-sixfab-raspberry-p-shield-hat-as-a-wi-fi-hotspot-access-point/"  target="_blank" rel="noopener">Sixfab tutorial</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<p>If you are using Raspberry Pi 2 or earlier, you will need a USB WiFi adaptor.</p>
+
+        <h3 id="Backup-wireless-configurations"   >
+          <a href="#Backup-wireless-configurations" class="heading-link"><i class="fas fa-link"></i></a>Backup wireless configurations</h3>
+      <p>Not a must but you may want to do this, in case later you changed your mind.</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo cp /etc/wpa_supplicant/wpa_supplicant.conf /etc/wpa_supplicant/wpa_supplicant.backup.conf</span><br></pre></td></tr></table></div></figure>
+
+
+        <h3 id="Configure-wireless-device"   >
+          <a href="#Configure-wireless-device" class="heading-link"><i class="fas fa-link"></i></a>Configure wireless device</h3>
+      <p>Clear the configuration file</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo cp /dev/null /etc/wpa_supplicant/wpa_supplicant.conf</span><br></pre></td></tr></table></div></figure>
+<p>Add configurations into <code>/etc/wpa_supplicant/wpa_supplicant.conf</code>:</p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ctrl_interface&#x3D;DIR&#x3D;&#x2F;var&#x2F;run&#x2F;wpa_supplicant GROUP&#x3D;netdev</span><br><span class="line">update_config&#x3D;1</span><br></pre></td></tr></table></div></figure>
+
+
+        <h3 id="Install-RaspAP"   >
+          <a href="#Install-RaspAP" class="heading-link"><i class="fas fa-link"></i></a>Install RaspAP</h3>
+      <p>Use a quick installer of <span class="exturl"><a class="exturl__link"   href="https://github.com/billz/raspap-webgui"  target="_blank" rel="noopener">RaspAP</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> and follow the questions to setup the wireless network</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ wget -q https://git.io/voEUQ -O /tmp/raspap &amp;&amp; bash /tmp/raspap -y</span><br></pre></td></tr></table></div></figure>
+<p>I did not tested this, so any problem or question (default password etc.), please refer to the <span class="exturl"><a class="exturl__link"   href="https://sixfab.com/using-sixfab-raspberry-p-shield-hat-as-a-wi-fi-hotspot-access-point/"  target="_blank" rel="noopener">Sixfab tutorial</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> and the toubleshooting in the <span class="exturl"><a class="exturl__link"   href="https://howtoraspberrypi.com/create-a-wi-fi-hotspot-in-less-than-10-minutes-with-pi-raspberry/"  target="_blank" rel="noopener">original tutorial</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+
+        <h2 id="Wired-Router"   >
+          <a href="#Wired-Router" class="heading-link"><i class="fas fa-link"></i></a>Wired Router</h2>
+      <p>We are going to use network address translation (NAT) to bridge <code>ppp0</code> with <code>eth0</code></p>
+<p>This tutorial was adopting <span class="exturl"><a class="exturl__link"   href="https://raspberrypi.stackexchange.com/questions/48307/sharing-the-pis-wifi-connection-through-the-ethernet-port"  target="_blank" rel="noopener">sharing wifi through the ethernet</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> and change it to share PPP connection to ethernet</p>
+
+        <h3 id="DHCP-and-DNS-server"   >
+          <a href="#DHCP-and-DNS-server" class="heading-link"><i class="fas fa-link"></i></a>DHCP and DNS server</h3>
+      <p>I used <code>dnsmasq</code> for DHCP + DNS.</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install dnsmasq</span><br></pre></td></tr></table></div></figure>
+
+        <h3 id="Configurate-interfaces"   >
+          <a href="#Configurate-interfaces" class="heading-link"><i class="fas fa-link"></i></a>Configurate interfaces</h3>
+      <p>Edit the <code>eth0</code> section in file <code>/etc/network/interfaces</code>:</p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">allow-hotplug eth0  </span><br><span class="line">iface eth0 inet static  </span><br><span class="line">    address 192.168.2.1</span><br><span class="line">    netmask 255.255.255.0</span><br><span class="line">    network 192.168.2.0</span><br><span class="line">    broadcast 192.168.2.255</span><br></pre></td></tr></table></div></figure>
+
+        <h3 id="Configure-dnsmasq"   >
+          <a href="#Configure-dnsmasq" class="heading-link"><i class="fas fa-link"></i></a>Configure dnsmasq</h3>
+      <p>Backup dnsmasq configuration</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo mv /etc/dnsmasq.conf /etc/dnsmasq.conf.orig</span><br></pre></td></tr></table></div></figure>
+<p>Edit <code>/etc/dnsmasq.conf</code></p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">interface&#x3D;eth0      # Use interface eth0  </span><br><span class="line">listen-address&#x3D;192.168.2.1 # listen on  </span><br><span class="line"># Bind to the interface to make sure we aren&#39;t sending things elsewhere  </span><br><span class="line">#### bind-interfaces #### BUT don&#39;t enable this.</span><br><span class="line">server&#x3D;8.8.8.8       # Forward DNS requests to Google DNS  </span><br><span class="line">domain-needed        # Don&#39;t forward short names  </span><br><span class="line"># Never forward addresses in the non-routed address spaces.</span><br><span class="line">bogus-priv</span><br><span class="line"># Assign IP addresses between 192.168.2.2 and 192.168.2.100 with a</span><br><span class="line"># 12 hour lease time</span><br><span class="line">dhcp-range&#x3D;192.168.2.2,192.168.2.100,12h</span><br></pre></td></tr></table></div></figure>
+<blockquote>
+<p>Enable <code>bind-interfaces</code> cause me unable to share the internet. You may need to test it.</p>
+</blockquote>
+
+        <h3 id="NAT-configuration"   >
+          <a href="#NAT-configuration" class="heading-link"><i class="fas fa-link"></i></a>NAT configuration</h3>
+      <figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo iptables -t nat -A POSTROUTING -o wwan0 -j MASQUERADE  </span><br><span class="line">$ sudo iptables -A FORWARD -i wwan0 -o eth0 -m state --state RELATED,ESTABLISHED -j ACCEPT  </span><br><span class="line">$ sudo iptables -A FORWARD -i eth0 -o wwan0 -j ACCEPT</span><br></pre></td></tr></table></div></figure>
+<p>Make the rules persistent.</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo sh -c <span class="string">"iptables-save &gt; /etc/iptables.ipv4.nat"</span></span><br></pre></td></tr></table></div></figure>
+<p>Edit <code>/etc/rc.local</code></p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Add this line above exit 0</span><br><span class="line">iptables-restore &lt; &#x2F;etc&#x2F;iptables.ipv4.nat</span><br></pre></td></tr></table></div></figure>
+
+        <h2 id="DONE"   >
+          <a href="#DONE" class="heading-link"><i class="fas fa-link"></i></a>DONE</h2>
+      <p>Connect my laptop to Raspberry Pi </p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ ping 8.8.8.8</span><br><span class="line">PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.</span><br><span class="line">64 bytes from 8.8.8.8: icmp_seq=2 ttl=51 time=99.2 ms</span><br><span class="line">64 bytes from 8.8.8.8: icmp_seq=1 ttl=51 time=22.9 ms</span><br><span class="line">64 bytes from 8.8.8.8: icmp_seq=3 ttl=51 time=69.7 ms</span><br></pre></td></tr></table></div></figure>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ END ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">Author: </span><span class="copyright-author__value"><a href="https://NewJerseyStyle.github.io">NewJerseyStyle</a></span></div><div class="copyright-link"><span class="copyright-link__name">Link: </span><span class="copyright-link__value"><a href="https://newjerseystyle.github.io/en/2020/Raspberry-Pi-as-4G-LTE-Router/">https://newjerseystyle.github.io/en/2020/Raspberry-Pi-as-4G-LTE-Router/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">Copyright: </span><span class="copyright-notice__value">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-SA</a> unless stating additionally</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://newjerseystyle.github.io/tags/Raspberry-Pi/">Raspberry Pi</a></span><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://newjerseystyle.github.io/tags/NAT/">NAT</a></span><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://newjerseystyle.github.io/tags/WWAN/">WWAN</a></span><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://newjerseystyle.github.io/tags/4G/">4G</a></span><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://newjerseystyle.github.io/tags/Router/">Router</a></span></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/en/2020/Raspberry-Pi-connect-to-4G-LTE/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">Raspberry Pi connect to 4G LTE</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/en/2020/hello-world/"><span class="paginator-prev__text">Hello World</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">Catalog</span><span class="sidebar-nav-ov">Overview</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Previous"><span class="toc-number">1.</span> <span class="toc-text">
+          Previous</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Goal"><span class="toc-number">2.</span> <span class="toc-text">
+          Goal</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Wireless-Router"><span class="toc-number">3.</span> <span class="toc-text">
+          Wireless Router</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Backup-wireless-configurations"><span class="toc-number">3.1.</span> <span class="toc-text">
+          Backup wireless configurations</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Configure-wireless-device"><span class="toc-number">3.2.</span> <span class="toc-text">
+          Configure wireless device</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Install-RaspAP"><span class="toc-number">3.3.</span> <span class="toc-text">
+          Install RaspAP</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Wired-Router"><span class="toc-number">4.</span> <span class="toc-text">
+          Wired Router</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#DHCP-and-DNS-server"><span class="toc-number">4.1.</span> <span class="toc-text">
+          DHCP and DNS server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Configurate-interfaces"><span class="toc-number">4.2.</span> <span class="toc-text">
+          Configurate interfaces</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Configure-dnsmasq"><span class="toc-number">4.3.</span> <span class="toc-text">
+          Configure dnsmasq</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NAT-configuration"><span class="toc-number">4.4.</span> <span class="toc-text">
+          NAT configuration</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DONE"><span class="toc-number">5.</span> <span class="toc-text">
+          DONE</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/logo.png" alt="avatar"></div><p class="sidebar-ov-author__text">NewJerseyStyle</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">9</div><div class="sidebar-ov-state-item__name">Tags</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">You have read </span><span class="sidebar-reading-info__num">0</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2020</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>NewJerseyStyle</span></div><div><span>Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span> v4.2.0</span><span class="footer__devider">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.0.0-rc.0</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.0.0-rc.0"></script><script src="/js/stun-boot.js?v=2.0.0-rc.0"></script><script src="/js/scroll.js?v=2.0.0-rc.0"></script><script src="/js/header.js?v=2.0.0-rc.0"></script><script src="/js/sidebar.js?v=2.0.0-rc.0"></script></body></html>
