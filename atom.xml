@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>ExpShare</title>
+  
+  <subtitle>Playground of NewJerseyStyle</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://newjerseystyle.github.io/"/>
+  <updated>2020-04-10T10:49:51.875Z</updated>
+  <id>https://newjerseystyle.github.io/</id>
+  
+  <author>
+    <name>NewJerseyStyle</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Network usage monitor using Python</title>
+    <link href="https://newjerseystyle.github.io/en/2020/Network-usage-monitor-using-Python/"/>
+    <id>https://newjerseystyle.github.io/en/2020/Network-usage-monitor-using-Python/</id>
+    <published>2020-04-10T09:15:36.000Z</published>
+    <updated>2020-04-10T10:49:51.875Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;!-- # Network usage monitor using Python --&gt;
+
+        &lt;h2 id=&quot;Previous&quot;   &gt;
+          &lt;a href=&quot;#Previous&quot; class=&quot;heading-link&quot;&gt;&lt;i
+        
+      
+    
+    </summary>
+    
+    
+    
+      <category term="Raspberry Pi" scheme="https://NewJerseyStyle.github.io/tags/Raspberry-Pi/"/>
+    
+      <category term="Python3" scheme="https://NewJerseyStyle.github.io/tags/Python3/"/>
+    
+      <category term="Monitoring" scheme="https://NewJerseyStyle.github.io/tags/Monitoring/"/>
+    
+      <category term="Email" scheme="https://NewJerseyStyle.github.io/tags/Email/"/>
+    
+      <category term="Coding" scheme="https://NewJerseyStyle.github.io/tags/Coding/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Raspberry Pi connect to 4G LTE</title>
+    <link href="https://newjerseystyle.github.io/en/2020/Raspberry-Pi-connect-to-4G-LTE/"/>
+    <id>https://newjerseystyle.github.io/en/2020/Raspberry-Pi-connect-to-4G-LTE/</id>
+    <published>2020-04-10T05:51:19.000Z</published>
+    <updated>2020-04-10T09:56:56.471Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;!-- # Raspberry Pi connect to 4G LTE --&gt;
+
+        &lt;h2 id=&quot;What-you-need&quot;   &gt;
+          &lt;a href=&quot;#What-you-need&quot; class=&quot;heading-link&quot;&gt;&lt;i
+        
+      
+    
+    </summary>
+    
+    
+    
+      <category term="Raspberry Pi" scheme="https://NewJerseyStyle.github.io/tags/Raspberry-Pi/"/>
+    
+      <category term="WWAN" scheme="https://NewJerseyStyle.github.io/tags/WWAN/"/>
+    
+      <category term="4G" scheme="https://NewJerseyStyle.github.io/tags/4G/"/>
+    
+      <category term="LTE" scheme="https://NewJerseyStyle.github.io/tags/LTE/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Raspberry Pi as 4G LTE Router</title>
+    <link href="https://newjerseystyle.github.io/en/2020/Raspberry-Pi-as-4G-LTE-Router/"/>
+    <id>https://newjerseystyle.github.io/en/2020/Raspberry-Pi-as-4G-LTE-Router/</id>
+    <published>2020-04-10T02:53:11.000Z</published>
+    <updated>2020-04-10T09:19:36.041Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;!-- # Raspberry Pi as 4G LTE Router --&gt;
+
+        &lt;h2 id=&quot;Previous&quot;   &gt;
+          &lt;a href=&quot;#Previous&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas
+        
+      
+    
+    </summary>
+    
+    
+    
+      <category term="Raspberry Pi" scheme="https://NewJerseyStyle.github.io/tags/Raspberry-Pi/"/>
+    
+      <category term="NAT" scheme="https://NewJerseyStyle.github.io/tags/NAT/"/>
+    
+      <category term="WWAN" scheme="https://NewJerseyStyle.github.io/tags/WWAN/"/>
+    
+      <category term="4G" scheme="https://NewJerseyStyle.github.io/tags/4G/"/>
+    
+      <category term="Router" scheme="https://NewJerseyStyle.github.io/tags/Router/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="https://newjerseystyle.github.io/en/2020/hello-world/"/>
+    <id>https://newjerseystyle.github.io/en/2020/hello-world/</id>
+    <published>2020-04-05T15:01:26.415Z</published>
+    <updated>2020-04-05T15:01:26.415Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;Welcome to &lt;span class=&quot;exturl&quot;&gt;&lt;a class=&quot;exturl__link&quot;   href=&quot;https://hexo.io/&quot;  target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;&lt;span
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+</feed>
