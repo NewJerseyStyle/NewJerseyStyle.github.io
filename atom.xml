@@ -42,9 +42,9 @@
     
       <category term="Python3" scheme="https://NewJerseyStyle.github.io/tags/Python3/"/>
     
-      <category term="Coding" scheme="https://NewJerseyStyle.github.io/tags/Coding/"/>
-    
       <category term="OpenCV" scheme="https://NewJerseyStyle.github.io/tags/OpenCV/"/>
+    
+      <category term="Coding" scheme="https://NewJerseyStyle.github.io/tags/Coding/"/>
     
   </entry>
   
@@ -110,11 +110,11 @@
     
       <category term="Python3" scheme="https://NewJerseyStyle.github.io/tags/Python3/"/>
     
+      <category term="Coding" scheme="https://NewJerseyStyle.github.io/tags/Coding/"/>
+    
       <category term="Monitoring" scheme="https://NewJerseyStyle.github.io/tags/Monitoring/"/>
     
       <category term="Email" scheme="https://NewJerseyStyle.github.io/tags/Email/"/>
-    
-      <category term="Coding" scheme="https://NewJerseyStyle.github.io/tags/Coding/"/>
     
   </entry>
   
@@ -178,11 +178,11 @@
     
       <category term="Raspberry Pi" scheme="https://NewJerseyStyle.github.io/tags/Raspberry-Pi/"/>
     
-      <category term="NAT" scheme="https://NewJerseyStyle.github.io/tags/NAT/"/>
-    
       <category term="WWAN" scheme="https://NewJerseyStyle.github.io/tags/WWAN/"/>
     
       <category term="4G" scheme="https://NewJerseyStyle.github.io/tags/4G/"/>
+    
+      <category term="NAT" scheme="https://NewJerseyStyle.github.io/tags/NAT/"/>
     
       <category term="Router" scheme="https://NewJerseyStyle.github.io/tags/Router/"/>
     
