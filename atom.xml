@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://newjerseystyle.github.io/"/>
-  <updated>2020-04-11T05:04:20.819Z</updated>
+  <updated>2020-04-11T09:53:38.474Z</updated>
   <id>https://newjerseystyle.github.io/</id>
   
   <author>
@@ -15,6 +15,38 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Video based Motion Detection in Python with OpenCV</title>
+    <link href="https://newjerseystyle.github.io/en/2020/Video-based-Motion-Detection-in-Python-with-OpenCV/"/>
+    <id>https://newjerseystyle.github.io/en/2020/Video-based-Motion-Detection-in-Python-with-OpenCV/</id>
+    <published>2020-04-11T05:08:20.000Z</published>
+    <updated>2020-04-11T09:53:38.474Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;!-- # Video based Motion Detection in Python with OpenCV --&gt;
+
+        &lt;h2 id=&quot;What-you-need&quot;   &gt;
+          &lt;a href=&quot;#What-you-need&quot;
+        
+      
+    
+    </summary>
+    
+    
+    
+      <category term="Python3" scheme="https://NewJerseyStyle.github.io/tags/Python3/"/>
+    
+      <category term="Coding" scheme="https://NewJerseyStyle.github.io/tags/Coding/"/>
+    
+      <category term="OpenCV" scheme="https://NewJerseyStyle.github.io/tags/OpenCV/"/>
+    
+  </entry>
   
   <entry>
     <title>Raspberry Pi 使用 4G 數據網路</title>
@@ -125,7 +157,7 @@
     <link href="https://newjerseystyle.github.io/en/2020/Raspberry-Pi-as-4G-LTE-Router/"/>
     <id>https://newjerseystyle.github.io/en/2020/Raspberry-Pi-as-4G-LTE-Router/</id>
     <published>2020-04-10T02:53:11.000Z</published>
-    <updated>2020-04-10T09:19:36.041Z</updated>
+    <updated>2020-04-11T05:35:17.418Z</updated>
     
     <summary type="html">
     
