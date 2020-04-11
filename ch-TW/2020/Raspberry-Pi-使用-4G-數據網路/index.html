@@ -1,0 +1,142 @@
+<!DOCTYPE html><html lang="[&quot;en&quot;,&quot;zh-TW&quot;,&quot;default&quot;]"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.0.0-rc.0" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.0.0-rc.0" type="image/png" sizes="32x32"><meta name="description" content="購物清單        Raspberry Pi SD Card with Linux installed Raspberry Pi 3G&#x2F;4G-LTE Base HAT Quectel EC25 Mini PCle 4G&#x2F;LTE Module LTE Main &amp; Diversity &amp; GNSS Triple Port u.FL Ant">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Raspberry Pi 使用 4G 數據網路">
+<meta property="og:url" content="https://newjerseystyle.github.io/ch-TW/2020/Raspberry-Pi-%E4%BD%BF%E7%94%A8-4G-%E6%95%B8%E6%93%9A%E7%B6%B2%E8%B7%AF/index.html">
+<meta property="og:site_name" content="ExpShare">
+<meta property="og:description" content="購物清單        Raspberry Pi SD Card with Linux installed Raspberry Pi 3G&#x2F;4G-LTE Base HAT Quectel EC25 Mini PCle 4G&#x2F;LTE Module LTE Main &amp; Diversity &amp; GNSS Triple Port u.FL Ant">
+<meta property="og:locale" content="ch_TW">
+<meta property="og:image" content="https://sixfab-com.exactdn.com/wp-content/uploads/2019/09/Base_HAT_with_EC25A.jpg?strip=all&lossy=0&ssl=1">
+<meta property="og:image" content="https://www.torbox.ch/wp-content/uploads/2019/12/IMG_5237-e1576357032325.jpg">
+<meta property="article:published_time" content="2020-04-11T03:01:55.000Z">
+<meta property="article:modified_time" content="2020-04-11T05:04:20.819Z">
+<meta property="article:author" content="NewJerseyStyle">
+<meta property="article:tag" content="Raspberry Pi">
+<meta property="article:tag" content="WWAN">
+<meta property="article:tag" content="4G">
+<meta property="article:tag" content="LTE">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://sixfab-com.exactdn.com/wp-content/uploads/2019/09/Base_HAT_with_EC25A.jpg?strip=all&lossy=0&ssl=1"><meta name="keywords" content="NewJerseyStyle, ExpShare"><meta name="description" content="Share experience in software development"><title>Raspberry Pi 使用 4G 數據網路</title><link ref="canonical" href="https://newjerseystyle.github.io/ch-TW/2020/Raspberry-Pi-%E4%BD%BF%E7%94%A8-4G-%E6%95%B8%E6%93%9A%E7%B6%B2%E8%B7%AF/"><link rel="alternate" href="/atom.xml" type="application/atom+xml"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.0.0-rc.0"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":false,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"carbon","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"Copy","copySuccess":"Copy Success","copyError":"Copy Error"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 4.2.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner header-inner--height header-inner--bgcolor"><nav class="header-nav header-nav--sticky"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/softdev/"><span class="header-nav-menu-item__icon"><i class="fas fa-laptop-code"></i></span><span class="header-nav-menu-item__text">Coding</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/toolz/"><span class="header-nav-menu-item__icon"><i class="fas fa-toolbox"></i></span><span class="header-nav-menu-item__text">Tools</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">Tags</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">Raspberry Pi 使用 4G 數據網路</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2020-04-11</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2020-04-11</span></span></div></header><div class="post-body"><!-- # Raspberry Pi connect to 4G LTE -->
+
+        <h2 id="購物清單"   >
+          <a href="#購物清單" class="heading-link"><i class="fas fa-link"></i></a>購物清單</h2>
+      <ul>
+<li><span class="exturl"><a class="exturl__link"   href="https://www.raspberrypi.org/products/"  target="_blank" rel="noopener">Raspberry Pi</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li>SD Card with <span class="exturl"><a class="exturl__link"   href="https://projects.raspberrypi.org/en/projects/raspberry-pi-setting-up"  target="_blank" rel="noopener">Linux installed</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li><span class="exturl"><a class="exturl__link"   href="https://sixfab.com/product/raspberry-pi-base-hat-3g-4g-lte-minipcie-cards/"  target="_blank" rel="noopener">Raspberry Pi 3G/4G-LTE Base HAT</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li><span class="exturl"><a class="exturl__link"   href="https://sixfab.com/product/quectel-ec25-mini-pcle-4glte-module/"  target="_blank" rel="noopener">Quectel EC25 Mini PCle 4G/LTE Module</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li><span class="exturl"><a class="exturl__link"   href="https://sixfab.com/product/lte-main-diversity-gnss-triple-port-u-fl-antenna-100mm/"  target="_blank" rel="noopener">LTE Main &amp; Diversity &amp; GNSS Triple Port u.FL Antenna </a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+</ul>
+<blockquote>
+<p>不想分開購買零件，可以<span class="exturl"><a class="exturl__link"   href="https://sixfab.com/product/raspberry-pi-4g-lte-modem-kit/"  target="_blank" rel="noopener">購買 Sixfab 的 Raspberry Pi 4G/LTE套件</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+</blockquote>
+
+        <h2 id="組裝"   >
+          <a href="#組裝" class="heading-link"><i class="fas fa-link"></i></a>組裝</h2>
+      <ol>
+<li><p>安裝 Mini PCIe 4G IoT Module 到 3G/4G-LTE Base HAT，感覺和以前在手提電腦上安裝記憶體差不多。</p>
+</li>
+<li><p>然後將 3G/4G-LTE Base HAT 裝上 Raspberry Pi。<br><img   src="https://sixfab-com.exactdn.com/wp-content/uploads/2019/09/Base_HAT_with_EC25A.jpg?strip=all&lossy=0&ssl=1" style=""  alt="Installed onto Pi" title=" After assembly Raspberry Pi @sixfab "><center><em>完成之後大概這樣的感覺（圖片來源：<span class="exturl"><a class="exturl__link"   href="https://sixfab.com/product/raspberry-pi-base-hat-3g-4g-lte-minipcie-cards/"  target="_blank" rel="noopener">@sixfab</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>）</em></center></p>
+</li>
+<li><p>將天線也安裝上去，正確地完成安裝之後的樣子大概這樣<br><img src="https://www.torbox.ch/wp-content/uploads/2019/12/IMG_5237-e1576357032325.jpg" alt="Connect Antenna" title=" Complete assembly @https://www.torbox.ch/?p=1165 "><center><em>加上天線應該這樣個樣子吧（圖片來源：<span class="exturl"><a class="exturl__link"   href="https://www.torbox.ch/?p=1165"  target="_blank" rel="noopener">@torbox.ch</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>）</em></center></p>
+</li>
+</ol>
+<p>最左邊和最右邊的兩個天線似乎是可以互換的，我安裝完成之後那些線是平行的。</p>
+
+        <h2 id="安裝驅動"   >
+          <a href="#安裝驅動" class="heading-link"><i class="fas fa-link"></i></a>安裝驅動</h2>
+      <p>Sixfab 提供了兩種方法驅動 LTE 模組，一個是 <span class="exturl"><a class="exturl__link"   href="https://sixfab.com/ppp-installer-for-sixfab-shield/"  target="_blank" rel="noopener">PPP</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> 一個是 <span class="exturl"><a class="exturl__link"   href="https://sixfab.com/qmi-interface-with-3g-4g-lte-base-shield-v2/"  target="_blank" rel="noopener">QMI interface</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>。這邊我用的是 PPP。</p>
+<p>在 Raspberry Pi 的終端模擬器裡進行操作，下載 sixfab 的安裝腳本，然後跟著指引進行安裝就可以了。簡單方便快捷，感謝sixfab。</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ wget https://raw.githubusercontent.com/sixfab/Sixfab_PPP_Installer/master/ppp_installer/install.sh</span><br><span class="line"></span><br><span class="line">$ chmod +x install.sh</span><br><span class="line"></span><br><span class="line">$ sudo ./install.sh</span><br></pre></td></tr></table></div></figure>
+
+
+        <h3 id="有些選項可能比較曖昧，給個避坑指南"   >
+          <a href="#有些選項可能比較曖昧，給個避坑指南" class="heading-link"><i class="fas fa-link"></i></a>有些選項可能比較曖昧，給個避坑指南</h3>
+      <ul>
+<li>Choose your Sixfab<ul>
+<li>因為買的是 <code>3G, 4G/LTE Base Shield</code> 所以只填 <code>2</code></li>
+<li>就算之後連不上也肯定不是這裡填錯</li>
+</ul>
+</li>
+<li>APN<ul>
+<li>問問谷歌、雅虎或者百度你這家電信商的基地台用什麼存取點名稱（APN），選一個填，不對之後再改</li>
+<li>將你的 SIM 卡插入智能電話，看看設定裡行動網絡設定關於存取點名稱裡有什麼選項，選一個填，不對之後再改</li>
+<li>之後修改的方法參見出坑指南</li>
+</ul>
+</li>
+<li>PORT name<ul>
+<li>因為買的是 <code>3G, 4G/LTE Base Shield</code> 所以只填 <code>ttyUSB3</code></li>
+<li>肯定是 <code>ttyUSB3</code>，跟實際上你硬件上插哪個 USB 位置好像沒關係，可能是用的 GPIO？</li>
+</ul>
+</li>
+</ul>
+
+        <h2 id="沒能避開坑？出坑指南"   >
+          <a href="#沒能避開坑？出坑指南" class="heading-link"><i class="fas fa-link"></i></a>沒能避開坑？出坑指南</h2>
+      
+        <h3 id="我需要登入才能上網"   >
+          <a href="#我需要登入才能上網" class="heading-link"><i class="fas fa-link"></i></a>我需要登入才能上網</h3>
+      <p>如果你需要用戶名和密碼登入才能上網，完成前面的安裝和設定之後再編輯 <code>/etc/ppp/peers/provider</code> 檔案。</p>
+<p>你要移除這一行</p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">noauth</span><br></pre></td></tr></table></div></figure>
+<p>然後按照以下格式填入登錄資料</p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">user &quot;YOUR USERNAME&quot;</span><br><span class="line">password &quot;YOURPASSWORD&quot;</span><br></pre></td></tr></table></div></figure>
+
+        <h3 id="遇到-Routing-error-的錯誤"   >
+          <a href="#遇到-Routing-error-的錯誤" class="heading-link"><i class="fas fa-link"></i></a>遇到 Routing error 的錯誤</h3>
+      <p>執行以下指令</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo route del default</span><br><span class="line"></span><br><span class="line">$ sudo route add default ppp0</span><br></pre></td></tr></table></div></figure>
+
+        <h3 id="沒有網絡連接"   >
+          <a href="#沒有網絡連接" class="heading-link"><i class="fas fa-link"></i></a>沒有網絡連接</h3>
+      <p>誰也 ping 不到，網絡不通，或者無盡的連接超時</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ ping 8.8.8.8</span><br><span class="line">connect: network is unreachable </span><br><span class="line">$ ping baidu.com</span><br><span class="line">connect: network is unreachable </span><br><span class="line">`</span><br></pre></td></tr></table></div></figure>
+<blockquote>
+<p>檢查你的移動數據是否需要先在手機上啟用</p>
+</blockquote>
+<p>試試手動連接移動數據</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo pon</span><br></pre></td></tr></table></div></figure>
+<p>你可能發現 Modem hang up 並且不論你做什麼都沒有什麼效果。</p>
+<p>我已經坑過幾次了，基本上問題就是 APN 填錯了，或者舊的 APN 已經不能用了。於是我將 SIM 插入手機，看手機自動連上網絡的時候用的哪個 APN 再修改 <code>/etc/ppp/peers/provider</code> 文件</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo poff</span><br><span class="line">$ sudo nano /etc/ppp/peers/provider</span><br></pre></td></tr></table></div></figure>
+<p>APN 在我 <code>/etc/ppp/peers/provider</code> 文件裡第三行的結尾。</p>
+<p>逐一測試你所能找到的 APN，看看 <code>sudo pon</code> 能不能連上，應該其中一個能連上。至少我是成功了。</p>
+
+        <h2 id="DONE"   >
+          <a href="#DONE" class="heading-link"><i class="fas fa-link"></i></a>DONE</h2>
+      <figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ ping 8.8.8.8</span><br><span class="line">PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.</span><br><span class="line">64 bytes from 8.8.8.8: icmp_seq=1 ttl=52 time=20.9 ms</span><br><span class="line">64 bytes from 8.8.8.8: icmp_seq=2 ttl=52 time=111 ms</span><br><span class="line">64 bytes from 8.8.8.8: icmp_seq=3 ttl=52 time=69.7 ms</span><br></pre></td></tr></table></div></figure>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ END ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">Author: </span><span class="copyright-author__value"><a href="https://NewJerseyStyle.github.io">NewJerseyStyle</a></span></div><div class="copyright-link"><span class="copyright-link__name">Link: </span><span class="copyright-link__value"><a href="https://newjerseystyle.github.io/ch-TW/2020/Raspberry-Pi-%E4%BD%BF%E7%94%A8-4G-%E6%95%B8%E6%93%9A%E7%B6%B2%E8%B7%AF/">https://newjerseystyle.github.io/ch-TW/2020/Raspberry-Pi-%E4%BD%BF%E7%94%A8-4G-%E6%95%B8%E6%93%9A%E7%B6%B2%E8%B7%AF/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">Copyright: </span><span class="copyright-notice__value">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en zh-tw" rel="external nofollow" target="_blank">BY-SA</a> unless stating additionally</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://newjerseystyle.github.io/tags/Raspberry-Pi/">Raspberry Pi</a></span><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://newjerseystyle.github.io/tags/WWAN/">WWAN</a></span><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://newjerseystyle.github.io/tags/4G/">4G</a></span><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://newjerseystyle.github.io/tags/LTE/">LTE</a></span></div><nav class="post-paginator paginator"><div class="paginator-next"><a class="paginator-next__link" href="/en/2020/Network-usage-monitor-using-Python/"><span class="paginator-prev__text">Network usage monitor using Python</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">Catalog</span><span class="sidebar-nav-ov">Overview</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#購物清單"><span class="toc-number">1.</span> <span class="toc-text">
+          購物清單</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#組裝"><span class="toc-number">2.</span> <span class="toc-text">
+          組裝</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安裝驅動"><span class="toc-number">3.</span> <span class="toc-text">
+          安裝驅動</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#有些選項可能比較曖昧，給個避坑指南"><span class="toc-number">3.1.</span> <span class="toc-text">
+          有些選項可能比較曖昧，給個避坑指南</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#沒能避開坑？出坑指南"><span class="toc-number">4.</span> <span class="toc-text">
+          沒能避開坑？出坑指南</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#我需要登入才能上網"><span class="toc-number">4.1.</span> <span class="toc-text">
+          我需要登入才能上網</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#遇到-Routing-error-的錯誤"><span class="toc-number">4.2.</span> <span class="toc-text">
+          遇到 Routing error 的錯誤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#沒有網絡連接"><span class="toc-number">4.3.</span> <span class="toc-text">
+          沒有網絡連接</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DONE"><span class="toc-number">5.</span> <span class="toc-text">
+          DONE</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/logo.png" alt="avatar"></div><p class="sidebar-ov-author__text">NewJerseyStyle</p></div><div class="sidebar-ov-feed"><span class="sidebar-ov-feed-rss"><a class="sidebar-ov-feed-rss__link" href="/atom.xml" target="_blank" rel="noopener"><span class="sidebar-ov-feed-rss__icon"><i class="fas fa-rss"></i></span><span>RSS Subscribe</span></a></span></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">10</div><div class="sidebar-ov-state-item__name">Tags</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en zh-tw" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">You have read </span><span class="sidebar-reading-info__num">0</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2020</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>NewJerseyStyle</span></div><div><span>Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span> v4.2.0</span><span class="footer__devider">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.0.0-rc.0</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" async=""></script><script>(adsbygoogle = window.adsbygoogle || []).push({
+  google_ad_client: 'ca-pub-9667639204764993',
+  enable_page_level_ads: true
+});</script><script src="/js/utils.js?v=2.0.0-rc.0"></script><script src="/js/stun-boot.js?v=2.0.0-rc.0"></script><script src="/js/scroll.js?v=2.0.0-rc.0"></script><script src="/js/header.js?v=2.0.0-rc.0"></script><script src="/js/sidebar.js?v=2.0.0-rc.0"></script></body></html>

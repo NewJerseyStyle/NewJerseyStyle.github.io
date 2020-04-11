@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://newjerseystyle.github.io/"/>
-  <updated>2020-04-10T10:49:51.875Z</updated>
+  <updated>2020-04-11T05:04:20.819Z</updated>
   <id>https://newjerseystyle.github.io/</id>
   
   <author>
@@ -15,6 +15,40 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Raspberry Pi 使用 4G 數據網路</title>
+    <link href="https://newjerseystyle.github.io/ch-TW/2020/Raspberry-Pi-%E4%BD%BF%E7%94%A8-4G-%E6%95%B8%E6%93%9A%E7%B6%B2%E8%B7%AF/"/>
+    <id>https://newjerseystyle.github.io/ch-TW/2020/Raspberry-Pi-%E4%BD%BF%E7%94%A8-4G-%E6%95%B8%E6%93%9A%E7%B6%B2%E8%B7%AF/</id>
+    <published>2020-04-11T03:01:55.000Z</published>
+    <updated>2020-04-11T05:04:20.819Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;!-- # Raspberry Pi connect to 4G LTE --&gt;
+
+        &lt;h2 id=&quot;購物清單&quot;   &gt;
+          &lt;a href=&quot;#購物清單&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas
+        
+      
+    
+    </summary>
+    
+    
+    
+      <category term="Raspberry Pi" scheme="https://NewJerseyStyle.github.io/tags/Raspberry-Pi/"/>
+    
+      <category term="WWAN" scheme="https://NewJerseyStyle.github.io/tags/WWAN/"/>
+    
+      <category term="4G" scheme="https://NewJerseyStyle.github.io/tags/4G/"/>
+    
+      <category term="LTE" scheme="https://NewJerseyStyle.github.io/tags/LTE/"/>
+    
+  </entry>
   
   <entry>
     <title>Network usage monitor using Python</title>
@@ -57,7 +91,7 @@
     <link href="https://newjerseystyle.github.io/en/2020/Raspberry-Pi-connect-to-4G-LTE/"/>
     <id>https://newjerseystyle.github.io/en/2020/Raspberry-Pi-connect-to-4G-LTE/</id>
     <published>2020-04-10T05:51:19.000Z</published>
-    <updated>2020-04-10T09:56:56.471Z</updated>
+    <updated>2020-04-11T05:04:20.821Z</updated>
     
     <summary type="html">
     
