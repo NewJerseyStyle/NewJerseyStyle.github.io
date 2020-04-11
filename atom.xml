@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://newjerseystyle.github.io/"/>
-  <updated>2020-04-11T09:53:38.474Z</updated>
+  <updated>2020-04-11T13:32:15.215Z</updated>
   <id>https://newjerseystyle.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://newjerseystyle.github.io/en/2020/Video-based-Motion-Detection-in-Python-with-OpenCV/"/>
     <id>https://newjerseystyle.github.io/en/2020/Video-based-Motion-Detection-in-Python-with-OpenCV/</id>
     <published>2020-04-11T05:08:20.000Z</published>
-    <updated>2020-04-11T09:53:38.474Z</updated>
+    <updated>2020-04-11T13:32:15.215Z</updated>
     
     <summary type="html">
     
@@ -42,9 +42,9 @@
     
       <category term="Python3" scheme="https://NewJerseyStyle.github.io/tags/Python3/"/>
     
-      <category term="OpenCV" scheme="https://NewJerseyStyle.github.io/tags/OpenCV/"/>
-    
       <category term="Coding" scheme="https://NewJerseyStyle.github.io/tags/Coding/"/>
+    
+      <category term="OpenCV" scheme="https://NewJerseyStyle.github.io/tags/OpenCV/"/>
     
   </entry>
   
@@ -110,11 +110,11 @@
     
       <category term="Python3" scheme="https://NewJerseyStyle.github.io/tags/Python3/"/>
     
-      <category term="Coding" scheme="https://NewJerseyStyle.github.io/tags/Coding/"/>
-    
       <category term="Monitoring" scheme="https://NewJerseyStyle.github.io/tags/Monitoring/"/>
     
       <category term="Email" scheme="https://NewJerseyStyle.github.io/tags/Email/"/>
+    
+      <category term="Coding" scheme="https://NewJerseyStyle.github.io/tags/Coding/"/>
     
   </entry>
   
