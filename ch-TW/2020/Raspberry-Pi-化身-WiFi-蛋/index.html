@@ -1,0 +1,394 @@
+<!DOCTYPE html><html lang="[&quot;en&quot;,&quot;zh-TW&quot;,&quot;default&quot;]"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.0.0-rc.0" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.0.0-rc.0" type="image/png" sizes="32x32"><meta name="description" content="前文       我們已經改造 Raspberry Pi 使用 4G 數據網路                     目標       這次我們要讓 Raspberry Pi 將網絡分享給其他裝置，你可以選：  製成無線路由器 製成路由器（有線）                      無線路由器       因為博主很懶惰，不想重複造輪子，所以無線路">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Raspberry Pi 化身 WiFi 蛋">
+<meta property="og:url" content="https://newjerseystyle.github.io/ch-TW/2020/Raspberry-Pi-%E5%8C%96%E8%BA%AB-WiFi-%E8%9B%8B/index.html">
+<meta property="og:site_name" content="ExpShare">
+<meta property="og:description" content="前文       我們已經改造 Raspberry Pi 使用 4G 數據網路                     目標       這次我們要讓 Raspberry Pi 將網絡分享給其他裝置，你可以選：  製成無線路由器 製成路由器（有線）                      無線路由器       因為博主很懶惰，不想重複造輪子，所以無線路">
+<meta property="og:locale" content="ch_TW">
+<meta property="article:published_time" content="2020-04-12T04:03:11.000Z">
+<meta property="article:modified_time" content="2020-04-12T08:56:48.622Z">
+<meta property="article:author" content="NewJerseyStyle">
+<meta property="article:tag" content="Raspberry Pi">
+<meta property="article:tag" content="WWAN">
+<meta property="article:tag" content="4G">
+<meta property="article:tag" content="NAT">
+<meta property="article:tag" content="Router">
+<meta name="twitter:card" content="summary"><meta name="keywords" content="NewJerseyStyle, ExpShare"><meta name="description" content="Share experience in software development"><title>Raspberry Pi 化身 WiFi 蛋</title><link ref="canonical" href="https://newjerseystyle.github.io/ch-TW/2020/Raspberry-Pi-%E5%8C%96%E8%BA%AB-WiFi-%E8%9B%8B/"><link rel="alternate" href="/atom.xml" type="application/atom+xml"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.0.0-rc.0"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":false,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"carbon","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"Copy","copySuccess":"Copy Success","copyError":"Copy Error"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 4.2.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner header-inner--height header-inner--bgcolor"><nav class="header-nav header-nav--sticky"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/softdev/"><span class="header-nav-menu-item__icon"><i class="fas fa-laptop-code"></i></span><span class="header-nav-menu-item__text">Coding</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/toolz/"><span class="header-nav-menu-item__icon"><i class="fas fa-toolbox"></i></span><span class="header-nav-menu-item__text">Tools</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">Tags</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">Search</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">Raspberry Pi 化身 WiFi 蛋</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2020-04-12</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2020-04-12</span></span></div></header><div class="post-body"><!-- # Raspberry Pi 化身 WiFi 蛋 -->
+
+        <h2 id="前文"   >
+          <a href="#前文" class="heading-link"><i class="fas fa-link"></i></a>前文</h2>
+      <p>我們已經改造 <a href="/en/2020/Raspberry-Pi-connect-to-4G-LTE/">Raspberry Pi 使用 4G 數據網路</a></p>
+
+        <h2 id="目標"   >
+          <a href="#目標" class="heading-link"><i class="fas fa-link"></i></a>目標</h2>
+      <p>這次我們要讓 Raspberry Pi 將網絡分享給其他裝置，你可以選：</p>
+<ul>
+<li><a href="#無線路由器">製成<strong>無線</strong>路由器</a></li>
+<li><a href="#有線路由器">製成路由器（有線）</a></li>
+</ul>
+
+        <h2 id="無線路由器"   >
+          <a href="#無線路由器" class="heading-link"><i class="fas fa-link"></i></a>無線路由器</h2>
+      <p>因為博主很懶惰，不想重複造輪子，所以無線路由器的教材就直接引用 <span class="exturl"><a class="exturl__link"   href="https://sixfab.com/using-sixfab-raspberry-p-shield-hat-as-a-wi-fi-hotspot-access-point/"  target="_blank" rel="noopener">Sixfab 的教學</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<p>如果你用的是早於 Raspberry Pi 3 的版本，你大概需要一個 USB 無線網路卡。</p>
+
+        <h3 id="備份無線網絡配置"   >
+          <a href="#備份無線網絡配置" class="heading-link"><i class="fas fa-link"></i></a>備份無線網絡配置</h3>
+      <p>這並不是必須的步驟，不過萬一你日後想恢復原樣，這一步會很有幫助。</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo cp /etc/wpa_supplicant/wpa_supplicant.conf /etc/wpa_supplicant/wpa_supplicant.backup.conf</span><br></pre></td></tr></table></div></figure>
+
+
+        <h3 id="配置無線網絡裝置"   >
+          <a href="#配置無線網絡裝置" class="heading-link"><i class="fas fa-link"></i></a>配置無線網絡裝置</h3>
+      <p>用以下指令清除舊配置</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo cp /dev/null /etc/wpa_supplicant/wpa_supplicant.conf</span><br></pre></td></tr></table></div></figure>
+<p>將以下的新配置寫入到 <code>/etc/wpa_supplicant/wpa_supplicant.conf</code></p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ctrl_interface&#x3D;DIR&#x3D;&#x2F;var&#x2F;run&#x2F;wpa_supplicant GROUP&#x3D;netdev</span><br><span class="line">update_config&#x3D;1</span><br></pre></td></tr></table></div></figure>
+
+
+        <h3 id="安裝-RaspAP"   >
+          <a href="#安裝-RaspAP" class="heading-link"><i class="fas fa-link"></i></a>安裝 RaspAP</h3>
+      <p>有一個簡單的安裝精靈 <span class="exturl"><a class="exturl__link"   href="https://github.com/billz/raspap-webgui"  target="_blank" rel="noopener">RaspAP</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> 跟著它的步驟去進行安裝</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ wget -q https://git.io/voEUQ -O /tmp/raspap &amp;&amp; bash /tmp/raspap -y</span><br></pre></td></tr></table></div></figure>
+<p>不過由於我本人並沒有試過這個方法，所以如果有任何疑問（例如默認的密碼、管理員界面等）還請前往 <span class="exturl"><a class="exturl__link"   href="https://sixfab.com/using-sixfab-raspberry-p-shield-hat-as-a-wi-fi-hotspot-access-point/"  target="_blank" rel="noopener">Sixfab 的教學</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> 和<span class="exturl"><a class="exturl__link"   href="https://howtoraspberrypi.com/create-a-wi-fi-hotspot-in-less-than-10-minutes-with-pi-raspberry/"  target="_blank" rel="noopener">原文教學（包含故障排除章節）</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+
+        <h2 id="有線路由器"   >
+          <a href="#有線路由器" class="heading-link"><i class="fas fa-link"></i></a>有線路由器</h2>
+      <p>我自己是用的這個方法，因為感覺會比較安心，始終有線的網絡感覺會比較穩定。這一部分就要使用網絡位址轉換技術（Network Address Translation，NAT）來連接 <code>ppp0</code> 和 <code>eth0</code> 兩個網絡界面（網卡）</p>
+<p>我是參考<span class="exturl"><a class="exturl__link"   href="https://raspberrypi.stackexchange.com/questions/48307/sharing-the-pis-wifi-connection-through-the-ethernet-port"  target="_blank" rel="noopener">將無線網絡分享到網線教程</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>然後將它改成將 PPP 網絡分享到網線</p>
+
+        <h3 id="DHCP-和-DNS-伺服器"   >
+          <a href="#DHCP-和-DNS-伺服器" class="heading-link"><i class="fas fa-link"></i></a>DHCP 和 DNS 伺服器</h3>
+      <p>你可以選自己喜歡的諸如 <code>isc-dhcp-server</code> 之類比較複雜的，這邊直接用 <code>dnsmasq</code> 比較方便</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install dnsmasq</span><br></pre></td></tr></table></div></figure>
+
+        <h3 id="設置網絡界面"   >
+          <a href="#設置網絡界面" class="heading-link"><i class="fas fa-link"></i></a>設置網絡界面</h3>
+      <p>編輯 <code>/etc/network/interfaces</code> 裡的 <code>eth0</code> 部分</p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">allow-hotplug eth0  </span><br><span class="line">iface eth0 inet static  </span><br><span class="line">    address 192.168.2.1</span><br><span class="line">    netmask 255.255.255.0</span><br><span class="line">    network 192.168.2.0</span><br><span class="line">    broadcast 192.168.2.255</span><br></pre></td></tr></table></div></figure>
+
+        <h3 id="設置-dnsmasq"   >
+          <a href="#設置-dnsmasq" class="heading-link"><i class="fas fa-link"></i></a>設置 dnsmasq</h3>
+      <p>先備份一下 dnsmasq 原本的設置</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo mv /etc/dnsmasq.conf /etc/dnsmasq.conf.orig</span><br></pre></td></tr></table></div></figure>
+<p>然後編輯 <code>/etc/dnsmasq.conf</code></p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">interface&#x3D;eth0      # 分享到 eth0  </span><br><span class="line">listen-address&#x3D;192.168.2.1 # 和&#x2F;etc&#x2F;network&#x2F;interfaces配置的 IP 要一致  </span><br><span class="line"># Bind to the interface to make sure we aren&#39;t sending things elsewhere</span><br><span class="line">#### bind-interfaces #### BUT don&#39;t enable this.</span><br><span class="line">server&#x3D;8.8.8.8       # Forward DNS requests to Google DNS  </span><br><span class="line">domain-needed        # Don&#39;t forward short names  </span><br><span class="line"># Never forward addresses in the non-routed address spaces.</span><br><span class="line">bogus-priv</span><br><span class="line"># Assign IP addresses between 192.168.2.2 and 192.168.2.100 with a</span><br><span class="line"># 12 hour lease time</span><br><span class="line">dhcp-range&#x3D;192.168.2.2,192.168.2.100,12h</span><br></pre></td></tr></table></div></figure>
+<blockquote>
+<p>關於 <strong><code>bind-interfaces</code></strong> 部分，原本的教學是啟用的，不過我這邊啟用的話會無法分享網絡，所以這邊用<code>#</code>註釋掉了</p>
+</blockquote>
+
+        <h3 id="設置-NAT"   >
+          <a href="#設置-NAT" class="heading-link"><i class="fas fa-link"></i></a>設置 NAT</h3>
+      <p>通過防火牆來設置 NAT</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo iptables -t nat -A POSTROUTING -o wwan0 -j MASQUERADE  </span><br><span class="line">$ sudo iptables -A FORWARD -i wwan0 -o eth0 -m state --state RELATED,ESTABLISHED -j ACCEPT  </span><br><span class="line">$ sudo iptables -A FORWARD -i eth0 -o wwan0 -j ACCEPT</span><br></pre></td></tr></table></div></figure>
+
+        <h4 id="設置為永久-NAT"   >
+          <a href="#設置為永久-NAT" class="heading-link"><i class="fas fa-link"></i></a>設置為永久 NAT</h4>
+      <p>保存設置</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo sh -c <span class="string">"iptables-save &gt; /etc/iptables.ipv4.nat"</span></span><br></pre></td></tr></table></div></figure>
+<p>修改 <code>/etc/rc.local</code> 開機自動載入 NAT 設置</p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Add this line above exit 0</span><br><span class="line">iptables-restore &lt; &#x2F;etc&#x2F;iptables.ipv4.nat</span><br></pre></td></tr></table></div></figure>
+
+        <h2 id="完成"   >
+          <a href="#完成" class="heading-link"><i class="fas fa-link"></i></a>完成</h2>
+      <p>將手提電腦連上 Raspberry Pi 然後……可以了</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ ping 8.8.8.8</span><br><span class="line">PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.</span><br><span class="line">64 bytes from 8.8.8.8: icmp_seq=2 ttl=51 time=99.2 ms</span><br><span class="line">64 bytes from 8.8.8.8: icmp_seq=1 ttl=51 time=22.9 ms</span><br><span class="line">64 bytes from 8.8.8.8: icmp_seq=3 ttl=51 time=69.7 ms</span><br></pre></td></tr></table></div></figure>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ END ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">Author: </span><span class="copyright-author__value"><a href="https://NewJerseyStyle.github.io">NewJerseyStyle</a></span></div><div class="copyright-link"><span class="copyright-link__name">Link: </span><span class="copyright-link__value"><a href="https://newjerseystyle.github.io/ch-TW/2020/Raspberry-Pi-%E5%8C%96%E8%BA%AB-WiFi-%E8%9B%8B/">https://newjerseystyle.github.io/ch-TW/2020/Raspberry-Pi-%E5%8C%96%E8%BA%AB-WiFi-%E8%9B%8B/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">Copyright: </span><span class="copyright-notice__value">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en zh-tw" rel="external nofollow" target="_blank">BY-SA</a> unless stating additionally</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://newjerseystyle.github.io/tags/Raspberry-Pi/">Raspberry Pi</a></span><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://newjerseystyle.github.io/tags/WWAN/">WWAN</a></span><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://newjerseystyle.github.io/tags/4G/">4G</a></span><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://newjerseystyle.github.io/tags/NAT/">NAT</a></span><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://newjerseystyle.github.io/tags/Router/">Router</a></span></div><nav class="post-paginator paginator"><div class="paginator-next"><a class="paginator-next__link" href="/en/2020/Video-based-Motion-Detection-in-Python-with-OpenCV/"><span class="paginator-prev__text">Video based Motion Detection in Python with OpenCV</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">Catalog</span><span class="sidebar-nav-ov">Overview</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前文"><span class="toc-number">1.</span> <span class="toc-text">
+          前文</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#目標"><span class="toc-number">2.</span> <span class="toc-text">
+          目標</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#無線路由器"><span class="toc-number">3.</span> <span class="toc-text">
+          無線路由器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#備份無線網絡配置"><span class="toc-number">3.1.</span> <span class="toc-text">
+          備份無線網絡配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置無線網絡裝置"><span class="toc-number">3.2.</span> <span class="toc-text">
+          配置無線網絡裝置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安裝-RaspAP"><span class="toc-number">3.3.</span> <span class="toc-text">
+          安裝 RaspAP</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#有線路由器"><span class="toc-number">4.</span> <span class="toc-text">
+          有線路由器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#DHCP-和-DNS-伺服器"><span class="toc-number">4.1.</span> <span class="toc-text">
+          DHCP 和 DNS 伺服器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#設置網絡界面"><span class="toc-number">4.2.</span> <span class="toc-text">
+          設置網絡界面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#設置-dnsmasq"><span class="toc-number">4.3.</span> <span class="toc-text">
+          設置 dnsmasq</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#設置-NAT"><span class="toc-number">4.4.</span> <span class="toc-text">
+          設置 NAT</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#設置為永久-NAT"><span class="toc-number">4.4.1.</span> <span class="toc-text">
+          設置為永久 NAT</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#完成"><span class="toc-number">5.</span> <span class="toc-text">
+          完成</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/logo.png" alt="avatar"></div><p class="sidebar-ov-author__text">NewJerseyStyle</p></div><div class="sidebar-ov-feed"><span class="sidebar-ov-feed-rss"><a class="sidebar-ov-feed-rss__link" href="/atom.xml" target="_blank" rel="noopener"><span class="sidebar-ov-feed-rss__icon"><i class="fas fa-rss"></i></span><span>RSS Subscribe</span></a></span></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">11</div><div class="sidebar-ov-state-item__name">Tags</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en zh-tw" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">You have read </span><span class="sidebar-reading-info__num">0</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2020</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>NewJerseyStyle</span></div><div><span>Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span class="footer__devider">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="Search for Posts (Support multiple keywords)"></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="https://cdn.jsdelivr.net/npm/ribbon.js@latest/dist/ribbon.min.js" size="120" alpha="0.6" zIndex="-1"></script><script>function initSearch() {
+  var isXML = true;
+  var search_path = 'search.json';
+
+  if (!search_path) {
+    search_path = 'search.xml';
+  } else if (/json$/i.test(search_path)) {
+    isXML = false;
+  }
+
+  var path = '/' + search_path;
+  $.ajax({
+    url: path,
+    dataType: isXML ? 'xml' : 'json',
+    async: true,
+    success: function (res) {
+      var datas = isXML ? $('entry', res).map(function () {
+        // 将 XML 转为 JSON
+        return {
+          title: $('title', this).text(),
+          content: $('content', this).text(),
+          url: $('url', this).text()
+        };
+      }).get() : res;
+      var $input = $('.search-input input');
+      var $result = $('.search-results');
+      // 搜索对象（标题、内容）的权重，影响显示顺序
+      var WEIGHT = { title: 100, content: 1 };
+      var searchPost = function () {
+        var searchText = $input.val().toLowerCase().trim();
+        // 根据空白字符分隔关键字
+        var keywords = searchText.split(/[\s]+/);
+        // 搜索结果
+        var matchPosts = [];
+
+        // 有多个关键字时，将原文字整个保存下来
+        if (keywords.length > 1) {
+          keywords.push(searchText);
+        }
+        // 防止未输入字符时搜索
+        if (searchText.length > 0) {
+          datas.forEach(function (data) {
+            var isMatch  = false;
+            // 没有标题的文章使用预设的 i18n 变量代替
+            var title = (data.title && data.title.trim()) || '[ Untitled ]';
+            var titleLower = title && title.toLowerCase();
+            // 删除 HTML 标签 和 所有空白字符
+            var content = data.content && data.content.replace(/<[^>]+>/g, '');
+            var contentLower = content && content.toLowerCase();
+            // 删除重复的 /
+            var postURL = data.url && decodeURI(data.url).replace(/\/{2,}/g, '/');
+            // 标题中匹配到的关键词
+            var titleHitSlice = [];
+            // 内容中匹配到的关键词
+            var contentHitSlice = [];
+
+            keywords.forEach(function (keyword) {
+              /**
+              * 获取匹配的关键词的索引
+              * @param {String} keyword 要匹配的关键字
+              * @param {String} text 原文字
+              * @param {Boolean} caseSensitive 是否区分大小写
+              * @param {Number} weight 匹配对象的权重。权重大的优先显示
+              * @return {Array}
+              */
+              function getIndexByword (word, text, caseSensitive, weight) {
+                if (!word || !text) {
+                  return [];
+                };
+
+                var startIndex = 0; // 每次匹配的开始索引
+                var index = -1;     // 匹配到的索引值
+                var result = [];    // 匹配结果
+
+                if (!caseSensitive) {
+                  word = word.toLowerCase();
+                  text = text.toLowerCase();
+                }
+
+                while((index = text.indexOf(word, startIndex)) !== -1) {
+                  var hasMatch = false;
+                  // 索引位置相同的关键词，保留长度较长的
+                  titleHitSlice.forEach(function (hit) {
+                    if (hit.index === index && hit.word.length < word.length) {
+                      hit.word = word;
+                      hasMatch = true;
+                    }
+                  });
+                  startIndex = index + word.length;
+                  !hasMatch && result.push({ index: index, word: word, weight: weight });
+                }
+                return result;
+              }
+              titleHitSlice = titleHitSlice.concat(getIndexByword(keyword, titleLower, false, WEIGHT.title));
+              contentHitSlice = contentHitSlice.concat(getIndexByword(keyword, contentLower, false, WEIGHT.content));
+            });
+
+            var hitTitle = titleHitSlice.length;
+            var hitContent = contentHitSlice.length;
+
+            if (hitTitle > 0 || hitContent > 0) {
+              isMatch = true;
+            }
+            if (isMatch) {
+              ;[titleHitSlice, contentHitSlice].forEach(function (hit) {
+                // 按照匹配文字的索引的递增顺序排序
+                hit.sort(function (left, right) {
+                  return left.index - right.index;
+                });
+              });
+              /**
+              * 给文本中匹配到的关键词添加标记，从而进行高亮显示
+              * @param {String} text 原文本
+              * @param {Array} hitSlice 匹配项的索引信息
+              * @param {Number} start 开始索引
+              * @param {Number} end 结束索引
+              * @return {String}
+              */
+              function highlightKeyword (text, hitSlice, start, end) {
+                if (!text || !hitSlice || !hitSlice.length) {
+                  return;
+                }
+
+                var result = '';
+                var startIndex = start;
+                var endIndex = end;
+                hitSlice.forEach(function (hit) {
+                  if (hit.index < startIndex) {
+                    return;
+                  }
+
+                  var hitWordEnd = hit.index + hit.word.length;
+                  result += text.slice(startIndex, hit.index);
+                  result += '<b>' + text.slice(hit.index, hitWordEnd) + '</b>';
+                  startIndex = hitWordEnd;
+                });
+                result += text.slice(startIndex, endIndex);
+                return result;
+              }
+
+              var postData = {};
+              // 文章总的搜索权重
+              var postWeight = titleHitSlice.length * WEIGHT.title + contentHitSlice.length * WEIGHT.content;
+              // 标记匹配关键词后的标题
+              var postTitle = highlightKeyword(title, titleHitSlice, 0, title.length) || title;
+              // 标记匹配关键词后的内容
+              var postContent;
+              // 显示内容的长度
+              var SHOW_WORD_LENGTH = 200;
+              // 命中关键词前的字符显示长度
+              var SHOW_WORD_FRONT_LENGTH = 20;
+              var SHOW_WORD_END_LENGTH = SHOW_WORD_LENGTH - SHOW_WORD_FRONT_LENGTH;
+
+              // 截取匹配的第一个字符，前后共 200 个字符来显示
+              if (contentHitSlice.length > 0) {
+                var firstIndex = contentHitSlice[0].index;
+                var start = firstIndex > SHOW_WORD_FRONT_LENGTH ? firstIndex - SHOW_WORD_FRONT_LENGTH : 0;
+                var end = firstIndex + SHOW_WORD_END_LENGTH;
+                postContent = highlightKeyword(content, contentHitSlice, start, end);
+              } else { // 未匹配到内容，直接截取前 200 个字符来显示
+                postContent = content.slice(0, SHOW_WORD_LENGTH);
+              }
+              postData.title = postTitle;
+              postData.content = postContent;
+              postData.url = postURL;
+              postData.weight = postWeight;
+              matchPosts.push(postData);
+            }
+          });
+        }
+
+        var resultInnerHtml = '';
+        if (matchPosts.length) {
+          // 按权重递增的顺序排序，使权重大的优先显示
+          matchPosts.sort(function (left, right) {
+            return right.weight - left.weight;
+          });
+          resultInnerHtml += '<ul>';
+          matchPosts.forEach(function (post) {
+            resultInnerHtml += '<li><a class="search-results-title" href="' + post.url + '">';
+            resultInnerHtml += post.title;
+            resultInnerHtml += '</a><div class="search-results-content">';
+            resultInnerHtml += post.content;
+            resultInnerHtml += '</div></li>';
+          });
+          resultInnerHtml += '</ul>';
+        } else {
+          resultInnerHtml += '<div class="search-results-none"><i class="far fa-meh"></i></div>';
+        }
+        $result.html(resultInnerHtml);
+      };
+      $input.on('input', searchPost);
+      $input.on('keyup', function (e) {
+        if (e.keyCode === Stun.utils.codeToKeyCode('Enter')) {
+          searchPost();
+        }
+      });
+    }
+  });
+}
+
+function closeSearch () {
+  $('body').css({ overflow: 'auto' });
+  $('.search-popup').css({ display: 'none' });
+  $('.search-mask').css({ display: 'none' });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  Stun.utils.pjaxReloadLocalSearch = function () {
+    $('.header-nav-search').on('click', function (e) {
+      e.stopPropagation();
+      $('body').css('overflow', 'hidden');
+      $('.search-popup')
+        .velocity('stop')
+        .velocity('transition.expandIn', {
+          duration: 300,
+          complete: function () {
+            $('.search-popup input').focus();
+          }
+        });
+      $('.search-mask')
+        .velocity('stop')
+        .velocity('transition.fadeIn', {
+          duration: 300
+        });
+
+      initSearch();
+    });
+    $('.search-mask, .search-close').on('click', function () {
+      closeSearch();
+    });
+    $(document).on('keydown', function (e) {
+      // Escape <=> 27
+      if (e.keyCode === Stun.utils.codeToKeyCode('Escape')) {
+        closeSearch();
+      }
+    });
+  };
+
+  Stun.utils.pjaxReloadLocalSearch();
+}, false);</script><script src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" async=""></script><script>(adsbygoogle = window.adsbygoogle || []).push({
+  google_ad_client: 'ca-pub-9667639204764993',
+  enable_page_level_ads: true
+});</script><script src="/js/utils.js?v=2.0.0-rc.0"></script><script src="/js/stun-boot.js?v=2.0.0-rc.0"></script><script src="/js/scroll.js?v=2.0.0-rc.0"></script><script src="/js/header.js?v=2.0.0-rc.0"></script><script src="/js/sidebar.js?v=2.0.0-rc.0"></script>
+        <script src="//cdn.jsdelivr.net/npm/js-base64/base64.min.js"></script>
+        <script>
+        $('a').each(function() {
+          const $this = $(this);
+          const href = $this.attr('href');
+          if (href && href.match('^((http|https|thunder|qqdl|ed2k|Flashget|qbrowser|ftp|rtsp|mms)://)')) {
+            const strs = href.split('/');
+            if (strs.length >= 3) {
+                const host = strs[2];
+                if (host !== 'newjerseystyle.github.io' || window.location.host) {
+                    $this.attr('href', '/redirect_page.html?u='+Base64.encode(href)+'').attr('rel', 'external nofollow noopener noreferrer');
+                    if (false) {
+                        $this.attr('target', '_blank');
+                    }
+                }
+            }
+          }
+        });
+        </script></body></html>
