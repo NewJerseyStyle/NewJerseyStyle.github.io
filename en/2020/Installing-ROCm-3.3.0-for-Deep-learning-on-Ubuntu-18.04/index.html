@@ -1,0 +1,412 @@
+<!DOCTYPE html><html lang="[&quot;en&quot;,&quot;zh-TW&quot;,&quot;default&quot;]"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.0.0-rc.0" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.0.0-rc.0" type="image/png" sizes="32x32"><meta name="description" content="Goal       We all know AMD VEGA 56 and VEGA 64 are powerful GPUs are competitive to NVIDIA 2080 Ti, the Radeon VII is even more powerful with 13.44 TFLOPS FP32 (float) performance">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Installing ROCm 3.3.0 for Deep learning on Ubuntu 18.04">
+<meta property="og:url" content="https://newjerseystyle.github.io/en/2020/Installing-ROCm-3.3.0-for-Deep-learning-on-Ubuntu-18.04/index.html">
+<meta property="og:site_name" content="ExpShare">
+<meta property="og:description" content="Goal       We all know AMD VEGA 56 and VEGA 64 are powerful GPUs are competitive to NVIDIA 2080 Ti, the Radeon VII is even more powerful with 13.44 TFLOPS FP32 (float) performance">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-04-18T15:38:00.000Z">
+<meta property="article:modified_time" content="2020-04-22T00:56:05.602Z">
+<meta property="article:author" content="NewJerseyStyle">
+<meta property="article:tag" content="AMD">
+<meta property="article:tag" content="Deep learning">
+<meta property="article:tag" content="ROCm">
+<meta property="article:tag" content="TensorFlow">
+<meta name="twitter:card" content="summary"><meta name="keywords" content="NewJerseyStyle, ExpShare"><meta name="description" content="Share experience in software development"><title>Installing ROCm 3.3.0 for Deep learning on Ubuntu 18.04</title><link ref="canonical" href="https://newjerseystyle.github.io/en/2020/Installing-ROCm-3.3.0-for-Deep-learning-on-Ubuntu-18.04/"><link rel="alternate" href="/atom.xml" type="application/atom+xml"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.0.0-rc.0"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":false,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"carbon","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"Copy","copySuccess":"Copy Success","copyError":"Copy Error"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 4.2.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner header-inner--height header-inner--bgcolor"><nav class="header-nav header-nav--sticky"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/softdev/"><span class="header-nav-menu-item__icon"><i class="fas fa-laptop-code"></i></span><span class="header-nav-menu-item__text">Coding</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/toolz/"><span class="header-nav-menu-item__icon"><i class="fas fa-toolbox"></i></span><span class="header-nav-menu-item__text">Tools</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">Tags</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">Search</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">Installing ROCm 3.3.0 for Deep learning on Ubuntu 18.04</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2020-04-18</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2020-04-22</span></span></div></header><div class="post-body"><!-- # Installing ROCm for Deep learning on Ubuntu 18.04 -->
+
+        <h2 id="Goal"   >
+          <a href="#Goal" class="heading-link"><i class="fas fa-link"></i></a>Goal</h2>
+      <p>We all know AMD <span class="exturl"><a class="exturl__link"   href="https://www.techpowerup.com/gpu-specs/radeon-rx-vega-56.c2993"  target="_blank" rel="noopener">VEGA 56</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> and <span class="exturl"><a class="exturl__link"   href="https://www.techpowerup.com/gpu-specs/radeon-rx-vega-64.c2871"  target="_blank" rel="noopener">VEGA 64</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> are powerful GPUs are competitive to <span class="exturl"><a class="exturl__link"   href="https://www.techpowerup.com/gpu-specs/geforce-rtx-2080-ti.c3305"  target="_blank" rel="noopener">NVIDIA 2080 Ti</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>, the <span class="exturl"><a class="exturl__link"   href="https://www.techpowerup.com/gpu-specs/radeon-vii.c3358"  target="_blank" rel="noopener">Radeon VII</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> is even more powerful with 13.44 TFLOPS FP32 (float) performance (Theoretical) and price at 699 USD.</p>
+<p>I was thinking about having a Deep Learning machine, and I looked at the price for NVIDIA 2080 Ti, it is around 1548 USD here. So I made a call to my friend who sells 2nd hand electronic stuff and get a <span class="exturl"><a class="exturl__link"   href="https://www.techpowerup.com/gpu-specs/radeon-rx-580.c2938"  target="_blank" rel="noopener">AMD Radeon RX 580</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> with around 100 USD. RX 580 is a cost-effective card to get 6 TFLOPS performance.</p>
+<p>But, how to fit it with TensorFlow or Pytorch? CUDA does not agree with AMD GPUs. But no worries, I have found ROCm for AMD GPUs to replace CUDA.</p>
+
+        <h2 id="Requirements"   >
+          <a href="#Requirements" class="heading-link"><i class="fas fa-link"></i></a>Requirements</h2>
+      <p>It is so excited to run TensorFlow on AMD GPU. But here are some important notes:</p>
+<ul>
+<li>Only new CPUs are supported as it requires PCIe Gen3 and PCIe Atomics</li>
+<li>Only new GPUs are supported because old GPUs are too poor in performance</li>
+<li>Use Linux with kernel 4.17 or above (Or you will have a hard time with it)</li>
+</ul>
+
+        <h3 id="Supported-CPUs"   >
+          <a href="#Supported-CPUs" class="heading-link"><i class="fas fa-link"></i></a>Supported CPUs</h3>
+      <ul>
+<li>AMD Ryzen CPUs</li>
+<li>The CPUs in AMD Ryzen APUs</li>
+<li>AMD Ryzen Threadripper CPUs</li>
+<li>AMD EPYC CPUs</li>
+<li>Intel Xeon E7 v3 or newer CPUs</li>
+<li>Intel Xeon E5 v3 or newer CPUs</li>
+<li>Intel Xeon E3 v3 or newer CPUs</li>
+<li>Intel Core i7 v4, Core i5 v4, Core i3 v4 or newer CPUs (i.e. Haswell family or newer)</li>
+<li>Some Ivy Bridge-E systems</li>
+</ul>
+<p>Refer to <span class="exturl"><a class="exturl__link"   href="https://github.com/RadeonOpenCompute/ROCm#supported-cpus"  target="_blank" rel="noopener">GitHub of ROCm CPU section</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>. What are those “Some Ivy Bridge-E systems”? I don’t know too. You may Email them for support on that. You may see some older CPUs are limited supported, but I would suggest you don’t waste your time on that unless you want to contribute in ROCm to make it support older CPUs. It will make your life harder.</p>
+
+        <h3 id="Supported-GPUs"   >
+          <a href="#Supported-GPUs" class="heading-link"><i class="fas fa-link"></i></a>Supported GPUs</h3>
+      <ul>
+<li>GFX8 GPUs<ul>
+<li>“Fiji” chips, such as on the AMD Radeon R9 Fury X and Radeon Instinct MI8</li>
+<li>“Polaris 10” chips, such as on the AMD Radeon RX 580 and Radeon Instinct MI6</li>
+</ul>
+</li>
+<li>GFX9 GPUs<ul>
+<li>“Vega 10” chips, such as on the AMD Radeon RX Vega 64 and Radeon Instinct MI25</li>
+<li>“Vega 7nm” chips, such as on the Radeon Instinct MI50, Radeon Instinct MI60 or AMD Radeon VII</li>
+</ul>
+</li>
+</ul>
+<p>Refer to <span class="exturl"><a class="exturl__link"   href="https://github.com/RadeonOpenCompute/ROCm#supported-gpus"  target="_blank" rel="noopener">GitHub of ROCm GPU section</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>. Few GFX8 and GFX7 GPUs are supported unofficially (if you got problem, no help, no guarantee).</p>
+
+        <h2 id="Install-ROCm"   >
+          <a href="#Install-ROCm" class="heading-link"><i class="fas fa-link"></i></a>Install ROCm</h2>
+      
+        <h3 id="Things-I-got"   >
+          <a href="#Things-I-got" class="heading-link"><i class="fas fa-link"></i></a>Things I got</h3>
+      <p>I got a i5-4570 for CPU (another 2nd hand computer with 140 USD) and RX 580 for GPU and installed Ubuntu Server 18.04.</p>
+<p>The <span class="exturl"><a class="exturl__link"   href="https://rocm-documentation.readthedocs.io/en/latest/Installation_Guide/Installation-Guide.html#ubuntu"  target="_blank" rel="noopener">official tutorial</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> will be just fine for installnig ROCm and TensorFlow. But you will encounter problem in Pytorch (which is the reason I write this tutorial, I gave up on the first time, and this time I find <a href="/en/2020/Installing-Pytorch-with-ROCm-on-Ubuntu-18.04/">solution</a>).</p>
+
+        <h3 id="Step-one"   >
+          <a href="#Step-one" class="heading-link"><i class="fas fa-link"></i></a>Step one</h3>
+      <blockquote>
+<p>Note the ROCm version you install, I am installing ROCm 3.3.0  This information will be useful during Pytorch installation.</p>
+</blockquote>
+<p>Update system, install <code>libnuma-dev</code> and reboot:</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt update</span><br><span class="line"></span><br><span class="line">$ sudo apt dist-upgrade</span><br><span class="line"></span><br><span class="line">$ sudo apt install libnuma-dev</span><br><span class="line"></span><br><span class="line">$ sudo reboot</span><br></pre></td></tr></table></div></figure>
+
+        <h3 id="Step-two"   >
+          <a href="#Step-two" class="heading-link"><i class="fas fa-link"></i></a>Step two</h3>
+      <p>Add the ROCm apt repository.</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ wget -q -O - http://repo.radeon.com/rocm/apt/debian/rocm.gpg.key | sudo apt-key add -</span><br><span class="line"></span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">'deb [arch=amd64] http://repo.radeon.com/rocm/apt/debian/ xenial main'</span> | sudo te</span><br></pre></td></tr></table></div></figure>
+<p>Install ROCm</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt update</span><br><span class="line"></span><br><span class="line">$ sudo apt install rocm-dkms</span><br></pre></td></tr></table></div></figure>
+
+
+        <h3 id="Step-three"   >
+          <a href="#Step-three" class="heading-link"><i class="fas fa-link"></i></a>Step three</h3>
+      <p>Grant yourself permission for accessing your GPU</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo usermod -a -G video <span class="variable">$LOGNAME</span></span><br></pre></td></tr></table></div></figure>
+<p>If you need to add more users, check the <span class="exturl"><a class="exturl__link"   href="https://rocm-documentation.readthedocs.io/en/latest/Installation_Guide/Installation-Guide.html#ubuntu"  target="_blank" rel="noopener">document</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<p>Reboot</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo reboot</span><br></pre></td></tr></table></div></figure>
+
+
+        <h3 id="Step-four"   >
+          <a href="#Step-four" class="heading-link"><i class="fas fa-link"></i></a>Step four</h3>
+      <p>Test the ROCm installation.</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ /opt/rocm/bin/rocminfo</span><br><span class="line">$ /opt/rocm/opencl/bin/x86_64/clinfo</span><br></pre></td></tr></table></div></figure>
+<p>You should see something like report.</p>
+<p>Add ROCm to environment PATH:</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> <span class="string">'export PATH=$PATH:/opt/rocm/bin:/opt/rocm/profiler/bin:/opt/rocm/opencl/bin/x86_64'</span> |</span><br><span class="line">&gt; sudo tee -a /etc/profile.d/rocm.sh</span><br></pre></td></tr></table></div></figure>
+
+
+        <h2 id="Install-TensorFlow"   >
+          <a href="#Install-TensorFlow" class="heading-link"><i class="fas fa-link"></i></a>Install TensorFlow</h2>
+      <p>This is simple with two steps, get some important libraries and install TensorFlow through <code>pip</code>. Refer to <span class="exturl"><a class="exturl__link"   href="https://rocm-documentation.readthedocs.io/en/latest/Deep_learning/Deep-learning.html"  target="_blank" rel="noopener">ROCm Doc</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt update</span><br><span class="line"></span><br><span class="line">$ sudo apt install rocm-libs miopen-hip cxlactivitylogger rccl</span><br><span class="line"></span><br><span class="line">$ sudo apt install wget python3-pip</span><br><span class="line"></span><br><span class="line">$ pip3 install --user tensorflow-rocm</span><br></pre></td></tr></table></div></figure>
+
+<p>It now installed TensorFlow 2 (latest), you need to specify version if you need just like installing other packages in Python.</p>
+
+        <h2 id="DONE"   >
+          <a href="#DONE" class="heading-link"><i class="fas fa-link"></i></a>DONE</h2>
+      <p>TensorFlow time~ (^_^)b</p>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ END ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">Author: </span><span class="copyright-author__value"><a href="https://NewJerseyStyle.github.io">NewJerseyStyle</a></span></div><div class="copyright-link"><span class="copyright-link__name">Link: </span><span class="copyright-link__value"><a href="https://newjerseystyle.github.io/en/2020/Installing-ROCm-3.3.0-for-Deep-learning-on-Ubuntu-18.04/">https://newjerseystyle.github.io/en/2020/Installing-ROCm-3.3.0-for-Deep-learning-on-Ubuntu-18.04/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">Copyright: </span><span class="copyright-notice__value">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en zh-tw" rel="external nofollow" target="_blank">BY-SA</a> unless stating additionally</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://newjerseystyle.github.io/tags/AMD/">AMD</a></span><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://newjerseystyle.github.io/tags/Deep-learning/">Deep learning</a></span><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://newjerseystyle.github.io/tags/ROCm/">ROCm</a></span><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://newjerseystyle.github.io/tags/TensorFlow/">TensorFlow</a></span></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/en/2020/Installing-Pytorch-with-ROCm-3.3.0-on-Ubuntu-18.04/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">Installing Pytorch with ROCm 3.3.0 on Ubuntu 18.04</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/zh-TW/2020/Raspberry-Pi-%E5%8C%96%E8%BA%AB-WiFi-%E8%9B%8B/"><span class="paginator-prev__text">Raspberry Pi 化身 WiFi 蛋</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">Catalog</span><span class="sidebar-nav-ov">Overview</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Goal"><span class="toc-number">1.</span> <span class="toc-text">
+          Goal</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Requirements"><span class="toc-number">2.</span> <span class="toc-text">
+          Requirements</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Supported-CPUs"><span class="toc-number">2.1.</span> <span class="toc-text">
+          Supported CPUs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Supported-GPUs"><span class="toc-number">2.2.</span> <span class="toc-text">
+          Supported GPUs</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Install-ROCm"><span class="toc-number">3.</span> <span class="toc-text">
+          Install ROCm</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Things-I-got"><span class="toc-number">3.1.</span> <span class="toc-text">
+          Things I got</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Step-one"><span class="toc-number">3.2.</span> <span class="toc-text">
+          Step one</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Step-two"><span class="toc-number">3.3.</span> <span class="toc-text">
+          Step two</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Step-three"><span class="toc-number">3.4.</span> <span class="toc-text">
+          Step three</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Step-four"><span class="toc-number">3.5.</span> <span class="toc-text">
+          Step four</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Install-TensorFlow"><span class="toc-number">4.</span> <span class="toc-text">
+          Install TensorFlow</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DONE"><span class="toc-number">5.</span> <span class="toc-text">
+          DONE</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/logo.png" alt="avatar"></div><p class="sidebar-ov-author__text">NewJerseyStyle</p></div><div class="sidebar-ov-feed"><span class="sidebar-ov-feed-rss"><a class="sidebar-ov-feed-rss__link" href="/atom.xml" target="_blank" rel="noopener"><span class="sidebar-ov-feed-rss__icon"><i class="fas fa-rss"></i></span><span>RSS Subscribe</span></a></span></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">16</div><div class="sidebar-ov-state-item__name">Tags</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en zh-tw" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">You have read </span><span class="sidebar-reading-info__num">0</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2020</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>NewJerseyStyle</span></div><div><span>Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span class="footer__devider">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="Search for Posts (Support multiple keywords)"></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="https://cdn.jsdelivr.net/npm/ribbon.js@latest/dist/ribbon.min.js" size="120" alpha="0.6" zIndex="-1"></script><script>function initSearch() {
+  var isXML = true;
+  var search_path = 'search.json';
+
+  if (!search_path) {
+    search_path = 'search.xml';
+  } else if (/json$/i.test(search_path)) {
+    isXML = false;
+  }
+
+  var path = '/' + search_path;
+  $.ajax({
+    url: path,
+    dataType: isXML ? 'xml' : 'json',
+    async: true,
+    success: function (res) {
+      var datas = isXML ? $('entry', res).map(function () {
+        // 将 XML 转为 JSON
+        return {
+          title: $('title', this).text(),
+          content: $('content', this).text(),
+          url: $('url', this).text()
+        };
+      }).get() : res;
+      var $input = $('.search-input input');
+      var $result = $('.search-results');
+      // 搜索对象（标题、内容）的权重，影响显示顺序
+      var WEIGHT = { title: 100, content: 1 };
+      var searchPost = function () {
+        var searchText = $input.val().toLowerCase().trim();
+        // 根据空白字符分隔关键字
+        var keywords = searchText.split(/[\s]+/);
+        // 搜索结果
+        var matchPosts = [];
+
+        // 有多个关键字时，将原文字整个保存下来
+        if (keywords.length > 1) {
+          keywords.push(searchText);
+        }
+        // 防止未输入字符时搜索
+        if (searchText.length > 0) {
+          datas.forEach(function (data) {
+            var isMatch  = false;
+            // 没有标题的文章使用预设的 i18n 变量代替
+            var title = (data.title && data.title.trim()) || '[ Untitled ]';
+            var titleLower = title && title.toLowerCase();
+            // 删除 HTML 标签 和 所有空白字符
+            var content = data.content && data.content.replace(/<[^>]+>/g, '');
+            var contentLower = content && content.toLowerCase();
+            // 删除重复的 /
+            var postURL = data.url && decodeURI(data.url).replace(/\/{2,}/g, '/');
+            // 标题中匹配到的关键词
+            var titleHitSlice = [];
+            // 内容中匹配到的关键词
+            var contentHitSlice = [];
+
+            keywords.forEach(function (keyword) {
+              /**
+              * 获取匹配的关键词的索引
+              * @param {String} keyword 要匹配的关键字
+              * @param {String} text 原文字
+              * @param {Boolean} caseSensitive 是否区分大小写
+              * @param {Number} weight 匹配对象的权重。权重大的优先显示
+              * @return {Array}
+              */
+              function getIndexByword (word, text, caseSensitive, weight) {
+                if (!word || !text) {
+                  return [];
+                };
+
+                var startIndex = 0; // 每次匹配的开始索引
+                var index = -1;     // 匹配到的索引值
+                var result = [];    // 匹配结果
+
+                if (!caseSensitive) {
+                  word = word.toLowerCase();
+                  text = text.toLowerCase();
+                }
+
+                while((index = text.indexOf(word, startIndex)) !== -1) {
+                  var hasMatch = false;
+                  // 索引位置相同的关键词，保留长度较长的
+                  titleHitSlice.forEach(function (hit) {
+                    if (hit.index === index && hit.word.length < word.length) {
+                      hit.word = word;
+                      hasMatch = true;
+                    }
+                  });
+                  startIndex = index + word.length;
+                  !hasMatch && result.push({ index: index, word: word, weight: weight });
+                }
+                return result;
+              }
+              titleHitSlice = titleHitSlice.concat(getIndexByword(keyword, titleLower, false, WEIGHT.title));
+              contentHitSlice = contentHitSlice.concat(getIndexByword(keyword, contentLower, false, WEIGHT.content));
+            });
+
+            var hitTitle = titleHitSlice.length;
+            var hitContent = contentHitSlice.length;
+
+            if (hitTitle > 0 || hitContent > 0) {
+              isMatch = true;
+            }
+            if (isMatch) {
+              ;[titleHitSlice, contentHitSlice].forEach(function (hit) {
+                // 按照匹配文字的索引的递增顺序排序
+                hit.sort(function (left, right) {
+                  return left.index - right.index;
+                });
+              });
+              /**
+              * 给文本中匹配到的关键词添加标记，从而进行高亮显示
+              * @param {String} text 原文本
+              * @param {Array} hitSlice 匹配项的索引信息
+              * @param {Number} start 开始索引
+              * @param {Number} end 结束索引
+              * @return {String}
+              */
+              function highlightKeyword (text, hitSlice, start, end) {
+                if (!text || !hitSlice || !hitSlice.length) {
+                  return;
+                }
+
+                var result = '';
+                var startIndex = start;
+                var endIndex = end;
+                hitSlice.forEach(function (hit) {
+                  if (hit.index < startIndex) {
+                    return;
+                  }
+
+                  var hitWordEnd = hit.index + hit.word.length;
+                  result += text.slice(startIndex, hit.index);
+                  result += '<b>' + text.slice(hit.index, hitWordEnd) + '</b>';
+                  startIndex = hitWordEnd;
+                });
+                result += text.slice(startIndex, endIndex);
+                return result;
+              }
+
+              var postData = {};
+              // 文章总的搜索权重
+              var postWeight = titleHitSlice.length * WEIGHT.title + contentHitSlice.length * WEIGHT.content;
+              // 标记匹配关键词后的标题
+              var postTitle = highlightKeyword(title, titleHitSlice, 0, title.length) || title;
+              // 标记匹配关键词后的内容
+              var postContent;
+              // 显示内容的长度
+              var SHOW_WORD_LENGTH = 200;
+              // 命中关键词前的字符显示长度
+              var SHOW_WORD_FRONT_LENGTH = 20;
+              var SHOW_WORD_END_LENGTH = SHOW_WORD_LENGTH - SHOW_WORD_FRONT_LENGTH;
+
+              // 截取匹配的第一个字符，前后共 200 个字符来显示
+              if (contentHitSlice.length > 0) {
+                var firstIndex = contentHitSlice[0].index;
+                var start = firstIndex > SHOW_WORD_FRONT_LENGTH ? firstIndex - SHOW_WORD_FRONT_LENGTH : 0;
+                var end = firstIndex + SHOW_WORD_END_LENGTH;
+                postContent = highlightKeyword(content, contentHitSlice, start, end);
+              } else { // 未匹配到内容，直接截取前 200 个字符来显示
+                postContent = content.slice(0, SHOW_WORD_LENGTH);
+              }
+              postData.title = postTitle;
+              postData.content = postContent;
+              postData.url = postURL;
+              postData.weight = postWeight;
+              matchPosts.push(postData);
+            }
+          });
+        }
+
+        var resultInnerHtml = '';
+        if (matchPosts.length) {
+          // 按权重递增的顺序排序，使权重大的优先显示
+          matchPosts.sort(function (left, right) {
+            return right.weight - left.weight;
+          });
+          resultInnerHtml += '<ul>';
+          matchPosts.forEach(function (post) {
+            resultInnerHtml += '<li><a class="search-results-title" href="' + post.url + '">';
+            resultInnerHtml += post.title;
+            resultInnerHtml += '</a><div class="search-results-content">';
+            resultInnerHtml += post.content;
+            resultInnerHtml += '</div></li>';
+          });
+          resultInnerHtml += '</ul>';
+        } else {
+          resultInnerHtml += '<div class="search-results-none"><i class="far fa-meh"></i></div>';
+        }
+        $result.html(resultInnerHtml);
+      };
+      $input.on('input', searchPost);
+      $input.on('keyup', function (e) {
+        if (e.keyCode === Stun.utils.codeToKeyCode('Enter')) {
+          searchPost();
+        }
+      });
+    }
+  });
+}
+
+function closeSearch () {
+  $('body').css({ overflow: 'auto' });
+  $('.search-popup').css({ display: 'none' });
+  $('.search-mask').css({ display: 'none' });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  Stun.utils.pjaxReloadLocalSearch = function () {
+    $('.header-nav-search').on('click', function (e) {
+      e.stopPropagation();
+      $('body').css('overflow', 'hidden');
+      $('.search-popup')
+        .velocity('stop')
+        .velocity('transition.expandIn', {
+          duration: 300,
+          complete: function () {
+            $('.search-popup input').focus();
+          }
+        });
+      $('.search-mask')
+        .velocity('stop')
+        .velocity('transition.fadeIn', {
+          duration: 300
+        });
+
+      initSearch();
+    });
+    $('.search-mask, .search-close').on('click', function () {
+      closeSearch();
+    });
+    $(document).on('keydown', function (e) {
+      // Escape <=> 27
+      if (e.keyCode === Stun.utils.codeToKeyCode('Escape')) {
+        closeSearch();
+      }
+    });
+  };
+
+  Stun.utils.pjaxReloadLocalSearch();
+}, false);</script><script src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" async=""></script><script>(adsbygoogle = window.adsbygoogle || []).push({
+  google_ad_client: 'ca-pub-9667639204764993',
+  enable_page_level_ads: true
+});</script><script src="/js/utils.js?v=2.0.0-rc.0"></script><script src="/js/stun-boot.js?v=2.0.0-rc.0"></script><script src="/js/scroll.js?v=2.0.0-rc.0"></script><script src="/js/header.js?v=2.0.0-rc.0"></script><script src="/js/sidebar.js?v=2.0.0-rc.0"></script>
+        <script src="//cdn.jsdelivr.net/npm/js-base64/base64.min.js"></script>
+        <script>
+        $('a').each(function() {
+          const $this = $(this);
+          const href = $this.attr('href');
+          if (href && href.match('^((http|https|thunder|qqdl|ed2k|Flashget|qbrowser|ftp|rtsp|mms)://)')) {
+            const strs = href.split('/');
+            if (strs.length >= 3) {
+                const host = strs[2];
+                if (host !== 'newjerseystyle.github.io' || window.location.host) {
+                    $this.attr('href', '/redirect_page.html?u='+Base64.encode(href)+'').attr('rel', 'external nofollow noopener noreferrer');
+                    if (false) {
+                        $this.attr('target', '_blank');
+                    }
+                }
+            }
+          }
+        });
+        </script></body></html>

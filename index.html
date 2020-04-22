@@ -30,7 +30,235 @@ var CONFIG = {
   sourcePath: {"js":"js","css":"css","images":"images"},
 };
 
-window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 4.2.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/softdev/"><span class="header-nav-menu-item__icon"><i class="fas fa-laptop-code"></i></span><span class="header-nav-menu-item__text">Coding</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/toolz/"><span class="header-nav-menu-item__icon"><i class="fas fa-toolbox"></i></span><span class="header-nav-menu-item__text">Tools</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">Tags</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">Search</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">ExpShare</div><div class="header-banner-info__subtitle">Playground of NewJerseyStyle</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content content-home" id="content"><section class="postlist"><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/ch-TW/2020/Raspberry-Pi-%E5%8C%96%E8%BA%AB-WiFi-%E8%9B%8B/">Raspberry Pi 化身 WiFi 蛋</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2020-04-12</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2020-04-12</span></span></div></header><div class="post-body"><div class="post-excerpt"><!-- # Raspberry Pi 化身 WiFi 蛋 -->
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 4.2.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/softdev/"><span class="header-nav-menu-item__icon"><i class="fas fa-laptop-code"></i></span><span class="header-nav-menu-item__text">Coding</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/toolz/"><span class="header-nav-menu-item__icon"><i class="fas fa-toolbox"></i></span><span class="header-nav-menu-item__text">Tools</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">Tags</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">Search</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">ExpShare</div><div class="header-banner-info__subtitle">Playground of NewJerseyStyle</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content content-home" id="content"><section class="postlist"><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/en/2020/Installing-Pytorch-with-ROCm-3.3.0-on-Ubuntu-18.04/">Installing Pytorch with ROCm 3.3.0 on Ubuntu 18.04</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2020-04-18</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2020-04-22</span></span></div></header><div class="post-body"><div class="post-excerpt"><!-- # Installing Pytorch with ROCm on Ubuntu 18.04 -->
+
+        <h2 id="Goal"   >
+          <a href="#Goal" class="heading-link"><i class="fas fa-link"></i></a>Goal</h2>
+      <p>Now I have got my RX 580 ready for TensorFlow, and I brought a VEGA 56 with 10.54 TFLOPS for FP32 from newegg.com at price 266 USD. Let’s install Pytorch this time? Well, there will be few problem you may encounter like I did during installation of Pytorch on top of ROCm 3.3.0. Watch me how to fix them.</p>
+<p>First of all, install ROCm 3.3.0 (refer to <a href="/en/2020/Installing-ROCm-for-Deep-learning-on-Ubuntu-18.04/">previous tutorial</a>), requirements are the same.</p>
+
+        <h2 id="Install-Pytorch"   >
+          <a href="#Install-Pytorch" class="heading-link"><i class="fas fa-link"></i></a>Install Pytorch</h2>
+      <p>We follow the instructions from <span class="exturl"><a class="exturl__link"   href="https://rocm-documentation.readthedocs.io/en/latest/Deep_learning/Deep-learning.html"  target="_blank" rel="noopener">ROCm</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> first, and I will add solution to problem I encountered.</p>
+<p><strong>You will need to have 16 GB RAM or more to finish the whole compile, install and test process.</strong></p>
+
+        <h2 id="Step-One"   >
+          <a href="#Step-One" class="heading-link"><i class="fas fa-link"></i></a>Step One</h2>
+      
+        <h3 id="Install-Docker"   >
+          <a href="#Install-Docker" class="heading-link"><i class="fas fa-link"></i></a>Install Docker</h3>
+      <p>You will need Docker to finish the installation. Docker is similar to virtual machine simulate a operating system environment isolate from your computer but Docker is much lighter and faster, <span class="exturl"><a class="exturl__link"   href="https://www.docker.com/resources/what-container"  target="_blank" rel="noopener">learn more from their docuements</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>.</p>
+<p>Install <span class="exturl"><a class="exturl__link"   href="https://docs.docker.com/engine/install/ubuntu/"  target="_blank" rel="noopener">Docker with instructions from Docker official document</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> or you can use their convenience script. <strong>And examine scripts downloaded from the internet before running them locally.</strong> Make sure no one added a line to install a trojan into your computer.</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ curl -fsSL https://get.docker.com -o get-docker.sh</span><br><span class="line"></span><br><span class="line">$ sudo sh get-docker.sh</span><br></pre></td></tr></table></div></figure>
+
+        <h3 id="Install-ROCm-Dev-package"   >
+          <a href="#Install-ROCm-Dev-package" class="heading-link"><i class="fas fa-link"></i></a>Install ROCm-Dev package</h3>
+      <p>We are going to compile Pytorch from source, it requires <code>rocm-dev</code> package.</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get update</span><br><span class="line"></span><br><span class="line">$ sudo apt-get upgrade</span><br><span class="line"></span><br><span class="line">$ sudo apt-get install rocm-dev</span><br></pre></td></tr></table></div></figure>
+
+        <h2 id="Step-Two"   >
+          <a href="#Step-Two" class="heading-link"><i class="fas fa-link"></i></a>Step Two</h2>
+      
+        <h3 id="Prepare-environment-for-compiling"   >
+          <a href="#Prepare-environment-for-compiling" class="heading-link"><i class="fas fa-link"></i></a>Prepare environment for compiling</h3>
+      <p>Now we get the compilation environment for ROCm 3.3.0. The official document is not up-to-date which tells you to run <code>docker pull rocm/pytorch:rocm3.0_ubuntu16.04_py3.6_pytorch</code>. You should go to <span class="exturl"><a class="exturl__link"   href="https://hub.docker.com/r/rocm/pytorch/tags"  target="_blank" rel="noopener">their DockerHub</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> and make sure the tag <code>rocm3.0_ubuntu16.04_py3.6_pytorch</code> is what you need. For ROCm 3.3.0 I need <code>rocm3.3_ubuntu16.04_py3.6_pytorch</code> so I run:</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo docker pull rocm/pytorch:rocm3.3_ubuntu16.04_py3.6_pytorch</span><br></pre></td></tr></table></div></figure>
+
+        <h3 id="Prepare-source-code-for-compiling"   >
+          <a href="#Prepare-source-code-for-compiling" class="heading-link"><i class="fas fa-link"></i></a>Prepare source code for compiling</h3>
+      <p>Now clone the source code of Pytorch with Git, do <code>sudo apt-get install git</code> if you don’t have git.</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> ~</span><br><span class="line"></span><br><span class="line">$ git <span class="built_in">clone</span> https://github.com/pytorch/pytorch.git</span><br></pre></td></tr></table></div></figure>
+<p>And then clone the other required source code automatically.</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> pytorch</span><br><span class="line"></span><br><span class="line">$ git submodule init</span><br><span class="line"></span><br><span class="line">$ git submodule update</span><br></pre></td></tr></table></div></figure>
+<p>I would suggest you to run <code>git submodule update --init --recursive</code> instead of <code>git submodule update</code> as some of the required source code may have their own required repository which needs to download with <code>--recursive</code> flag.</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git submodule update --init --recursive</span><br></pre></td></tr></table></div></figure>
+
+
+        <h2 id="Step-Three"   >
+          <a href="#Step-Three" class="heading-link"><i class="fas fa-link"></i></a>Step Three</h2>
+      
+        <h3 id="Enter-environment-for-compiling"   >
+          <a href="#Enter-environment-for-compiling" class="heading-link"><i class="fas fa-link"></i></a>Enter environment for compiling</h3>
+      <p>Just run this:</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo docker run -it -v <span class="variable">$HOME</span>:/data --privileged --rm --device=/dev/kfd --device=/dev/dri --group-add video rocm/pytorch:rocm3.0_ubuntu16.04_py3.6_pytorch</span><br></pre></td></tr></table></div></figure>
+<p>And you will get something look another terminal:</p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@f78375b1c487:&#x2F;#</span><br></pre></td></tr></table></div></figure>
+<p>Now we change to the mounted source code directory:</p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@f78375b1c487:&#x2F;# cd &#x2F;data&#x2F;pytorch</span><br></pre></td></tr></table></div></figure>
+
+        <h3 id="We-now-start-building"   >
+          <a href="#We-now-start-building" class="heading-link"><i class="fas fa-link"></i></a>We now start building</h3>
+      <p>However you may encounter some problems. Here was my solution in 20 Apr 2020. I hope the problems have already been fixed while you read this, but in case it isn’t…</p>
+
+        <h4 id="Patch-1"   >
+          <a href="#Patch-1" class="heading-link"><i class="fas fa-link"></i></a>Patch 1</h4>
+      <p>Depends on your GPU, export the right code for it. You can check the code by running <code>rocminfo</code> on your host (out side the docker) on another terminal. Or you can find it <span class="exturl"><a class="exturl__link"   href="https://llvm.org/docs/AMDGPUUsage.html#processors"  target="_blank" rel="noopener">here</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> Ctrl-F search your GPU. <code>gfx803</code> for RX 580 and <code>gfx900</code> for VEGA 56.</p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@f78375b1c487:&#x2F;# export HCC_AMDGPU_TARGET&#x3D;gfx900</span><br></pre></td></tr></table></div></figure>
+
+        <h4 id="Patch-2"   >
+          <a href="#Patch-2" class="heading-link"><i class="fas fa-link"></i></a>Patch 2</h4>
+      <p>Check you have <code>hip_version.h</code> in the path <code>${ROCM_DIR}/include/hip/hip_version.h</code>, add such a file if it does not exist. Otherwise compilation may fail at <code>78%</code>.</p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@f78375b1c487:&#x2F;# nano $&#123;ROCM_DIR&#125;&#x2F;include&#x2F;hip&#x2F;hip_version.h</span><br></pre></td></tr></table></div></figure>
+<p>It sould look like this.</p>
+<figure class="highlight c++"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> HIP_VERSION</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> HIP_VERSION 330</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></div></figure>
+<p><code>330</code> here means ROCm 3.3.0, change it to <code>300</code> for ROCm 3.0.0, depends on your ROCm version.<br>In case you need to add it:</p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root@f78375b1c487:&#x2F;# mkdir -p $&#123;ROCM_DIR&#125;&#x2F;include&#x2F;hip&#x2F;</span><br><span class="line"></span><br><span class="line">root@f78375b1c487:&#x2F;# nano $&#123;ROCM_DIR&#125;&#x2F;include&#x2F;hip&#x2F;hip_version.h</span><br></pre></td></tr></table></div></figure>
+
+        <h4 id="Patch-3"   >
+          <a href="#Patch-3" class="heading-link"><i class="fas fa-link"></i></a>Patch 3</h4>
+      <p>Make sure packages such as <code>rccl</code> have installed in the docker container, otherwise compiler will not be able to find the libaray and fail the compilation at around <code>79%</code>.</p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@f78375b1c487:&#x2F;# apt install rocm-libs miopen-hip rccl</span><br></pre></td></tr></table></div></figure>
+
+        <h3 id="Start-compiling"   >
+          <a href="#Start-compiling" class="heading-link"><i class="fas fa-link"></i></a>Start compiling</h3>
+      <p>A automated script is provided, just run the following command will build and install everything to the docker container.</p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@f78375b1c487:&#x2F;# .jenkins&#x2F;pytorch&#x2F;build.sh</span><br></pre></td></tr></table></div></figure>
+<p>You may take a break and had tea time or go hiking, It takes more than one hour on my i5-4570.</p>
+
+        <h2 id="Step-Four"   >
+          <a href="#Step-Four" class="heading-link"><i class="fas fa-link"></i></a>Step Four</h2>
+      <p>Before we finish everything, we need to run a test.</p>
+
+        <h3 id="Test"   >
+          <a href="#Test" class="heading-link"><i class="fas fa-link"></i></a>Test</h3>
+      <p>You may run script for testing…</p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@f78375b1c487:&#x2F;# PYTORCH_TEST_WITH_ROCM&#x3D;1 python test&#x2F;run_test.py --verbose</span><br></pre></td></tr></table></div></figure>
+<p>And it may say <code>Import Error : no module named torch</code> no worry, let’s fix it.</p>
+
+        <h3 id="Patch-1-1"   >
+          <a href="#Patch-1-1" class="heading-link"><i class="fas fa-link"></i></a>Patch 1</h3>
+      <p>In order to pass the test, you will need Ninja, the container does not contain Ninja while I was running it on 19 Apr 2020, so I need to install it myself (The strange thing is, Ninja should be used in compiling to speed up everything. Cannot see why it is not installed before running testing.).</p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@f78375b1c487:&#x2F;# apt-get install -y ninja-build</span><br></pre></td></tr></table></div></figure>
+
+        <h3 id="Patch-2-1"   >
+          <a href="#Patch-2-1" class="heading-link"><i class="fas fa-link"></i></a>Patch 2</h3>
+      <p>Check your Python version</p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">root@f78375b1c487:&#x2F;# python -V</span><br><span class="line">Python 2.7.18</span><br><span class="line">root@f78375b1c487:&#x2F;# python3 -V</span><br><span class="line">Python 3.5.8</span><br><span class="line">root@f78375b1c487:&#x2F;# python3.6 -V</span><br><span class="line">Python 3.6.10</span><br></pre></td></tr></table></div></figure>
+<p>Since the Pytorch was compiled and installed for Python 3.6, you need to use Python 3.6 for running the test.</p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@f78375b1c487:&#x2F;# PYTORCH_TEST_WITH_ROCM&#x3D;1 python3.6 test&#x2F;run_test.py --verbose</span><br></pre></td></tr></table></div></figure>
+
+        <h3 id="Patch-3-1"   >
+          <a href="#Patch-3-1" class="heading-link"><i class="fas fa-link"></i></a>Patch 3</h3>
+      <p>If you do not have 16 GB RAM, it will use up all the memeory and <code>malloc</code> will raise error for unable to allocate memory.</p>
+
+        <h2 id="Step-Five"   >
+          <a href="#Step-Five" class="heading-link"><i class="fas fa-link"></i></a>Step Five</h2>
+      
+        <h3 id="Install-torchvision"   >
+          <a href="#Install-torchvision" class="heading-link"><i class="fas fa-link"></i></a>Install torchvision</h3>
+      <p>Try to install it and you suppose to see it already installed with your compilation and installation of Pytorch.</p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@f78375b1c487:&#x2F;# pip install torchvision</span><br></pre></td></tr></table></div></figure>
+
+        <h3 id="Save-the-container"   >
+          <a href="#Save-the-container" class="heading-link"><i class="fas fa-link"></i></a>Save the container</h3>
+      <p>Exit your container with Ctrl-D and use the container ID to save it into image so you can use it for different project and prevent environment contamination of different dependencies. The container ID is the hash showing in your terminal for container, <code>f78375b1c487</code> for mine.</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo docker commit f78375b1c487 -m <span class="string">'pytorch installed'</span></span><br></pre></td></tr></table></div></figure>
+<p>Change <code>f78375b1c487</code> to your container ID.</p>
+
+        <h2 id="DONE"   >
+          <a href="#DONE" class="heading-link"><i class="fas fa-link"></i></a>DONE</h2>
+      <p>Pytorch time! (&gt;w&lt;)b</p>
+</div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/en/2020/Installing-ROCm-3.3.0-for-Deep-learning-on-Ubuntu-18.04/">Installing ROCm 3.3.0 for Deep learning on Ubuntu 18.04</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2020-04-18</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2020-04-22</span></span></div></header><div class="post-body"><div class="post-excerpt"><!-- # Installing ROCm for Deep learning on Ubuntu 18.04 -->
+
+        <h2 id="Goal"   >
+          <a href="#Goal" class="heading-link"><i class="fas fa-link"></i></a>Goal</h2>
+      <p>We all know AMD <span class="exturl"><a class="exturl__link"   href="https://www.techpowerup.com/gpu-specs/radeon-rx-vega-56.c2993"  target="_blank" rel="noopener">VEGA 56</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> and <span class="exturl"><a class="exturl__link"   href="https://www.techpowerup.com/gpu-specs/radeon-rx-vega-64.c2871"  target="_blank" rel="noopener">VEGA 64</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> are powerful GPUs are competitive to <span class="exturl"><a class="exturl__link"   href="https://www.techpowerup.com/gpu-specs/geforce-rtx-2080-ti.c3305"  target="_blank" rel="noopener">NVIDIA 2080 Ti</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>, the <span class="exturl"><a class="exturl__link"   href="https://www.techpowerup.com/gpu-specs/radeon-vii.c3358"  target="_blank" rel="noopener">Radeon VII</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> is even more powerful with 13.44 TFLOPS FP32 (float) performance (Theoretical) and price at 699 USD.</p>
+<p>I was thinking about having a Deep Learning machine, and I looked at the price for NVIDIA 2080 Ti, it is around 1548 USD here. So I made a call to my friend who sells 2nd hand electronic stuff and get a <span class="exturl"><a class="exturl__link"   href="https://www.techpowerup.com/gpu-specs/radeon-rx-580.c2938"  target="_blank" rel="noopener">AMD Radeon RX 580</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> with around 100 USD. RX 580 is a cost-effective card to get 6 TFLOPS performance.</p>
+<p>But, how to fit it with TensorFlow or Pytorch? CUDA does not agree with AMD GPUs. But no worries, I have found ROCm for AMD GPUs to replace CUDA.</p>
+
+        <h2 id="Requirements"   >
+          <a href="#Requirements" class="heading-link"><i class="fas fa-link"></i></a>Requirements</h2>
+      <p>It is so excited to run TensorFlow on AMD GPU. But here are some important notes:</p>
+<ul>
+<li>Only new CPUs are supported as it requires PCIe Gen3 and PCIe Atomics</li>
+<li>Only new GPUs are supported because old GPUs are too poor in performance</li>
+<li>Use Linux with kernel 4.17 or above (Or you will have a hard time with it)</li>
+</ul>
+
+        <h3 id="Supported-CPUs"   >
+          <a href="#Supported-CPUs" class="heading-link"><i class="fas fa-link"></i></a>Supported CPUs</h3>
+      <ul>
+<li>AMD Ryzen CPUs</li>
+<li>The CPUs in AMD Ryzen APUs</li>
+<li>AMD Ryzen Threadripper CPUs</li>
+<li>AMD EPYC CPUs</li>
+<li>Intel Xeon E7 v3 or newer CPUs</li>
+<li>Intel Xeon E5 v3 or newer CPUs</li>
+<li>Intel Xeon E3 v3 or newer CPUs</li>
+<li>Intel Core i7 v4, Core i5 v4, Core i3 v4 or newer CPUs (i.e. Haswell family or newer)</li>
+<li>Some Ivy Bridge-E systems</li>
+</ul>
+<p>Refer to <span class="exturl"><a class="exturl__link"   href="https://github.com/RadeonOpenCompute/ROCm#supported-cpus"  target="_blank" rel="noopener">GitHub of ROCm CPU section</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>. What are those “Some Ivy Bridge-E systems”? I don’t know too. You may Email them for support on that. You may see some older CPUs are limited supported, but I would suggest you don’t waste your time on that unless you want to contribute in ROCm to make it support older CPUs. It will make your life harder.</p>
+
+        <h3 id="Supported-GPUs"   >
+          <a href="#Supported-GPUs" class="heading-link"><i class="fas fa-link"></i></a>Supported GPUs</h3>
+      <ul>
+<li>GFX8 GPUs<ul>
+<li>“Fiji” chips, such as on the AMD Radeon R9 Fury X and Radeon Instinct MI8</li>
+<li>“Polaris 10” chips, such as on the AMD Radeon RX 580 and Radeon Instinct MI6</li>
+</ul>
+</li>
+<li>GFX9 GPUs<ul>
+<li>“Vega 10” chips, such as on the AMD Radeon RX Vega 64 and Radeon Instinct MI25</li>
+<li>“Vega 7nm” chips, such as on the Radeon Instinct MI50, Radeon Instinct MI60 or AMD Radeon VII</li>
+</ul>
+</li>
+</ul>
+<p>Refer to <span class="exturl"><a class="exturl__link"   href="https://github.com/RadeonOpenCompute/ROCm#supported-gpus"  target="_blank" rel="noopener">GitHub of ROCm GPU section</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>. Few GFX8 and GFX7 GPUs are supported unofficially (if you got problem, no help, no guarantee).</p>
+
+        <h2 id="Install-ROCm"   >
+          <a href="#Install-ROCm" class="heading-link"><i class="fas fa-link"></i></a>Install ROCm</h2>
+      
+        <h3 id="Things-I-got"   >
+          <a href="#Things-I-got" class="heading-link"><i class="fas fa-link"></i></a>Things I got</h3>
+      <p>I got a i5-4570 for CPU (another 2nd hand computer with 140 USD) and RX 580 for GPU and installed Ubuntu Server 18.04.</p>
+<p>The <span class="exturl"><a class="exturl__link"   href="https://rocm-documentation.readthedocs.io/en/latest/Installation_Guide/Installation-Guide.html#ubuntu"  target="_blank" rel="noopener">official tutorial</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> will be just fine for installnig ROCm and TensorFlow. But you will encounter problem in Pytorch (which is the reason I write this tutorial, I gave up on the first time, and this time I find <a href="/en/2020/Installing-Pytorch-with-ROCm-on-Ubuntu-18.04/">solution</a>).</p>
+
+        <h3 id="Step-one"   >
+          <a href="#Step-one" class="heading-link"><i class="fas fa-link"></i></a>Step one</h3>
+      <blockquote>
+<p>Note the ROCm version you install, I am installing ROCm 3.3.0  This information will be useful during Pytorch installation.</p>
+</blockquote>
+<p>Update system, install <code>libnuma-dev</code> and reboot:</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt update</span><br><span class="line"></span><br><span class="line">$ sudo apt dist-upgrade</span><br><span class="line"></span><br><span class="line">$ sudo apt install libnuma-dev</span><br><span class="line"></span><br><span class="line">$ sudo reboot</span><br></pre></td></tr></table></div></figure>
+
+        <h3 id="Step-two"   >
+          <a href="#Step-two" class="heading-link"><i class="fas fa-link"></i></a>Step two</h3>
+      <p>Add the ROCm apt repository.</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ wget -q -O - http://repo.radeon.com/rocm/apt/debian/rocm.gpg.key | sudo apt-key add -</span><br><span class="line"></span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">'deb [arch=amd64] http://repo.radeon.com/rocm/apt/debian/ xenial main'</span> | sudo te</span><br></pre></td></tr></table></div></figure>
+<p>Install ROCm</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt update</span><br><span class="line"></span><br><span class="line">$ sudo apt install rocm-dkms</span><br></pre></td></tr></table></div></figure>
+
+
+        <h3 id="Step-three"   >
+          <a href="#Step-three" class="heading-link"><i class="fas fa-link"></i></a>Step three</h3>
+      <p>Grant yourself permission for accessing your GPU</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo usermod -a -G video <span class="variable">$LOGNAME</span></span><br></pre></td></tr></table></div></figure>
+<p>If you need to add more users, check the <span class="exturl"><a class="exturl__link"   href="https://rocm-documentation.readthedocs.io/en/latest/Installation_Guide/Installation-Guide.html#ubuntu"  target="_blank" rel="noopener">document</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<p>Reboot</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo reboot</span><br></pre></td></tr></table></div></figure>
+
+
+        <h3 id="Step-four"   >
+          <a href="#Step-four" class="heading-link"><i class="fas fa-link"></i></a>Step four</h3>
+      <p>Test the ROCm installation.</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ /opt/rocm/bin/rocminfo</span><br><span class="line">$ /opt/rocm/opencl/bin/x86_64/clinfo</span><br></pre></td></tr></table></div></figure>
+<p>You should see something like report.</p>
+<p>Add ROCm to environment PATH:</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> <span class="string">'export PATH=$PATH:/opt/rocm/bin:/opt/rocm/profiler/bin:/opt/rocm/opencl/bin/x86_64'</span> |</span><br><span class="line">&gt; sudo tee -a /etc/profile.d/rocm.sh</span><br></pre></td></tr></table></div></figure>
+
+
+        <h2 id="Install-TensorFlow"   >
+          <a href="#Install-TensorFlow" class="heading-link"><i class="fas fa-link"></i></a>Install TensorFlow</h2>
+      <p>This is simple with two steps, get some important libraries and install TensorFlow through <code>pip</code>. Refer to <span class="exturl"><a class="exturl__link"   href="https://rocm-documentation.readthedocs.io/en/latest/Deep_learning/Deep-learning.html"  target="_blank" rel="noopener">ROCm Doc</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt update</span><br><span class="line"></span><br><span class="line">$ sudo apt install rocm-libs miopen-hip cxlactivitylogger rccl</span><br><span class="line"></span><br><span class="line">$ sudo apt install wget python3-pip</span><br><span class="line"></span><br><span class="line">$ pip3 install --user tensorflow-rocm</span><br></pre></td></tr></table></div></figure>
+
+<p>It now installed TensorFlow 2 (latest), you need to specify version if you need just like installing other packages in Python.</p>
+
+        <h2 id="DONE"   >
+          <a href="#DONE" class="heading-link"><i class="fas fa-link"></i></a>DONE</h2>
+      <p>TensorFlow time~ (^_^)b</p>
+</div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/zh-TW/2020/Raspberry-Pi-%E5%8C%96%E8%BA%AB-WiFi-%E8%9B%8B/">Raspberry Pi 化身 WiFi 蛋</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2020-04-12</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2020-04-12</span></span></div></header><div class="post-body"><div class="post-excerpt"><!-- # Raspberry Pi 化身 WiFi 蛋 -->
 
         <h2 id="前文"   >
           <a href="#前文" class="heading-link"><i class="fas fa-link"></i></a>前文</h2>
@@ -214,7 +442,7 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 4.2.0"></he
 <p>Sixfab has a tutorial about <span class="exturl"><a class="exturl__link"   href="https://sixfab.com/tutorial-7-raspberry-pi-security-system-with-sixfab-3glte-shields/"  target="_blank" rel="noopener">Raspberry Pi Security System with Sixfab 3G, 4G/LTE Base Shield</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>. It seem to use a motion sensor to detect moment in the area and activate camera when sensor detect movement, it then send a frame to a email specified in the Python script.</p>
 <p>I didn’t find the hardware list of their design, but the <span class="exturl"><a class="exturl__link"   href="https://raw.githubusercontent.com/sixfab/Sixfab_RPi_3G-4G-LTE_Base_Shield/master/tutorials/tutorial7/SecuritySystem.py"  target="_blank" rel="noopener">Python source code is here</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>.</p>
 <p>I think using a motion sensor is a good idea, <span class="exturl"><a class="exturl__link"   href="https://www.instructables.com/id/Docker-Pi-Series-of-Sensor-Hub-Board-About-IOT/"  target="_blank" rel="noopener">Docker Pi Series of Sensor Hub</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> seem to be a good option, considering to have it in my production environment.</p>
-</div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/ch-TW/2020/Raspberry-Pi-%E4%BD%BF%E7%94%A8-4G-%E6%95%B8%E6%93%9A%E7%B6%B2%E8%B7%AF/">Raspberry Pi 使用 4G 數據網路</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2020-04-11</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2020-04-11</span></span></div></header><div class="post-body"><div class="post-excerpt"><!-- # Raspberry Pi connect to 4G LTE -->
+</div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/zh-TW/2020/Raspberry-Pi-%E4%BD%BF%E7%94%A8-4G-%E6%95%B8%E6%93%9A%E7%B6%B2%E8%B7%AF/">Raspberry Pi 使用 4G 數據網路</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2020-04-11</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2020-04-19</span></span></div></header><div class="post-body"><div class="post-excerpt"><!-- # Raspberry Pi connect to 4G LTE -->
 
         <h2 id="購物清單"   >
           <a href="#購物清單" class="heading-link"><i class="fas fa-link"></i></a>購物清單</h2>
@@ -576,7 +804,7 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 4.2.0"></he
       <figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></div></figure>
 
 <p>More info: <span class="exturl"><a class="exturl__link"   href="https://hexo.io/docs/one-command-deployment.html"  target="_blank" rel="noopener">Deployment</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
-</div></div></article></section><nav class="paginator"><div class="paginator-inner"><span class="page-number current">1</span></div></nav></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><section class="sidebar-toc hide"></section><!-- ov = overview--><section class="sidebar-ov"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/logo.png" alt="avatar"></div><p class="sidebar-ov-author__text">NewJerseyStyle</p></div><div class="sidebar-ov-feed"><span class="sidebar-ov-feed-rss"><a class="sidebar-ov-feed-rss__link" href="/atom.xml" target="_blank" rel="noopener"><span class="sidebar-ov-feed-rss__icon"><i class="fas fa-rss"></i></span><span>RSS Subscribe</span></a></span></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">11</div><div class="sidebar-ov-state-item__name">Tags</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en zh-tw" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-sa.svg"></a></div></section></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2020</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>NewJerseyStyle</span></div><div><span>Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span class="footer__devider">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="Search for Posts (Support multiple keywords)"></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="https://cdn.jsdelivr.net/npm/ribbon.js@latest/dist/ribbon.min.js" size="120" alpha="0.6" zIndex="-1"></script><script>function initSearch() {
+</div></div></article></section><nav class="paginator"><div class="paginator-inner"><span class="page-number current">1</span></div></nav></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><section class="sidebar-toc hide"></section><!-- ov = overview--><section class="sidebar-ov"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/logo.png" alt="avatar"></div><p class="sidebar-ov-author__text">NewJerseyStyle</p></div><div class="sidebar-ov-feed"><span class="sidebar-ov-feed-rss"><a class="sidebar-ov-feed-rss__link" href="/atom.xml" target="_blank" rel="noopener"><span class="sidebar-ov-feed-rss__icon"><i class="fas fa-rss"></i></span><span>RSS Subscribe</span></a></span></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">16</div><div class="sidebar-ov-state-item__name">Tags</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en zh-tw" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-sa.svg"></a></div></section></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2020</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>NewJerseyStyle</span></div><div><span>Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span class="footer__devider">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="Search for Posts (Support multiple keywords)"></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="https://cdn.jsdelivr.net/npm/ribbon.js@latest/dist/ribbon.min.js" size="120" alpha="0.6" zIndex="-1"></script><script>function initSearch() {
   var isXML = true;
   var search_path = 'search.json';
 
