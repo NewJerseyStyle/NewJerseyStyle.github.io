@@ -30,12 +30,15 @@ var CONFIG = {
   sourcePath: {"js":"js","css":"css","images":"images"},
 };
 
-window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 4.2.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/softdev/"><span class="header-nav-menu-item__icon"><i class="fas fa-laptop-code"></i></span><span class="header-nav-menu-item__text">Coding</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/toolz/"><span class="header-nav-menu-item__icon"><i class="fas fa-toolbox"></i></span><span class="header-nav-menu-item__text">Tools</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">Tags</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">Search</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">ExpShare</div><div class="header-banner-info__subtitle">Playground of NewJerseyStyle</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content content-home" id="content"><section class="postlist"><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/en/2020/Installing-Pytorch-with-ROCm-3.3.0-on-Ubuntu-18.04/">Installing Pytorch with ROCm 3.3.0 on Ubuntu 18.04</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2020-04-18</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2020-04-22</span></span></div></header><div class="post-body"><div class="post-excerpt"><!-- # Installing Pytorch with ROCm on Ubuntu 18.04 -->
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 4.2.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/softdev/"><span class="header-nav-menu-item__icon"><i class="fas fa-laptop-code"></i></span><span class="header-nav-menu-item__text">Coding</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/toolz/"><span class="header-nav-menu-item__icon"><i class="fas fa-toolbox"></i></span><span class="header-nav-menu-item__text">Tools</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">Tags</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">Search</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">ExpShare</div><div class="header-banner-info__subtitle">Playground of NewJerseyStyle</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content content-home" id="content"><section class="postlist"><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/en/2020/Installing-Pytorch-with-ROCm-3.3.0-on-Ubuntu-18.04/">Installing Pytorch with ROCm 3.3.0 on Ubuntu 18.04</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2020-04-18</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2020-04-25</span></span></div></header><div class="post-body"><div class="post-excerpt"><!-- # Installing Pytorch with ROCm on Ubuntu 18.04 -->
 
         <h2 id="Goal"   >
           <a href="#Goal" class="heading-link"><i class="fas fa-link"></i></a>Goal</h2>
       <p>Now I have got my RX 580 ready for TensorFlow, and I brought a VEGA 56 with 10.54 TFLOPS for FP32 from newegg.com at price 266 USD. Let’s install Pytorch this time? Well, there will be few problem you may encounter like I did during installation of Pytorch on top of ROCm 3.3.0. Watch me how to fix them.</p>
 <p>First of all, install ROCm 3.3.0 (refer to <a href="/en/2020/Installing-ROCm-for-Deep-learning-on-Ubuntu-18.04/">previous tutorial</a>), requirements are the same.</p>
+<blockquote>
+<p>RX 580 does no longer fit, Pytorch say it is too old and do not support now.</p>
+</blockquote>
 
         <h2 id="Install-Pytorch"   >
           <a href="#Install-Pytorch" class="heading-link"><i class="fas fa-link"></i></a>Install Pytorch</h2>
@@ -79,8 +82,8 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 4.2.0"></he
       
         <h3 id="Enter-environment-for-compiling"   >
           <a href="#Enter-environment-for-compiling" class="heading-link"><i class="fas fa-link"></i></a>Enter environment for compiling</h3>
-      <p>Just run this:</p>
-<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo docker run -it -v <span class="variable">$HOME</span>:/data --privileged --rm --device=/dev/kfd --device=/dev/dri --group-add video rocm/pytorch:rocm3.0_ubuntu16.04_py3.6_pytorch</span><br></pre></td></tr></table></div></figure>
+      <p>Make sure the tag is correct before you run this command, my tag was <code>rocm3.3_ubuntu16.04_py3.6_pytorch</code> for ROCm 3.3.0. Official document seems got a small mistake on this.</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo docker run -it -v <span class="variable">$HOME</span>:/data --privileged --rm --device=/dev/kfd --device=/dev/dri --group-add video rocm/pytorch:rocm3.3_ubuntu16.04_py3.6_pytorch</span><br></pre></td></tr></table></div></figure>
 <p>And you will get something look another terminal:</p>
 <figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@f78375b1c487:&#x2F;#</span><br></pre></td></tr></table></div></figure>
 <p>Now we change to the mounted source code directory:</p>
@@ -89,25 +92,8 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 4.2.0"></he
         <h3 id="We-now-start-building"   >
           <a href="#We-now-start-building" class="heading-link"><i class="fas fa-link"></i></a>We now start building</h3>
       <p>However you may encounter some problems. Here was my solution in 20 Apr 2020. I hope the problems have already been fixed while you read this, but in case it isn’t…</p>
-
-        <h4 id="Patch-1"   >
-          <a href="#Patch-1" class="heading-link"><i class="fas fa-link"></i></a>Patch 1</h4>
-      <p>Depends on your GPU, export the right code for it. You can check the code by running <code>rocminfo</code> on your host (out side the docker) on another terminal. Or you can find it <span class="exturl"><a class="exturl__link"   href="https://llvm.org/docs/AMDGPUUsage.html#processors"  target="_blank" rel="noopener">here</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> Ctrl-F search your GPU. <code>gfx803</code> for RX 580 and <code>gfx900</code> for VEGA 56.</p>
+<p>Depends on your GPU, export the right code for it. You can check the code by running <code>rocminfo</code> on your host (out side the docker) on another terminal. Or you can find it <span class="exturl"><a class="exturl__link"   href="https://llvm.org/docs/AMDGPUUsage.html#processors"  target="_blank" rel="noopener">here</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> Ctrl-F search your GPU. <code>gfx900</code> for VEGA 56.</p>
 <figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@f78375b1c487:&#x2F;# export HCC_AMDGPU_TARGET&#x3D;gfx900</span><br></pre></td></tr></table></div></figure>
-
-        <h4 id="Patch-2"   >
-          <a href="#Patch-2" class="heading-link"><i class="fas fa-link"></i></a>Patch 2</h4>
-      <p>Check you have <code>hip_version.h</code> in the path <code>${ROCM_DIR}/include/hip/hip_version.h</code>, add such a file if it does not exist. Otherwise compilation may fail at <code>78%</code>.</p>
-<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@f78375b1c487:&#x2F;# nano $&#123;ROCM_DIR&#125;&#x2F;include&#x2F;hip&#x2F;hip_version.h</span><br></pre></td></tr></table></div></figure>
-<p>It sould look like this.</p>
-<figure class="highlight c++"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> HIP_VERSION</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> HIP_VERSION 330</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></div></figure>
-<p><code>330</code> here means ROCm 3.3.0, change it to <code>300</code> for ROCm 3.0.0, depends on your ROCm version.<br>In case you need to add it:</p>
-<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root@f78375b1c487:&#x2F;# mkdir -p $&#123;ROCM_DIR&#125;&#x2F;include&#x2F;hip&#x2F;</span><br><span class="line"></span><br><span class="line">root@f78375b1c487:&#x2F;# nano $&#123;ROCM_DIR&#125;&#x2F;include&#x2F;hip&#x2F;hip_version.h</span><br></pre></td></tr></table></div></figure>
-
-        <h4 id="Patch-3"   >
-          <a href="#Patch-3" class="heading-link"><i class="fas fa-link"></i></a>Patch 3</h4>
-      <p>Make sure packages such as <code>rccl</code> have installed in the docker container, otherwise compiler will not be able to find the libaray and fail the compilation at around <code>79%</code>.</p>
-<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@f78375b1c487:&#x2F;# apt install rocm-libs miopen-hip rccl</span><br></pre></td></tr></table></div></figure>
 
         <h3 id="Start-compiling"   >
           <a href="#Start-compiling" class="heading-link"><i class="fas fa-link"></i></a>Start compiling</h3>
@@ -124,22 +110,15 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 4.2.0"></he
       <p>You may run script for testing…</p>
 <figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@f78375b1c487:&#x2F;# PYTORCH_TEST_WITH_ROCM&#x3D;1 python test&#x2F;run_test.py --verbose</span><br></pre></td></tr></table></div></figure>
 <p>And it may say <code>Import Error : no module named torch</code> no worry, let’s fix it.</p>
-
-        <h3 id="Patch-1-1"   >
-          <a href="#Patch-1-1" class="heading-link"><i class="fas fa-link"></i></a>Patch 1</h3>
-      <p>In order to pass the test, you will need Ninja, the container does not contain Ninja while I was running it on 19 Apr 2020, so I need to install it myself (The strange thing is, Ninja should be used in compiling to speed up everything. Cannot see why it is not installed before running testing.).</p>
-<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@f78375b1c487:&#x2F;# apt-get install -y ninja-build</span><br></pre></td></tr></table></div></figure>
-
-        <h3 id="Patch-2-1"   >
-          <a href="#Patch-2-1" class="heading-link"><i class="fas fa-link"></i></a>Patch 2</h3>
-      <p>Check your Python version</p>
+<p>Check your Python version</p>
 <figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">root@f78375b1c487:&#x2F;# python -V</span><br><span class="line">Python 2.7.18</span><br><span class="line">root@f78375b1c487:&#x2F;# python3 -V</span><br><span class="line">Python 3.5.8</span><br><span class="line">root@f78375b1c487:&#x2F;# python3.6 -V</span><br><span class="line">Python 3.6.10</span><br></pre></td></tr></table></div></figure>
 <p>Since the Pytorch was compiled and installed for Python 3.6, you need to use Python 3.6 for running the test.</p>
 <figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@f78375b1c487:&#x2F;# PYTORCH_TEST_WITH_ROCM&#x3D;1 python3.6 test&#x2F;run_test.py --verbose</span><br></pre></td></tr></table></div></figure>
 
-        <h3 id="Patch-3-1"   >
-          <a href="#Patch-3-1" class="heading-link"><i class="fas fa-link"></i></a>Patch 3</h3>
+        <h3 id="Error"   >
+          <a href="#Error" class="heading-link"><i class="fas fa-link"></i></a>Error?</h3>
       <p>If you do not have 16 GB RAM, it will use up all the memeory and <code>malloc</code> will raise error for unable to allocate memory.</p>
+<p>If you try to run the test with RX 580, Pytorch will tell you the GPU is too old and their do not support now.</p>
 
         <h2 id="Step-Five"   >
           <a href="#Step-Five" class="heading-link"><i class="fas fa-link"></i></a>Step Five</h2>
