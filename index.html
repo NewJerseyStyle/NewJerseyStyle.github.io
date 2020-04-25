@@ -30,23 +30,313 @@ var CONFIG = {
   sourcePath: {"js":"js","css":"css","images":"images"},
 };
 
-window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 4.2.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/softdev/"><span class="header-nav-menu-item__icon"><i class="fas fa-laptop-code"></i></span><span class="header-nav-menu-item__text">Coding</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/toolz/"><span class="header-nav-menu-item__icon"><i class="fas fa-toolbox"></i></span><span class="header-nav-menu-item__text">Tools</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">Tags</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">Search</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">ExpShare</div><div class="header-banner-info__subtitle">Playground of NewJerseyStyle</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content content-home" id="content"><section class="postlist"><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/en/2020/Installing-Pytorch-with-ROCm-3.3.0-on-Ubuntu-18.04/">Installing Pytorch with ROCm 3.3.0 on Ubuntu 18.04</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2020-04-18</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2020-04-25</span></span></div></header><div class="post-body"><div class="post-excerpt"><!-- # Installing Pytorch with ROCm on Ubuntu 18.04 -->
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 4.2.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/softdev/"><span class="header-nav-menu-item__icon"><i class="fas fa-laptop-code"></i></span><span class="header-nav-menu-item__text">Coding</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/toolz/"><span class="header-nav-menu-item__icon"><i class="fas fa-toolbox"></i></span><span class="header-nav-menu-item__text">Tools</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">Tags</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">Search</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">ExpShare</div><div class="header-banner-info__subtitle">Playground of NewJerseyStyle</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content content-home" id="content"><section class="postlist"><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/zh-TW/2020/%E5%9C%A8-Ubuntu-18-04-%E4%B8%8A%E5%AE%89%E8%A3%9D-CUDA-%E5%92%8C-Pytorch/">在 Ubuntu 18.04 上安裝 CUDA 和 Pytorch</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2020-04-26</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2020-04-26</span></span></div></header><div class="post-body"><div class="post-excerpt"><!-- # 在 Ubuntu 18.04 上安裝 CUDA 和 Pytorch -->
+
+        <h2 id="目標"   >
+          <a href="#目標" class="heading-link"><i class="fas fa-link"></i></a>目標</h2>
+      <p>發生了不幸的事件，於是要重裝某個 GTX 1070 Ti 的電腦，安裝了 Ubuntu Server 18.04 之後我對於如何安裝 CUDA 有些混亂了，於是做個記錄方便之後參考。</p>
+<p>其實安裝步驟很簡單，但是文檔就好像很詳細、很複雜的樣子。</p>
+
+        <h2 id="系統要求"   >
+          <a href="#系統要求" class="heading-link"><i class="fas fa-link"></i></a>系統要求</h2>
+      <ul>
+<li>Ubuntu 16.04 or later</li>
+<li>NVIDIA GPU(s) that support CUDA</li>
+</ul>
+
+        <h2 id="使用-LVM-的溫馨提示"   >
+          <a href="#使用-LVM-的溫馨提示" class="heading-link"><i class="fas fa-link"></i></a>使用 LVM 的溫馨提示</h2>
+      <p>我安裝 Ubuntu Server 18.04 的時候用了 LVM，硬盤瞬間縮水不夠用。原來默認是不放開所有空間給系統用，所以要<span class="exturl"><a class="exturl__link"   href="https://askubuntu.com/questions/1106795/ubuntu-server-18-04-lvm-out-of-space-with-improper-default-partitioning"  target="_blank" rel="noopener">調整空間大小</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ lvm</span><br><span class="line">lvm&gt; lvextend -l +100%FREE /dev/ubuntu-vg/ubuntu-lv</span><br><span class="line">lvm&gt; <span class="built_in">exit</span></span><br><span class="line">$ resize2fs /dev/ubuntu-vg/ubuntu-lv</span><br></pre></td></tr></table></div></figure>
+
+
+        <h2 id="安裝-CUDA"   >
+          <a href="#安裝-CUDA" class="heading-link"><i class="fas fa-link"></i></a>安裝 CUDA</h2>
+      <p>CUDA 的版本其實不用管，詳細安裝文檔可以參考<span class="exturl"><a class="exturl__link"   href="https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#ubuntu-installation"  target="_blank" rel="noopener">鏈接</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>.</p>
+<p>我已經安裝好最新的 Ubuntu Server LTS 版本，我知道它肯定支援 CUDA。而 GTX 1070 Ti也當然支援 CUDA。那就只有兩個編譯工具需要確認一下</p>
+<p>我很懶惰，所以直接一鍵安裝所有編譯工具</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install build-essential</span><br></pre></td></tr></table></div></figure>
+
+<p>然後安裝適合當前內核的 kernel headers 以供安裝 CUDA</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install linux-headers-$(uname -r)</span><br></pre></td></tr></table></div></figure>
+
+<p>如果有自帶的驅動要先卸載，圖形化桌面要暫時關閉</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get purge nvidia-cuda*</span><br><span class="line">sudo apt-get purge nvidia-*</span><br></pre></td></tr></table></div></figure>
+<p><span class="exturl"><a class="exturl__link"   href="https://askubuntu.com/questions/830916/how-to-install-cuda-8-0-on-ubuntu-16-04-with-nvidia-geforce-gtx-1080"  target="_blank" rel="noopener">參見</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<p>然後去 <span class="exturl"><a class="exturl__link"   href="https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&target_distro=Ubuntu&target_version=1804&target_type=runfilelocal"  target="_blank" rel="noopener">CUDA Toolkit Download Page</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> 下載安裝包，然後跟著網頁上的說明輸入指令。</p>
+<p><img src="/en/2020/Installing-Pytorch-with-CUDA-on-Ubuntu-18-04/Installing-Pytorch-with-CUDA-on-Ubuntu-18.PNG" alt="Screen capture for downloading installation package"></p>
+<p>我選擇自動安裝腳本來安裝，中間要輸入同意用戶協議之類的。</p>
+
+        <h2 id="將項目放到-Docker-容器裏"   >
+          <a href="#將項目放到-Docker-容器裏" class="heading-link"><i class="fas fa-link"></i></a>將項目放到 Docker 容器裏</h2>
+      <p>這樣更容易管理資源和系統依賴的各種版本，如果全都放在本地系統就容易互相污染。學學如何用 Docker 和 NVIDIA GPU 進行深度學習項目<span class="exturl"><a class="exturl__link"   href="https://github.com/NVIDIA/nvidia-docker#ubuntu-16041804-debian-jessiestretchbuster"  target="_blank" rel="noopener">一鍵傳送</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>.</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker run --gpus all nvidia/cuda:10.0-base nvidia-smi</span><br></pre></td></tr></table></div></figure>
+
+
+        <h2 id="安裝-Pytorch"   >
+          <a href="#安裝-Pytorch" class="heading-link"><i class="fas fa-link"></i></a>安裝 Pytorch</h2>
+      <p>你要有 Python 的軟件包管理器 <code>pip</code>，沒有就裝</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install python3-pip</span><br></pre></td></tr></table></div></figure>
+<p>然後安裝 Pytorch</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pip3 install torch torchvision</span><br></pre></td></tr></table></div></figure>
+<p>如果你的環境和我不一樣，你需要 Pytorch <span class="exturl"><a class="exturl__link"   href="https://pytorch.org/get-started/locally/"  target="_blank" rel="noopener">的官方指令生成器</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+</div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/en/2020/Installing-Pytorch-with-CUDA-on-Ubuntu-18-04/">Installing Pytorch with CUDA on Ubuntu 18.04</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2020-04-25</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2020-04-25</span></span></div></header><div class="post-body"><div class="post-excerpt"><!-- # Installing Pytorch with CUDA on Ubuntu 18.04 -->
 
         <h2 id="Goal"   >
           <a href="#Goal" class="heading-link"><i class="fas fa-link"></i></a>Goal</h2>
-      <p>Now I have got my RX 580 ready for TensorFlow, and I brought a VEGA 56 with 10.54 TFLOPS for FP32 from newegg.com at price 266 USD. Let’s install Pytorch this time? Well, there will be few problem you may encounter like I did during installation of Pytorch on top of ROCm 3.3.0. Watch me how to fix them.</p>
-<p>First of all, install ROCm 3.3.0 (refer to <a href="/en/2020/Installing-ROCm-for-Deep-learning-on-Ubuntu-18.04/">previous tutorial</a>), requirements are the same.</p>
-<blockquote>
-<p>RX 580 does no longer fit, Pytorch say it is too old and do not support now.</p>
-</blockquote>
+      <p>For some reason I need to reinstall operating system and CUDA on a deep learning machine with GTX 1070 Ti. After installed Ubuntu Server 18.04, I was confused with the NVIDIA document, so I write down this notes to keep a reference.</p>
+<p>The procedures are actually very simple, but the document was a bit too detailed or the layout is too complex to find the key points, I was lost in the lines.</p>
+
+        <h2 id="Requirements"   >
+          <a href="#Requirements" class="heading-link"><i class="fas fa-link"></i></a>Requirements</h2>
+      <ul>
+<li>Ubuntu 16.04 or later</li>
+<li>NVIDIA GPU(s) that support CUDA</li>
+</ul>
+
+        <h2 id="Tips-for-LVM"   >
+          <a href="#Tips-for-LVM" class="heading-link"><i class="fas fa-link"></i></a>Tips for LVM</h2>
+      <p>Since I installed the Ubuntu Server 18.04 with LVM, I soon used up all space. It seems the default space is just fit for the operating system. <span class="exturl"><a class="exturl__link"   href="https://askubuntu.com/questions/1106795/ubuntu-server-18-04-lvm-out-of-space-with-improper-default-partitioning"  target="_blank" rel="noopener">Solution to it</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> is to extend the LVM partition.</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ lvm</span><br><span class="line">lvm&gt; lvextend -l +100%FREE /dev/ubuntu-vg/ubuntu-lv</span><br><span class="line">lvm&gt; <span class="built_in">exit</span></span><br><span class="line">$ resize2fs /dev/ubuntu-vg/ubuntu-lv</span><br></pre></td></tr></table></div></figure>
+
+
+        <h2 id="Install-CUDA"   >
+          <a href="#Install-CUDA" class="heading-link"><i class="fas fa-link"></i></a>Install CUDA</h2>
+      <p>CUDA version does not really matter. <span class="exturl"><a class="exturl__link"   href="https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#ubuntu-installation"  target="_blank" rel="noopener">Detailed Installation guide for your reference</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>.</p>
+<p>It is simple as I have installed the latest Ubuntu Server LTS version and I know it is supports CUDA things, I also sure GTX 1070 Ti supports CUDA. All I need to do now is to install GCC compiler and Linux development packages.</p>
+<p>I am so lazy that I just install everything I need to build anything.</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install build-essential</span><br></pre></td></tr></table></div></figure>
+
+<p>Then install the kernel headers and development packages for the currently running kernel.</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install linux-headers-$(uname -r)</span><br></pre></td></tr></table></div></figure>
+
+<p>Now go to <span class="exturl"><a class="exturl__link"   href="https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&target_distro=Ubuntu&target_version=1804&target_type=runfilelocal"  target="_blank" rel="noopener">CUDA Toolkit Download Page</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> download the installation package and follow the guide to install it.</p>
+<p><img src="/en/2020/Installing-Pytorch-with-CUDA-on-Ubuntu-18-04/Installing-Pytorch-with-CUDA-on-Ubuntu-18.PNG" alt="Screen capture for downloading installation package"></p>
+<p>I choosed the easiest way to install, use a automated script. Copy the instructions, enter the terminal, press Enter key and wait… Few agreement will require manual input “accept” for EULA before proceed to install the package.</p>
+
+        <h2 id="Use-docker-for-the-project"   >
+          <a href="#Use-docker-for-the-project" class="heading-link"><i class="fas fa-link"></i></a>Use docker for the project</h2>
+      <p>It will be a good idea to use Docker for each project. It is easy to set up and run. If you know how to work with Docker, check out the <span class="exturl"><a class="exturl__link"   href="https://github.com/NVIDIA/nvidia-docker#ubuntu-16041804-debian-jessiestretchbuster"  target="_blank" rel="noopener">document</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>.</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker run --gpus all nvidia/cuda:10.0-base nvidia-smi</span><br></pre></td></tr></table></div></figure>
+
 
         <h2 id="Install-Pytorch"   >
           <a href="#Install-Pytorch" class="heading-link"><i class="fas fa-link"></i></a>Install Pytorch</h2>
-      <p>We follow the instructions from <span class="exturl"><a class="exturl__link"   href="https://rocm-documentation.readthedocs.io/en/latest/Deep_learning/Deep-learning.html"  target="_blank" rel="noopener">ROCm</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> first, and I will add solution to problem I encountered.</p>
+      <p>Make sure <code>pip</code> is available for Python, install it if not.</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install python3-pip</span><br></pre></td></tr></table></div></figure>
+<p>And then install Pytorch.</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pip3 install torch torchvision</span><br></pre></td></tr></table></div></figure>
+<p>Find the command for your environment from Pytorch <span class="exturl"><a class="exturl__link"   href="https://pytorch.org/get-started/locally/"  target="_blank" rel="noopener">Official document</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+</div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/zh-TW/2020/%E5%9C%A8-Ubuntu-18-04-%E4%B8%8A%E5%AE%89%E8%A3%9D-ROCm-3.3.0-%E5%92%8C-Pytorch/">在 Ubuntu 18.04 上安裝 ROCm 3.3.0 和 Pytorch</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2020-04-18</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2020-04-26</span></span></div></header><div class="post-body"><div class="post-excerpt"><!-- # 在 Ubuntu 18.04 上安裝 ROCm 3.3.0 和 Pytorch -->
+
+        <h2 id="目標"   >
+          <a href="#目標" class="heading-link"><i class="fas fa-link"></i></a>目標</h2>
+      <p>現在我有一個可以跑 TensorFlow 的 RX 580 了。可是我還是不滿足，於是買了一個 VEGA 56。10.54 TFLOPS 的 FP32 運算能力現在好像也只要 266 美刀。</p>
+<p>和之前一樣，在 Ubuntu Server 18.04 上安裝 ROCm 3.3.0 （參見<a href="/en/2020/Installing-ROCm-for-Deep-learning-on-Ubuntu-18.04/">之前的操作和系統要求</a>)。</p>
+<blockquote>
+<p>RX 580 不能用 Pytorch 了，Pytorch 說它太舊了</p>
+</blockquote>
+<p>我基本上是按照 <span class="exturl"><a class="exturl__link"   href="https://rocm-documentation.readthedocs.io/en/latest/Deep_learning/Deep-learning.html"  target="_blank" rel="noopener">ROCm 的官方教學</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> 不過有些地方可能出問題，這邊提供了指引去避免這些坑。</p>
+<p><strong>你至少要 16 GB 記憶體，不然編譯會很慢而且測試的時候會出錯，我試過了</strong></p>
+
+        <h2 id="準備編譯"   >
+          <a href="#準備編譯" class="heading-link"><i class="fas fa-link"></i></a>準備編譯</h2>
+      
+        <h3 id="安裝-Docker"   >
+          <a href="#安裝-Docker" class="heading-link"><i class="fas fa-link"></i></a>安裝 Docker</h3>
+      <p>我們使用 Docker 來編譯，避免污染系統的設置，這樣之後編譯其他版本的時候不會需要卸載和重新安裝。Docker 其實就類似是一個虛擬機，<span class="exturl"><a class="exturl__link"   href="https://www.docker.com/resources/what-container"  target="_blank" rel="noopener">可以去官網瞭解更多</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> 我現在都基本上不用虛擬機，全都用 Docker 了。</p>
+<p><span class="exturl"><a class="exturl__link"   href="https://docs.docker.com/engine/install/ubuntu/"  target="_blank" rel="noopener">參考官方文檔安裝 Docker </a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> 或者你可以學我直接用一鍵安裝的腳本。官方說 <strong>千萬千萬要先自己檢查一下我們的腳本再運行，不然剛好有人惡意黑了我們改了腳本你就糟了</strong>。很貼心的說明。</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ curl -fsSL https://get.docker.com -o get-docker.sh</span><br><span class="line"><span class="comment"># 跑下面這句運行它之前，先打開來看看腳本裏面寫了什麼哦~</span></span><br><span class="line">$ sudo sh get-docker.sh</span><br></pre></td></tr></table></div></figure>
+
+        <h3 id="安裝-ROCm-Dev-開發軟件包"   >
+          <a href="#安裝-ROCm-Dev-開發軟件包" class="heading-link"><i class="fas fa-link"></i></a>安裝 ROCm-Dev 開發軟件包</h3>
+      <p>編譯 Pytorch 之前要先安裝 <code>rocm-dev</code>提供 ROCm 的 API 接口</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get update</span><br><span class="line"> </span><br><span class="line">$ sudo apt-get upgrade</span><br><span class="line"> </span><br><span class="line">$ sudo apt-get install rocm-dev</span><br></pre></td></tr></table></div></figure>
+
+        <h2 id="Docker-鏡像和下載代碼"   >
+          <a href="#Docker-鏡像和下載代碼" class="heading-link"><i class="fas fa-link"></i></a>Docker 鏡像和下載代碼</h2>
+      
+        <h3 id="下載編譯環境"   >
+          <a href="#下載編譯環境" class="heading-link"><i class="fas fa-link"></i></a>下載編譯環境</h3>
+      <p>現在我要編譯配合 ROCm 3.3.0 的 Pytorch了。官方文檔認爲你不可能是白癡，沒有告訴你記得檢查 <code>docker pull rocm/pytorch:rocm3.0_ubuntu16.04_py3.6_pytorch</code> 這句是不是對應你的 ROCm 版本。到 <span class="exturl"><a class="exturl__link"   href="https://hub.docker.com/r/rocm/pytorch/tags"  target="_blank" rel="noopener">DockerHub</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> 尋找你的 ROCm 版本的標籤來換掉文檔中的 <code>rocm3.0_ubuntu16.04_py3.6_pytorch</code>。我的 ROCm 3.3.0 是<code>rocm3.3_ubuntu16.04_py3.6_pytorch</code>。</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo docker pull rocm/pytorch:rocm3.3_ubuntu16.04_py3.6_pytorch</span><br></pre></td></tr></table></div></figure>
+
+        <h3 id="下載-Pytorch-源代碼"   >
+          <a href="#下載-Pytorch-源代碼" class="heading-link"><i class="fas fa-link"></i></a>下載 Pytorch 源代碼</h3>
+      <p>我們用 Git 來下載代碼，沒有的話請自行安裝：<code>sudo apt-get install git</code></p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> ~</span><br><span class="line"> </span><br><span class="line">$ git <span class="built_in">clone</span> https://github.com/pytorch/pytorch.git</span><br></pre></td></tr></table></div></figure>
+<p>然後讓 Git 把其他依賴的代碼一鍵自動下載</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> pytorch</span><br><span class="line"> </span><br><span class="line">$ git submodule init</span><br><span class="line"> </span><br><span class="line">$ git submodule update</span><br></pre></td></tr></table></div></figure>
+<p>可是編譯的時候還是報錯，有部分的依賴好像還有自己的依賴，所以要跑 <code>git submodule update --init --recursive</code> 而不是 <code>git submodule update</code>。用 <code>--recursive</code> 將依賴的依賴的依賴的依賴什麼的都統統下載下來。</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git submodule update --init --recursive</span><br></pre></td></tr></table></div></figure>
+
+
+        <h2 id="編譯！"   >
+          <a href="#編譯！" class="heading-link"><i class="fas fa-link"></i></a>編譯！</h2>
+      <p>先跑一下 <code>rocminfo</code> 並且記下你的 GPU 型號（例如我是 gfx 900）</p>
+
+        <h3 id="進入編譯環境"   >
+          <a href="#進入編譯環境" class="heading-link"><i class="fas fa-link"></i></a>進入編譯環境</h3>
+      <p>這裏，再一次確認你的鏡像標籤，我的標籤是 <code>rocm3.3_ubuntu16.04_py3.6_pytorch</code> 對應 ROCm 3.3.0。你可能是其他版本需要修改再跑。</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo docker run -it -v <span class="variable">$HOME</span>:/data --privileged --rm --device=/dev/kfd --device=/dev/dri --group-add video rocm/pytorch:rocm3.3_ubuntu16.04_py3.6_pytorch</span><br></pre></td></tr></table></div></figure>
+<p>之後應該會看到一個類似這樣的環境。</p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@f78375b1c487:&#x2F;#</span><br></pre></td></tr></table></div></figure>
+<p>切換到代碼的位置</p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@f78375b1c487:&#x2F;# cd &#x2F;data&#x2F;pytorch</span><br></pre></td></tr></table></div></figure>
+
+        <h3 id="開始編譯"   >
+          <a href="#開始編譯" class="heading-link"><i class="fas fa-link"></i></a>開始編譯</h3>
+      <p>你需要先指出你的 GPU 型號。如果你忘記事先用 <code>rocminfo</code> 查看的話，可以去<span class="exturl"><a class="exturl__link"   href="https://llvm.org/docs/AMDGPUUsage.html#processors"  target="_blank" rel="noopener">查表</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> 我是 VEGA 56 是 <code>gfx900</code>，用這行指令指定。</p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@f78375b1c487:&#x2F;# export HCC_AMDGPU_TARGET&#x3D;gfx900</span><br></pre></td></tr></table></div></figure>
+
+<p>然後就用這個自動建構的指令</p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@f78375b1c487:&#x2F;# .jenkins&#x2F;pytorch&#x2F;build.sh</span><br></pre></td></tr></table></div></figure>
+<p>如果你沒有足夠的記憶體，將會花費你很長時間……</p>
+
+        <h2 id="測試"   >
+          <a href="#測試" class="heading-link"><i class="fas fa-link"></i></a>測試</h2>
+      <p>運行自動測試腳本</p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@f78375b1c487:&#x2F;# PYTORCH_TEST_WITH_ROCM&#x3D;1 python test&#x2F;run_test.py --verbose</span><br></pre></td></tr></table></div></figure>
+<p>然後大概你會出現 <code>Import Error : no module named torch</code> 的問題。</p>
+<p>那樣的話，你需要確認你的 Python 版本。我的情況是這樣的：</p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">root@f78375b1c487:&#x2F;# python -V</span><br><span class="line">Python 2.7.18</span><br><span class="line">root@f78375b1c487:&#x2F;# python3 -V</span><br><span class="line">Python 3.5.8</span><br><span class="line">root@f78375b1c487:&#x2F;# python3.6 -V</span><br><span class="line">Python 3.6.10</span><br></pre></td></tr></table></div></figure>
+<p>這個 Pytorch 應該是編譯並且安裝給了 Python 3.6，所以要用 Python 3.6 來測試才對。</p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@f78375b1c487:&#x2F;# PYTORCH_TEST_WITH_ROCM&#x3D;1 python3.6 test&#x2F;run_test.py --verbose</span><br></pre></td></tr></table></div></figure>
+
+        <h3 id="出錯？"   >
+          <a href="#出錯？" class="heading-link"><i class="fas fa-link"></i></a>出錯？</h3>
+      <p>如果沒有 16 GB RAM 就會出現 <code>malloc</code> 無法賦予位置的錯誤</p>
+
+        <h3 id="Install-torchvision"   >
+          <a href="#Install-torchvision" class="heading-link"><i class="fas fa-link"></i></a>Install torchvision</h3>
+      <p>試試安裝 torchvision，應該是在編譯過程中已經一起安裝了的。</p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@f78375b1c487:&#x2F;# pip install torchvision</span><br></pre></td></tr></table></div></figure>
+
+        <h3 id="保存這個-Docker-容器"   >
+          <a href="#保存這個-Docker-容器" class="heading-link"><i class="fas fa-link"></i></a>保存這個 Docker 容器</h3>
+      <p>用容器 ID 來保存它，ID 一直都在上面有顯示，例如我的就是 <code>f78375b1c487</code></p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo docker commit f78375b1c487 -m <span class="string">'pytorch installed'</span></span><br></pre></td></tr></table></div></figure>
+<p>不過如果你直接推出的話好像也會自動保存變成一個鏡像</p>
+
+        <h2 id="DONE"   >
+          <a href="#DONE" class="heading-link"><i class="fas fa-link"></i></a>DONE</h2>
+      <p><span class="exturl"><a class="exturl__link"   href="https://github.com/twtrubiks/docker-tutorial"  target="_blank" rel="noopener">學學如何用 Docker 吧</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>，它與你來日方長。</p>
+<p>Pytorch time! (&gt;w&lt;)b</p>
+</div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/zh-TW/2020/%E5%9C%A8-Ubuntu-18-04-%E4%B8%8A%E5%AE%89%E8%A3%9D-ROCm-3.3.0-%E5%92%8C-TensorFlow/">在 Ubuntu 18.04 上安裝 ROCm 3.3.0 和 TensorFlow</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2020-04-18</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2020-04-26</span></span></div></header><div class="post-body"><div class="post-excerpt"><!-- # 在 Ubuntu 18.04 上安裝 ROCm 3.3.0 和 TensorFlow -->
+
+        <h2 id="目標"   >
+          <a href="#目標" class="heading-link"><i class="fas fa-link"></i></a>目標</h2>
+      <p>我一直覺得 AMD 出的幾張織女星顯卡很是吸引。 <span class="exturl"><a class="exturl__link"   href="https://www.techpowerup.com/gpu-specs/radeon-rx-vega-56.c2993"  target="_blank" rel="noopener">VEGA 56</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> ，<span class="exturl"><a class="exturl__link"   href="https://www.techpowerup.com/gpu-specs/radeon-rx-vega-64.c2871"  target="_blank" rel="noopener">VEGA 64</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> 都是很強勁的計算裝置，和 <span class="exturl"><a class="exturl__link"   href="https://www.techpowerup.com/gpu-specs/geforce-rtx-2080-ti.c3305"  target="_blank" rel="noopener">NVIDIA 2080 Ti</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> 不相上下。 <span class="exturl"><a class="exturl__link"   href="https://www.techpowerup.com/gpu-specs/radeon-vii.c3358"  target="_blank" rel="noopener">Radeon VII</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> 更是讓我流口水，13.44 TFLOPS FP32 (float) 運算能力（理論值）而且只有 2080 Ti 的一半價錢。</p>
+<p>爲了嘗試 AMD 的表現，和依賴庫的穩定性，我買了一張 RX 580 來玩，只花了我100美刀。<span class="exturl"><a class="exturl__link"   href="https://www.techpowerup.com/gpu-specs/radeon-rx-580.c2938"  target="_blank" rel="noopener">AMD Radeon RX 580</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> 感覺性價比很高，有 6 TFLOPS 的運算能力。</p>
+<p>NVIDIA 的 GPU 就用 CUDA 來跑，那 AMD 怎麼安裝 CUDA 呢？不怕，我們有 ROCm 來替代 CUDA。</p>
+
+        <h2 id="前提"   >
+          <a href="#前提" class="heading-link"><i class="fas fa-link"></i></a>前提</h2>
+      <p>對於使用性價比超高的 AMD GPU 來跑模型我已經迫不及待了，不過原來 ROCm 有很多要求，不是隨便哪個舊電腦就可以跑的。</p>
+<ul>
+<li>要有比較新的 CPU 支援 PCIe Gen3 和 PCIe Atomics 操作的才行</li>
+<li>底板要支援 PCIe 3.0</li>
+<li>GPU 也要比較新的才行，AMD 說太舊的顯卡性能太差懶得支援了</li>
+<li>更新你的 Linux 系統到內核版本 kernel 4.17 以上（如果你用 Windows 就不行了）</li>
+</ul>
+
+        <h3 id="支援的-CPU-型號"   >
+          <a href="#支援的-CPU-型號" class="heading-link"><i class="fas fa-link"></i></a>支援的 CPU 型號</h3>
+      <ul>
+<li>AMD Ryzen CPUs</li>
+<li>The CPUs in AMD Ryzen APUs</li>
+<li>AMD Ryzen Threadripper CPUs</li>
+<li>AMD EPYC CPUs</li>
+<li>Intel Xeon E7 v3 或以上</li>
+<li>Intel Xeon E5 v3 或以上</li>
+<li>Intel Xeon E3 v3 或以上</li>
+<li>Intel Core i7 v4 或以上 （i.e. 要 Haswell 或更新的架構）</li>
+<li>Intel Core i5 v4 或以上</li>
+<li>Intel Core i3 v4 或以上</li>
+<li>某些 Ivy Bridge-E systems</li>
+</ul>
+<p><span class="exturl"><a class="exturl__link"   href="https://github.com/RadeonOpenCompute/ROCm#supported-cpus"  target="_blank" rel="noopener">原文鏈接</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<p>我也不知道 “某些 Ivy Bridge-E systems” 是哪些，有需要的話請前往<span class="exturl"><a class="exturl__link"   href="https://github.com/RadeonOpenCompute/ROCm/issues"  target="_blank" rel="noopener">提問</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>。他們說有限度支援某些舊 CPU 和 GPU，不過最好就不要自尋短見了，除非你想幫忙搞底層代碼來支援那些硬件。</p>
+
+        <h3 id="支援的-GPU-型號"   >
+          <a href="#支援的-GPU-型號" class="heading-link"><i class="fas fa-link"></i></a>支援的 GPU 型號</h3>
+      <ul>
+<li>GFX8 GPUs<ul>
+<li>“Fiji” 晶片，例如 AMD Radeon R9 Fury X 和 Radeon Instinct MI8</li>
+<li>“Polaris 10” 晶片，例如 AMD Radeon RX 580 和 Radeon Instinct MI6</li>
+</ul>
+</li>
+<li>GFX9 GPUs<ul>
+<li>“Vega 10” 晶片，例如 AMD Radeon RX Vega 64 和 Radeon Instinct MI25</li>
+<li>“Vega 7nm” 晶片，例如 Radeon Instinct MI50, Radeon Instinct MI60 和 AMD Radeon VII</li>
+</ul>
+</li>
+</ul>
+<p>參考 <span class="exturl"><a class="exturl__link"   href="https://github.com/RadeonOpenCompute/ROCm#supported-gpus"  target="_blank" rel="noopener">原文</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>. 有些 GFX8 和 GFX7 系列的 GPU 碰巧可以支援，不過如果出問題的話，也沒人可以幫你解決了。順帶一提我的 RX 580 後來發現 Pytorch 不支援了，嫌棄我的 GPU 舊。.</p>
+
+        <h2 id="安裝-ROCm"   >
+          <a href="#安裝-ROCm" class="heading-link"><i class="fas fa-link"></i></a>安裝 ROCm</h2>
+      
+        <h3 id="我的配置"   >
+          <a href="#我的配置" class="heading-link"><i class="fas fa-link"></i></a>我的配置</h3>
+      <ul>
+<li>i5-4570 CPU</li>
+<li>RX 580 GPU</li>
+<li>Ubuntu Server 18.04.</li>
+</ul>
+<p><span class="exturl"><a class="exturl__link"   href="https://rocm-documentation.readthedocs.io/en/latest/Installation_Guide/Installation-Guide.html#ubuntu"  target="_blank" rel="noopener">官方的教學</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> 可以直接用，除非你想用 Pytorch，那可能有幾個不起眼的地方官方忘記提醒你要注意。可以汲取我的<a href="/zh-TW/2020/在-Ubuntu-18-04-上安裝-CUDA-和-Pytorch/">教訓</a>避免再入坑。</p>
+
+        <h3 id="前期準備"   >
+          <a href="#前期準備" class="heading-link"><i class="fas fa-link"></i></a>前期準備</h3>
+      <blockquote>
+<p>如果你安裝 Pytorch 就要記一下你選的 ROCm 版本，我裝 ROCm 3.3.0。</p>
+</blockquote>
+<p>先更新系統，然後安裝 <code>libnuma-dev</code> 然後重啓</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt update</span><br><span class="line"> </span><br><span class="line">$ sudo apt dist-upgrade</span><br><span class="line"> </span><br><span class="line">$ sudo apt install libnuma-dev</span><br><span class="line"> </span><br><span class="line">$ sudo reboot</span><br></pre></td></tr></table></div></figure>
+
+        <h3 id="安裝-ROCm-1"   >
+          <a href="#安裝-ROCm-1" class="heading-link"><i class="fas fa-link"></i></a>安裝 ROCm</h3>
+      <p>將 ROCm 的下載位置加入到系統的軟件包管理當中</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ wget -q -O - http://repo.radeon.com/rocm/apt/debian/rocm.gpg.key | sudo apt-key add -</span><br><span class="line"> </span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">'deb [arch=amd64] http://repo.radeon.com/rocm/apt/debian/ xenial main'</span> | sudo te</span><br></pre></td></tr></table></div></figure>
+<p>然後用系統的軟件包管理自動安裝</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt update</span><br><span class="line"> </span><br><span class="line">$ sudo apt install rocm-dkms</span><br></pre></td></tr></table></div></figure>
+
+
+        <h3 id="安裝善後"   >
+          <a href="#安裝善後" class="heading-link"><i class="fas fa-link"></i></a>安裝善後</h3>
+      <p>記得幫你自己的用戶加入 GPU 的操作權限</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo usermod -a -G video <span class="variable">$LOGNAME</span></span><br></pre></td></tr></table></div></figure>
+<p>如果你要考慮再加其他用戶就請去複製<span class="exturl"><a class="exturl__link"   href="https://rocm-documentation.readthedocs.io/en/latest/Installation_Guide/Installation-Guide.html#ubuntu"  target="_blank" rel="noopener">官方文檔的指令</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<p>然後重啓系統</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo reboot</span><br></pre></td></tr></table></div></figure>
+
+
+        <h3 id="測試安裝及啓用"   >
+          <a href="#測試安裝及啓用" class="heading-link"><i class="fas fa-link"></i></a>測試安裝及啓用</h3>
+      <p>測試 ROCm 的安裝</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ /opt/rocm/bin/rocminfo</span><br><span class="line">$ /opt/rocm/opencl/bin/x86_64/clinfo</span><br></pre></td></tr></table></div></figure>
+<p>你應該會看到一些類似報告表格的東西，那就說明安裝成功了。</p>
+<p>接下來將 ROCm 植入系統的環境 PATH 當中讓其他程序可以找得到它</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> <span class="string">'export PATH=$PATH:/opt/rocm/bin:/opt/rocm/profiler/bin:/opt/rocm/opencl/bin/x86_64'</span> |</span><br><span class="line">&gt; sudo tee -a /etc/profile.d/rocm.sh</span><br></pre></td></tr></table></div></figure>
+
+
+        <h2 id="安裝-TensorFlow"   >
+          <a href="#安裝-TensorFlow" class="heading-link"><i class="fas fa-link"></i></a>安裝 TensorFlow</h2>
+      <p>這個很簡單，只有兩步，不過現在好像默認安裝 2.0 以上最新版本，如果你要安裝其他版本要自己指定版本，不會的話去問問谷歌<code>pip安裝如何指定版本</code>。<span class="exturl"><a class="exturl__link"   href="https://rocm-documentation.readthedocs.io/en/latest/Deep_learning/Deep-learning.html"  target="_blank" rel="noopener">參考原文說明書</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt update</span><br><span class="line"> </span><br><span class="line">$ sudo apt install rocm-libs miopen-hip cxlactivitylogger rccl</span><br><span class="line"> </span><br><span class="line">$ sudo apt install wget python3-pip</span><br><span class="line"> </span><br><span class="line">$ pip3 install --user tensorflow-rocm</span><br></pre></td></tr></table></div></figure>
+
+<p>現在 TensorFlow 2 應該是已經成功安裝了！可喜可賀 (^_^)b</p>
+</div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/en/2020/Installing-Pytorch-with-ROCm-3.3.0-on-Ubuntu-18.04/">Installing Pytorch with ROCm 3.3.0 on Ubuntu 18.04</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2020-04-18</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2020-04-26</span></span></div></header><div class="post-body"><div class="post-excerpt"><!-- # Installing Pytorch with ROCm on Ubuntu 18.04 -->
+
+        <h2 id="Goal"   >
+          <a href="#Goal" class="heading-link"><i class="fas fa-link"></i></a>Goal</h2>
+      <p>I have my RX 580 ready for TensorFlow, I tried to install Pytorch but it say my GPU is too old and they do not support now. I brought a VEGA 56 with 10.54 TFLOPS for FP32 from newegg.com at price 266 USD. Let’s install Pytorch on top of ROCm 3.3.0.</p>
+<p>First of all, install ROCm 3.3.0 (refer to <a href="/en/2020/Installing-ROCm-for-Deep-learning-on-Ubuntu-18.04/">previous tutorial</a>), requirements are the same.</p>
+<p>We follow the instructions from <span class="exturl"><a class="exturl__link"   href="https://rocm-documentation.readthedocs.io/en/latest/Deep_learning/Deep-learning.html"  target="_blank" rel="noopener">ROCm</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> first, and I will add solution to problem I encountered.</p>
 <p><strong>You will need to have 16 GB RAM or more to finish the whole compile, install and test process.</strong></p>
 
-        <h2 id="Step-One"   >
-          <a href="#Step-One" class="heading-link"><i class="fas fa-link"></i></a>Step One</h2>
+        <h2 id="Install-dependencies"   >
+          <a href="#Install-dependencies" class="heading-link"><i class="fas fa-link"></i></a>Install dependencies</h2>
       
         <h3 id="Install-Docker"   >
           <a href="#Install-Docker" class="heading-link"><i class="fas fa-link"></i></a>Install Docker</h3>
@@ -77,12 +367,12 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 4.2.0"></he
 <figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git submodule update --init --recursive</span><br></pre></td></tr></table></div></figure>
 
 
-        <h2 id="Step-Three"   >
-          <a href="#Step-Three" class="heading-link"><i class="fas fa-link"></i></a>Step Three</h2>
+        <h2 id="Compile-and-Install"   >
+          <a href="#Compile-and-Install" class="heading-link"><i class="fas fa-link"></i></a>Compile and Install</h2>
       
         <h3 id="Enter-environment-for-compiling"   >
           <a href="#Enter-environment-for-compiling" class="heading-link"><i class="fas fa-link"></i></a>Enter environment for compiling</h3>
-      <p>Make sure the tag is correct before you run this command, my tag was <code>rocm3.3_ubuntu16.04_py3.6_pytorch</code> for ROCm 3.3.0. Official document seems got a small mistake on this.</p>
+      <p>Make sure the tag is correct before you run this command, my tag was <code>rocm3.3_ubuntu16.04_py3.6_pytorch</code> for ROCm 3.3.0. Official document forgot to remind you that the tag really matters.</p>
 <figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo docker run -it -v <span class="variable">$HOME</span>:/data --privileged --rm --device=/dev/kfd --device=/dev/dri --group-add video rocm/pytorch:rocm3.3_ubuntu16.04_py3.6_pytorch</span><br></pre></td></tr></table></div></figure>
 <p>And you will get something look another terminal:</p>
 <figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@f78375b1c487:&#x2F;#</span><br></pre></td></tr></table></div></figure>
@@ -91,25 +381,20 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 4.2.0"></he
 
         <h3 id="We-now-start-building"   >
           <a href="#We-now-start-building" class="heading-link"><i class="fas fa-link"></i></a>We now start building</h3>
-      <p>However you may encounter some problems. Here was my solution in 20 Apr 2020. I hope the problems have already been fixed while you read this, but in case it isn’t…</p>
-<p>Depends on your GPU, export the right code for it. You can check the code by running <code>rocminfo</code> on your host (out side the docker) on another terminal. Or you can find it <span class="exturl"><a class="exturl__link"   href="https://llvm.org/docs/AMDGPUUsage.html#processors"  target="_blank" rel="noopener">here</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> Ctrl-F search your GPU. <code>gfx900</code> for VEGA 56.</p>
+      <p>Export the right code for GPU. You can check the code by running <code>rocminfo</code> on your host (out side the docker) from another terminal. Or you can find it <span class="exturl"><a class="exturl__link"   href="https://llvm.org/docs/AMDGPUUsage.html#processors"  target="_blank" rel="noopener">here</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> Ctrl-F search your GPU. <code>gfx900</code> for VEGA 56.</p>
 <figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@f78375b1c487:&#x2F;# export HCC_AMDGPU_TARGET&#x3D;gfx900</span><br></pre></td></tr></table></div></figure>
 
         <h3 id="Start-compiling"   >
           <a href="#Start-compiling" class="heading-link"><i class="fas fa-link"></i></a>Start compiling</h3>
-      <p>A automated script is provided, just run the following command will build and install everything to the docker container.</p>
+      <p>An automated script is provided, just run the following command will build and install everything to the docker container.</p>
 <figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@f78375b1c487:&#x2F;# .jenkins&#x2F;pytorch&#x2F;build.sh</span><br></pre></td></tr></table></div></figure>
-<p>You may take a break and had tea time or go hiking, It takes more than one hour on my i5-4570.</p>
 
-        <h2 id="Step-Four"   >
-          <a href="#Step-Four" class="heading-link"><i class="fas fa-link"></i></a>Step Four</h2>
+        <h2 id="Test"   >
+          <a href="#Test" class="heading-link"><i class="fas fa-link"></i></a>Test</h2>
       <p>Before we finish everything, we need to run a test.</p>
-
-        <h3 id="Test"   >
-          <a href="#Test" class="heading-link"><i class="fas fa-link"></i></a>Test</h3>
-      <p>You may run script for testing…</p>
+<p>You may run the script for test…</p>
 <figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@f78375b1c487:&#x2F;# PYTORCH_TEST_WITH_ROCM&#x3D;1 python test&#x2F;run_test.py --verbose</span><br></pre></td></tr></table></div></figure>
-<p>And it may say <code>Import Error : no module named torch</code> no worry, let’s fix it.</p>
+<p>And it may say <code>Import Error : no module named torch</code>. No worry, it is easy to fix.</p>
 <p>Check your Python version</p>
 <figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">root@f78375b1c487:&#x2F;# python -V</span><br><span class="line">Python 2.7.18</span><br><span class="line">root@f78375b1c487:&#x2F;# python3 -V</span><br><span class="line">Python 3.5.8</span><br><span class="line">root@f78375b1c487:&#x2F;# python3.6 -V</span><br><span class="line">Python 3.6.10</span><br></pre></td></tr></table></div></figure>
 <p>Since the Pytorch was compiled and installed for Python 3.6, you need to use Python 3.6 for running the test.</p>
@@ -120,8 +405,8 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 4.2.0"></he
       <p>If you do not have 16 GB RAM, it will use up all the memeory and <code>malloc</code> will raise error for unable to allocate memory.</p>
 <p>If you try to run the test with RX 580, Pytorch will tell you the GPU is too old and their do not support now.</p>
 
-        <h2 id="Step-Five"   >
-          <a href="#Step-Five" class="heading-link"><i class="fas fa-link"></i></a>Step Five</h2>
+        <h2 id="Finishing"   >
+          <a href="#Finishing" class="heading-link"><i class="fas fa-link"></i></a>Finishing</h2>
       
         <h3 id="Install-torchvision"   >
           <a href="#Install-torchvision" class="heading-link"><i class="fas fa-link"></i></a>Install torchvision</h3>
@@ -130,20 +415,22 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 4.2.0"></he
 
         <h3 id="Save-the-container"   >
           <a href="#Save-the-container" class="heading-link"><i class="fas fa-link"></i></a>Save the container</h3>
-      <p>Exit your container with Ctrl-D and use the container ID to save it into image so you can use it for different project and prevent environment contamination of different dependencies. The container ID is the hash showing in your terminal for container, <code>f78375b1c487</code> for mine.</p>
+      <p>Use the container ID to save it into image so you can use it for different project and prevent environment contamination of different dependencies. The container ID is the hash showing in your terminal for container, <code>f78375b1c487</code> for mine.</p>
 <figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo docker commit f78375b1c487 -m <span class="string">'pytorch installed'</span></span><br></pre></td></tr></table></div></figure>
 <p>Change <code>f78375b1c487</code> to your container ID.</p>
+<p>By the way I think it is possible that the docker automatically save a docker image. I will verify it next week.</p>
 
         <h2 id="DONE"   >
           <a href="#DONE" class="heading-link"><i class="fas fa-link"></i></a>DONE</h2>
       <p>Pytorch time! (&gt;w&lt;)b</p>
-</div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/en/2020/Installing-ROCm-3.3.0-for-Deep-learning-on-Ubuntu-18.04/">Installing ROCm 3.3.0 for Deep learning on Ubuntu 18.04</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2020-04-18</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2020-04-22</span></span></div></header><div class="post-body"><div class="post-excerpt"><!-- # Installing ROCm for Deep learning on Ubuntu 18.04 -->
+<p>And I think you may need a <span class="exturl"><a class="exturl__link"   href="https://docker-curriculum.com/"  target="_blank" rel="noopener">tutorial for Docker</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> to get on.</p>
+</div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/en/2020/Installing-ROCm-3.3.0-for-Deep-learning-on-Ubuntu-18.04/">Installing ROCm 3.3.0 for Deep learning on Ubuntu 18.04</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2020-04-18</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2020-04-26</span></span></div></header><div class="post-body"><div class="post-excerpt"><!-- # Installing ROCm for Deep learning on Ubuntu 18.04 -->
 
         <h2 id="Goal"   >
           <a href="#Goal" class="heading-link"><i class="fas fa-link"></i></a>Goal</h2>
-      <p>We all know AMD <span class="exturl"><a class="exturl__link"   href="https://www.techpowerup.com/gpu-specs/radeon-rx-vega-56.c2993"  target="_blank" rel="noopener">VEGA 56</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> and <span class="exturl"><a class="exturl__link"   href="https://www.techpowerup.com/gpu-specs/radeon-rx-vega-64.c2871"  target="_blank" rel="noopener">VEGA 64</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> are powerful GPUs are competitive to <span class="exturl"><a class="exturl__link"   href="https://www.techpowerup.com/gpu-specs/geforce-rtx-2080-ti.c3305"  target="_blank" rel="noopener">NVIDIA 2080 Ti</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>, the <span class="exturl"><a class="exturl__link"   href="https://www.techpowerup.com/gpu-specs/radeon-vii.c3358"  target="_blank" rel="noopener">Radeon VII</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> is even more powerful with 13.44 TFLOPS FP32 (float) performance (Theoretical) and price at 699 USD.</p>
+      <p>We all know AMD <span class="exturl"><a class="exturl__link"   href="https://www.techpowerup.com/gpu-specs/radeon-rx-vega-56.c2993"  target="_blank" rel="noopener">VEGA 56</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> and <span class="exturl"><a class="exturl__link"   href="https://www.techpowerup.com/gpu-specs/radeon-rx-vega-64.c2871"  target="_blank" rel="noopener">VEGA 64</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> are powerful GPUs competitive to <span class="exturl"><a class="exturl__link"   href="https://www.techpowerup.com/gpu-specs/geforce-rtx-2080-ti.c3305"  target="_blank" rel="noopener">NVIDIA RTX 2080 Ti</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>, the <span class="exturl"><a class="exturl__link"   href="https://www.techpowerup.com/gpu-specs/radeon-vii.c3358"  target="_blank" rel="noopener">Radeon VII</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> is even more powerful with 13.44 TFLOPS FP32 (float) performance (Theoretical) with a lower price at 699 USD.</p>
 <p>I was thinking about having a Deep Learning machine, and I looked at the price for NVIDIA 2080 Ti, it is around 1548 USD here. So I made a call to my friend who sells 2nd hand electronic stuff and get a <span class="exturl"><a class="exturl__link"   href="https://www.techpowerup.com/gpu-specs/radeon-rx-580.c2938"  target="_blank" rel="noopener">AMD Radeon RX 580</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> with around 100 USD. RX 580 is a cost-effective card to get 6 TFLOPS performance.</p>
-<p>But, how to fit it with TensorFlow or Pytorch? CUDA does not agree with AMD GPUs. But no worries, I have found ROCm for AMD GPUs to replace CUDA.</p>
+<p>But, how to fit it with TensorFlow or Pytorch? CUDA does not agree with AMD GPUs. No worries, I have found ROCm for AMD GPUs to replace CUDA.</p>
 
         <h2 id="Requirements"   >
           <a href="#Requirements" class="heading-link"><i class="fas fa-link"></i></a>Requirements</h2>
@@ -193,24 +480,24 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 4.2.0"></he
       <p>I got a i5-4570 for CPU (another 2nd hand computer with 140 USD) and RX 580 for GPU and installed Ubuntu Server 18.04.</p>
 <p>The <span class="exturl"><a class="exturl__link"   href="https://rocm-documentation.readthedocs.io/en/latest/Installation_Guide/Installation-Guide.html#ubuntu"  target="_blank" rel="noopener">official tutorial</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> will be just fine for installnig ROCm and TensorFlow. But you will encounter problem in Pytorch (which is the reason I write this tutorial, I gave up on the first time, and this time I find <a href="/en/2020/Installing-Pytorch-with-ROCm-on-Ubuntu-18.04/">solution</a>).</p>
 
-        <h3 id="Step-one"   >
-          <a href="#Step-one" class="heading-link"><i class="fas fa-link"></i></a>Step one</h3>
+        <h3 id="Install-dependencies"   >
+          <a href="#Install-dependencies" class="heading-link"><i class="fas fa-link"></i></a>Install dependencies</h3>
       <blockquote>
-<p>Note the ROCm version you install, I am installing ROCm 3.3.0  This information will be useful during Pytorch installation.</p>
+<p>Note the ROCm version you install, I am installing ROCm 3.3.0  This information will be useful for Pytorch installation.</p>
 </blockquote>
 <p>Update system, install <code>libnuma-dev</code> and reboot:</p>
 <figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt update</span><br><span class="line"></span><br><span class="line">$ sudo apt dist-upgrade</span><br><span class="line"></span><br><span class="line">$ sudo apt install libnuma-dev</span><br><span class="line"></span><br><span class="line">$ sudo reboot</span><br></pre></td></tr></table></div></figure>
 
-        <h3 id="Step-two"   >
-          <a href="#Step-two" class="heading-link"><i class="fas fa-link"></i></a>Step two</h3>
+        <h3 id="Install-ROCm-1"   >
+          <a href="#Install-ROCm-1" class="heading-link"><i class="fas fa-link"></i></a>Install ROCm</h3>
       <p>Add the ROCm apt repository.</p>
 <figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ wget -q -O - http://repo.radeon.com/rocm/apt/debian/rocm.gpg.key | sudo apt-key add -</span><br><span class="line"></span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">'deb [arch=amd64] http://repo.radeon.com/rocm/apt/debian/ xenial main'</span> | sudo te</span><br></pre></td></tr></table></div></figure>
 <p>Install ROCm</p>
 <figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt update</span><br><span class="line"></span><br><span class="line">$ sudo apt install rocm-dkms</span><br></pre></td></tr></table></div></figure>
 
 
-        <h3 id="Step-three"   >
-          <a href="#Step-three" class="heading-link"><i class="fas fa-link"></i></a>Step three</h3>
+        <h3 id="Post-installation"   >
+          <a href="#Post-installation" class="heading-link"><i class="fas fa-link"></i></a>Post installation</h3>
       <p>Grant yourself permission for accessing your GPU</p>
 <figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo usermod -a -G video <span class="variable">$LOGNAME</span></span><br></pre></td></tr></table></div></figure>
 <p>If you need to add more users, check the <span class="exturl"><a class="exturl__link"   href="https://rocm-documentation.readthedocs.io/en/latest/Installation_Guide/Installation-Guide.html#ubuntu"  target="_blank" rel="noopener">document</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
@@ -218,8 +505,8 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 4.2.0"></he
 <figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo reboot</span><br></pre></td></tr></table></div></figure>
 
 
-        <h3 id="Step-four"   >
-          <a href="#Step-four" class="heading-link"><i class="fas fa-link"></i></a>Step four</h3>
+        <h3 id="Test-and-Cofnigure"   >
+          <a href="#Test-and-Cofnigure" class="heading-link"><i class="fas fa-link"></i></a>Test and Cofnigure</h3>
       <p>Test the ROCm installation.</p>
 <figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ /opt/rocm/bin/rocminfo</span><br><span class="line">$ /opt/rocm/opencl/bin/x86_64/clinfo</span><br></pre></td></tr></table></div></figure>
 <p>You should see something like report.</p>
@@ -598,192 +885,7 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 4.2.0"></he
 <li>Prevent network usage lost, save the usage in the last email with <code>pickle</code></li>
 <li>In order to monitoring network usage continuously, set one more <code>NETWORK_MAX</code> for reseting the flag after first email notification<br>See my <span class="exturl"><a class="exturl__link"   href="https://github.com/NewJerseyStyle/network-monitor"  target="_blank" rel="noopener">GitHub Repo</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
 </ul>
-</div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/en/2020/Raspberry-Pi-connect-to-4G-LTE/">Raspberry Pi connect to 4G LTE</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2020-04-10</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2020-04-11</span></span></div></header><div class="post-body"><div class="post-excerpt"><!-- # Raspberry Pi connect to 4G LTE -->
-
-        <h2 id="What-you-need"   >
-          <a href="#What-you-need" class="heading-link"><i class="fas fa-link"></i></a>What you need</h2>
-      <ul>
-<li><span class="exturl"><a class="exturl__link"   href="https://www.raspberrypi.org/products/"  target="_blank" rel="noopener">Raspberry Pi</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
-<li>SD Card with <span class="exturl"><a class="exturl__link"   href="https://projects.raspberrypi.org/en/projects/raspberry-pi-setting-up"  target="_blank" rel="noopener">Linux installed</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
-<li><span class="exturl"><a class="exturl__link"   href="https://sixfab.com/product/raspberry-pi-base-hat-3g-4g-lte-minipcie-cards/"  target="_blank" rel="noopener">Raspberry Pi 3G/4G-LTE Base HAT</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
-<li><span class="exturl"><a class="exturl__link"   href="https://sixfab.com/product/quectel-ec25-mini-pcle-4glte-module/"  target="_blank" rel="noopener">Quectel EC25 Mini PCle 4G/LTE Module</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
-<li><span class="exturl"><a class="exturl__link"   href="https://sixfab.com/product/lte-main-diversity-gnss-triple-port-u-fl-antenna-100mm/"  target="_blank" rel="noopener">LTE Main &amp; Diversity &amp; GNSS Triple Port u.FL Antenna </a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
-</ul>
-<blockquote>
-<p>Alternative option: <span class="exturl"><a class="exturl__link"   href="https://sixfab.com/product/raspberry-pi-4g-lte-modem-kit/"  target="_blank" rel="noopener">Raspberry Pi 4G/LTE HAT Kit from Sixfab</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
-</blockquote>
-
-        <h2 id="Assembly"   >
-          <a href="#Assembly" class="heading-link"><i class="fas fa-link"></i></a>Assembly</h2>
-      <ol>
-<li><p>Install Mini PCIe 4G IoT Module on Raspberry Pi 3G/4G-LTE Base HAT, it is similar to installing RAM modules in laptop.</p>
-</li>
-<li><p>Install Raspberry Pi 3G/4G-LTE Base HAT on Raspberry, it is simple.<br><img   src="https://sixfab-com.exactdn.com/wp-content/uploads/2019/09/Base_HAT_with_EC25A.jpg?strip=all&lossy=0&ssl=1" style=""  alt="Installed onto Pi" title=" After assembly Raspberry Pi @sixfab "><center><em>After assembly Raspberry Pi <span class="exturl"><a class="exturl__link"   href="https://sixfab.com/product/raspberry-pi-base-hat-3g-4g-lte-minipcie-cards/"  target="_blank" rel="noopener">@sixfab</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></em></center></p>
-</li>
-<li><p>Connect the Antenna to the Raspberry Pi 3G/4G-LTE Base HAT, the wire should be parallel if you connect them to right port.<br><img src="https://www.torbox.ch/wp-content/uploads/2019/12/IMG_5237-e1576357032325.jpg" alt="Connect Antenna" title=" Complete assembly @https://www.torbox.ch/?p=1165 "><center><em>Complete assembly <span class="exturl"><a class="exturl__link"   href="https://www.torbox.ch/?p=1165"  target="_blank" rel="noopener">@torbox.ch</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></em></center></p>
-</li>
-</ol>
-<p>The function of two outermost cable seem to be identical, all Antenna cables are parallel in my assembly and it works well.</p>
-
-        <h2 id="Driver"   >
-          <a href="#Driver" class="heading-link"><i class="fas fa-link"></i></a>Driver</h2>
-      <p>Sixfab provides two methods to control the LTE module, <span class="exturl"><a class="exturl__link"   href="https://sixfab.com/ppp-installer-for-sixfab-shield/"  target="_blank" rel="noopener">PPP</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> and <span class="exturl"><a class="exturl__link"   href="https://sixfab.com/qmi-interface-with-3g-4g-lte-base-shield-v2/"  target="_blank" rel="noopener">QMI interface</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>.</p>
-<p>I used PPP connection here.</p>
-<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ wget https://raw.githubusercontent.com/sixfab/Sixfab_PPP_Installer/master/ppp_installer/install.sh</span><br><span class="line"></span><br><span class="line">$ chmod +x install.sh</span><br><span class="line"></span><br><span class="line">$ sudo ./install.sh</span><br></pre></td></tr></table></div></figure>
-
-
-        <h3 id="Few-options-confused-me-and-here-are-tips"   >
-          <a href="#Few-options-confused-me-and-here-are-tips" class="heading-link"><i class="fas fa-link"></i></a>Few options confused me and here are tips:</h3>
-      <ul>
-<li>Choose your Sixfab<ul>
-<li>Always <code>2</code> for the <code>3G, 4G/LTE Base Shield</code></li>
-</ul>
-</li>
-<li>APN<ul>
-<li>Google the APN for the service provider</li>
-<li>Or insert the SIM Card to a phone and view the APN in settings</li>
-</ul>
-</li>
-<li>PORT name<ul>
-<li>For 3G, 4G/LTE Base Shield &amp;&amp; Base HAT it will be <code>ttyUSB3</code></li>
-<li>Always <code>ttyUSB3</code>, no thing to do with physical port</li>
-</ul>
-</li>
-</ul>
-
-        <h2 id="Troubleshooting"   >
-          <a href="#Troubleshooting" class="heading-link"><i class="fas fa-link"></i></a>Troubleshooting</h2>
-      
-        <h3 id="Need-auth-option-in-setup"   >
-          <a href="#Need-auth-option-in-setup" class="heading-link"><i class="fas fa-link"></i></a>Need auth option in setup</h3>
-      <p>If your service provider need username/password to use the network, edit <code>/etc/ppp/peers/provider</code> later to add your username and password.<br>Remove line</p>
-<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">noauth</span><br></pre></td></tr></table></div></figure>
-<p>And add two lines</p>
-<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">user &quot;YOUR USERNAME&quot;</span><br><span class="line">password &quot;YOURPASSWORD&quot;</span><br></pre></td></tr></table></div></figure>
-
-        <h3 id="Routing-error"   >
-          <a href="#Routing-error" class="heading-link"><i class="fas fa-link"></i></a>Routing error</h3>
-      <p>In this case, run the following commands</p>
-<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo route del default</span><br><span class="line"></span><br><span class="line">$ sudo route add default ppp0</span><br></pre></td></tr></table></div></figure>
-
-        <h3 id="No-network"   >
-          <a href="#No-network" class="heading-link"><i class="fas fa-link"></i></a>No network</h3>
-      <p>Try manually connect to cellular network:</p>
-<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo pon</span><br></pre></td></tr></table></div></figure>
-<p>Modem hang up and you tried all solution, nothing work and do not know why</p>
-<p>I have encountered few time on this problem, it hang up while connecting to network.<br>Because of incorrect APN, try all APN you can find on network and in your phone’s setting. To change the APN, edit <code>/etc/ppp/peers/provider</code></p>
-<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo poff</span><br><span class="line">$ sudo nano /etc/ppp/peers/provider</span><br></pre></td></tr></table></div></figure>
-<p>The APN is on the end of the 3rd line in my <code>/etc/ppp/peers/provider</code>.</p>
-<p>Try every APN you can find for the service provider try connect with <code>sudo pon</code> and one of them should work.</p>
-
-        <h2 id="DONE"   >
-          <a href="#DONE" class="heading-link"><i class="fas fa-link"></i></a>DONE</h2>
-      <figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ ping 8.8.8.8</span><br><span class="line">PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.</span><br><span class="line">64 bytes from 8.8.8.8: icmp_seq=1 ttl=52 time=20.9 ms</span><br><span class="line">64 bytes from 8.8.8.8: icmp_seq=2 ttl=52 time=111 ms</span><br><span class="line">64 bytes from 8.8.8.8: icmp_seq=3 ttl=52 time=69.7 ms</span><br></pre></td></tr></table></div></figure>
-</div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/en/2020/Raspberry-Pi-as-4G-LTE-Router/">Raspberry Pi as 4G LTE Router</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2020-04-10</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2020-04-11</span></span></div></header><div class="post-body"><div class="post-excerpt"><!-- # Raspberry Pi as 4G LTE Router -->
-
-        <h2 id="Previous"   >
-          <a href="#Previous" class="heading-link"><i class="fas fa-link"></i></a>Previous</h2>
-      <p>We have <a href="/en/2020/Raspberry-Pi-connect-to-4G-LTE/">established connection to 4G LTE network</a></p>
-
-        <h2 id="Goal"   >
-          <a href="#Goal" class="heading-link"><i class="fas fa-link"></i></a>Goal</h2>
-      <p>We are going to turn the Raspberry Pi into a Router for our devices, pick your need:</p>
-<ul>
-<li><a href="#Wireless-Router">Goto Wireless router section</a></li>
-<li><a href="#Wired-Router">Goto Wired router section</a></li>
-</ul>
-
-        <h2 id="Wireless-Router"   >
-          <a href="#Wireless-Router" class="heading-link"><i class="fas fa-link"></i></a>Wireless Router</h2>
-      <p>Instead of reinventing the wheel, we follow the guide <span class="exturl"><a class="exturl__link"   href="https://sixfab.com/using-sixfab-raspberry-p-shield-hat-as-a-wi-fi-hotspot-access-point/"  target="_blank" rel="noopener">Sixfab tutorial</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
-<p>If you are using Raspberry Pi 2 or earlier, you will need a USB WiFi adaptor.</p>
-
-        <h3 id="Backup-wireless-configurations"   >
-          <a href="#Backup-wireless-configurations" class="heading-link"><i class="fas fa-link"></i></a>Backup wireless configurations</h3>
-      <p>Not a must but you may want to do this, in case later you changed your mind.</p>
-<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo cp /etc/wpa_supplicant/wpa_supplicant.conf /etc/wpa_supplicant/wpa_supplicant.backup.conf</span><br></pre></td></tr></table></div></figure>
-
-
-        <h3 id="Configure-wireless-device"   >
-          <a href="#Configure-wireless-device" class="heading-link"><i class="fas fa-link"></i></a>Configure wireless device</h3>
-      <p>Clear the configuration file</p>
-<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo cp /dev/null /etc/wpa_supplicant/wpa_supplicant.conf</span><br></pre></td></tr></table></div></figure>
-<p>Add configurations into <code>/etc/wpa_supplicant/wpa_supplicant.conf</code>:</p>
-<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ctrl_interface&#x3D;DIR&#x3D;&#x2F;var&#x2F;run&#x2F;wpa_supplicant GROUP&#x3D;netdev</span><br><span class="line">update_config&#x3D;1</span><br></pre></td></tr></table></div></figure>
-
-
-        <h3 id="Install-RaspAP"   >
-          <a href="#Install-RaspAP" class="heading-link"><i class="fas fa-link"></i></a>Install RaspAP</h3>
-      <p>Use a quick installer of <span class="exturl"><a class="exturl__link"   href="https://github.com/billz/raspap-webgui"  target="_blank" rel="noopener">RaspAP</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> and follow the questions to setup the wireless network</p>
-<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ wget -q https://git.io/voEUQ -O /tmp/raspap &amp;&amp; bash /tmp/raspap -y</span><br></pre></td></tr></table></div></figure>
-<p>I did not tested this, so any problem or question (default password etc.), please refer to the <span class="exturl"><a class="exturl__link"   href="https://sixfab.com/using-sixfab-raspberry-p-shield-hat-as-a-wi-fi-hotspot-access-point/"  target="_blank" rel="noopener">Sixfab tutorial</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> and the toubleshooting in the <span class="exturl"><a class="exturl__link"   href="https://howtoraspberrypi.com/create-a-wi-fi-hotspot-in-less-than-10-minutes-with-pi-raspberry/"  target="_blank" rel="noopener">original tutorial</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
-
-        <h2 id="Wired-Router"   >
-          <a href="#Wired-Router" class="heading-link"><i class="fas fa-link"></i></a>Wired Router</h2>
-      <p>We are going to use network address translation (NAT) to bridge <code>ppp0</code> with <code>eth0</code></p>
-<p>This tutorial was adopting <span class="exturl"><a class="exturl__link"   href="https://raspberrypi.stackexchange.com/questions/48307/sharing-the-pis-wifi-connection-through-the-ethernet-port"  target="_blank" rel="noopener">sharing wifi through the ethernet</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> and change it to share PPP connection to ethernet</p>
-
-        <h3 id="DHCP-and-DNS-server"   >
-          <a href="#DHCP-and-DNS-server" class="heading-link"><i class="fas fa-link"></i></a>DHCP and DNS server</h3>
-      <p>I used <code>dnsmasq</code> for DHCP + DNS.</p>
-<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install dnsmasq</span><br></pre></td></tr></table></div></figure>
-
-        <h3 id="Configurate-interfaces"   >
-          <a href="#Configurate-interfaces" class="heading-link"><i class="fas fa-link"></i></a>Configurate interfaces</h3>
-      <p>Edit the <code>eth0</code> section in file <code>/etc/network/interfaces</code>:</p>
-<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">allow-hotplug eth0  </span><br><span class="line">iface eth0 inet static  </span><br><span class="line">    address 192.168.2.1</span><br><span class="line">    netmask 255.255.255.0</span><br><span class="line">    network 192.168.2.0</span><br><span class="line">    broadcast 192.168.2.255</span><br></pre></td></tr></table></div></figure>
-
-        <h3 id="Configure-dnsmasq"   >
-          <a href="#Configure-dnsmasq" class="heading-link"><i class="fas fa-link"></i></a>Configure dnsmasq</h3>
-      <p>Backup dnsmasq configuration</p>
-<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo mv /etc/dnsmasq.conf /etc/dnsmasq.conf.orig</span><br></pre></td></tr></table></div></figure>
-<p>Edit <code>/etc/dnsmasq.conf</code></p>
-<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">interface&#x3D;eth0      # Use interface eth0  </span><br><span class="line">listen-address&#x3D;192.168.2.1 # listen on  </span><br><span class="line"># Bind to the interface to make sure we aren&#39;t sending things elsewhere  </span><br><span class="line">#### bind-interfaces #### BUT don&#39;t enable this.</span><br><span class="line">server&#x3D;8.8.8.8       # Forward DNS requests to Google DNS  </span><br><span class="line">domain-needed        # Don&#39;t forward short names  </span><br><span class="line"># Never forward addresses in the non-routed address spaces.</span><br><span class="line">bogus-priv</span><br><span class="line"># Assign IP addresses between 192.168.2.2 and 192.168.2.100 with a</span><br><span class="line"># 12 hour lease time</span><br><span class="line">dhcp-range&#x3D;192.168.2.2,192.168.2.100,12h</span><br></pre></td></tr></table></div></figure>
-<blockquote>
-<p>Enable <strong><code>bind-interfaces</code></strong> cause me unable to share the internet. You may need to test it.</p>
-</blockquote>
-
-        <h3 id="NAT-configuration"   >
-          <a href="#NAT-configuration" class="heading-link"><i class="fas fa-link"></i></a>NAT configuration</h3>
-      <figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo iptables -t nat -A POSTROUTING -o wwan0 -j MASQUERADE  </span><br><span class="line">$ sudo iptables -A FORWARD -i wwan0 -o eth0 -m state --state RELATED,ESTABLISHED -j ACCEPT  </span><br><span class="line">$ sudo iptables -A FORWARD -i eth0 -o wwan0 -j ACCEPT</span><br></pre></td></tr></table></div></figure>
-<p>Make the rules persistent.</p>
-<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo sh -c <span class="string">"iptables-save &gt; /etc/iptables.ipv4.nat"</span></span><br></pre></td></tr></table></div></figure>
-<p>Edit <code>/etc/rc.local</code></p>
-<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Add this line above exit 0</span><br><span class="line">iptables-restore &lt; &#x2F;etc&#x2F;iptables.ipv4.nat</span><br></pre></td></tr></table></div></figure>
-
-        <h2 id="DONE"   >
-          <a href="#DONE" class="heading-link"><i class="fas fa-link"></i></a>DONE</h2>
-      <p>Connect my laptop to Raspberry Pi </p>
-<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ ping 8.8.8.8</span><br><span class="line">PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.</span><br><span class="line">64 bytes from 8.8.8.8: icmp_seq=2 ttl=51 time=99.2 ms</span><br><span class="line">64 bytes from 8.8.8.8: icmp_seq=1 ttl=51 time=22.9 ms</span><br><span class="line">64 bytes from 8.8.8.8: icmp_seq=3 ttl=51 time=69.7 ms</span><br></pre></td></tr></table></div></figure>
-</div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/en/2020/hello-world/">Hello World</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2020-04-05</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2020-04-05</span></span></div></header><div class="post-body"><div class="post-excerpt"><p>Welcome to <span class="exturl"><a class="exturl__link"   href="https://hexo.io/"  target="_blank" rel="noopener">Hexo</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>! This is your very first post. Check <span class="exturl"><a class="exturl__link"   href="https://hexo.io/docs/"  target="_blank" rel="noopener">documentation</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> for more info. If you get any problems when using Hexo, you can find the answer in <span class="exturl"><a class="exturl__link"   href="https://hexo.io/docs/troubleshooting.html"  target="_blank" rel="noopener">troubleshooting</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> or you can ask me on <span class="exturl"><a class="exturl__link"   href="https://github.com/hexojs/hexo/issues"  target="_blank" rel="noopener">GitHub</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>.</p>
-
-        <h2 id="Quick-Start"   >
-          <a href="#Quick-Start" class="heading-link"><i class="fas fa-link"></i></a>Quick Start</h2>
-      
-        <h3 id="Create-a-new-post"   >
-          <a href="#Create-a-new-post" class="heading-link"><i class="fas fa-link"></i></a>Create a new post</h3>
-      <figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></div></figure>
-
-<p>More info: <span class="exturl"><a class="exturl__link"   href="https://hexo.io/docs/writing.html"  target="_blank" rel="noopener">Writing</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
-
-        <h3 id="Run-server"   >
-          <a href="#Run-server" class="heading-link"><i class="fas fa-link"></i></a>Run server</h3>
-      <figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></div></figure>
-
-<p>More info: <span class="exturl"><a class="exturl__link"   href="https://hexo.io/docs/server.html"  target="_blank" rel="noopener">Server</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
-
-        <h3 id="Generate-static-files"   >
-          <a href="#Generate-static-files" class="heading-link"><i class="fas fa-link"></i></a>Generate static files</h3>
-      <figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></div></figure>
-
-<p>More info: <span class="exturl"><a class="exturl__link"   href="https://hexo.io/docs/generating.html"  target="_blank" rel="noopener">Generating</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
-
-        <h3 id="Deploy-to-remote-sites"   >
-          <a href="#Deploy-to-remote-sites" class="heading-link"><i class="fas fa-link"></i></a>Deploy to remote sites</h3>
-      <figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></div></figure>
-
-<p>More info: <span class="exturl"><a class="exturl__link"   href="https://hexo.io/docs/one-command-deployment.html"  target="_blank" rel="noopener">Deployment</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
-</div></div></article></section><nav class="paginator"><div class="paginator-inner"><span class="page-number current">1</span></div></nav></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><section class="sidebar-toc hide"></section><!-- ov = overview--><section class="sidebar-ov"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/logo.png" alt="avatar"></div><p class="sidebar-ov-author__text">NewJerseyStyle</p></div><div class="sidebar-ov-feed"><span class="sidebar-ov-feed-rss"><a class="sidebar-ov-feed-rss__link" href="/atom.xml" target="_blank" rel="noopener"><span class="sidebar-ov-feed-rss__icon"><i class="fas fa-rss"></i></span><span>RSS Subscribe</span></a></span></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">16</div><div class="sidebar-ov-state-item__name">Tags</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en zh-tw" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-sa.svg"></a></div></section></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2020</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>NewJerseyStyle</span></div><div><span>Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span class="footer__devider">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="Search for Posts (Support multiple keywords)"></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="https://cdn.jsdelivr.net/npm/ribbon.js@latest/dist/ribbon.min.js" size="120" alpha="0.6" zIndex="-1"></script><script>function initSearch() {
+</div></div></article></section><nav class="paginator"><div class="paginator-inner"><span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fas fa-angle-right"></i></a></div></nav></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><section class="sidebar-toc hide"></section><!-- ov = overview--><section class="sidebar-ov"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/logo.png" alt="avatar"></div><p class="sidebar-ov-author__text">NewJerseyStyle</p></div><div class="sidebar-ov-feed"><span class="sidebar-ov-feed-rss"><a class="sidebar-ov-feed-rss__link" href="/atom.xml" target="_blank" rel="noopener"><span class="sidebar-ov-feed-rss__icon"><i class="fas fa-rss"></i></span><span>RSS Subscribe</span></a></span></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">18</div><div class="sidebar-ov-state-item__name">Tags</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en zh-tw" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-sa.svg"></a></div></section></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2020</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>NewJerseyStyle</span></div><div><span>Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span class="footer__devider">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="Search for Posts (Support multiple keywords)"></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="https://cdn.jsdelivr.net/npm/ribbon.js@latest/dist/ribbon.min.js" size="120" alpha="0.6" zIndex="-1"></script><script>function initSearch() {
   var isXML = true;
   var search_path = 'search.json';
 

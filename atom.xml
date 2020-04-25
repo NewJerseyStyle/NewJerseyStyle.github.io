@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://newjerseystyle.github.io/"/>
-  <updated>2020-04-24T16:09:27.685Z</updated>
+  <updated>2020-04-25T16:34:35.575Z</updated>
   <id>https://newjerseystyle.github.io/</id>
   
   <author>
@@ -17,11 +17,147 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>在 Ubuntu 18.04 上安裝 CUDA 和 Pytorch</title>
+    <link href="https://newjerseystyle.github.io/zh-TW/2020/%E5%9C%A8-Ubuntu-18-04-%E4%B8%8A%E5%AE%89%E8%A3%9D-CUDA-%E5%92%8C-Pytorch/"/>
+    <id>https://newjerseystyle.github.io/zh-TW/2020/%E5%9C%A8-Ubuntu-18-04-%E4%B8%8A%E5%AE%89%E8%A3%9D-CUDA-%E5%92%8C-Pytorch/</id>
+    <published>2020-04-25T16:31:49.000Z</published>
+    <updated>2020-04-25T16:34:35.575Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;!-- # 在 Ubuntu 18.04 上安裝 CUDA 和 Pytorch --&gt;
+
+        &lt;h2 id=&quot;目標&quot;   &gt;
+          &lt;a href=&quot;#目標&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas
+        
+      
+    
+    </summary>
+    
+    
+    
+      <category term="NVIDIA" scheme="https://NewJerseyStyle.github.io/tags/NVIDIA/"/>
+    
+      <category term="Pytorch" scheme="https://NewJerseyStyle.github.io/tags/Pytorch/"/>
+    
+      <category term="Deep learning" scheme="https://NewJerseyStyle.github.io/tags/Deep-learning/"/>
+    
+      <category term="CUDA" scheme="https://NewJerseyStyle.github.io/tags/CUDA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Installing Pytorch with CUDA on Ubuntu 18.04</title>
+    <link href="https://newjerseystyle.github.io/en/2020/Installing-Pytorch-with-CUDA-on-Ubuntu-18-04/"/>
+    <id>https://newjerseystyle.github.io/en/2020/Installing-Pytorch-with-CUDA-on-Ubuntu-18-04/</id>
+    <published>2020-04-25T01:56:41.000Z</published>
+    <updated>2020-04-25T02:23:31.587Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;!-- # Installing Pytorch with CUDA on Ubuntu 18.04 --&gt;
+
+        &lt;h2 id=&quot;Goal&quot;   &gt;
+          &lt;a href=&quot;#Goal&quot; class=&quot;heading-link&quot;&gt;&lt;i
+        
+      
+    
+    </summary>
+    
+    
+    
+      <category term="NVIDIA" scheme="https://NewJerseyStyle.github.io/tags/NVIDIA/"/>
+    
+      <category term="Pytorch" scheme="https://NewJerseyStyle.github.io/tags/Pytorch/"/>
+    
+      <category term="Deep learning" scheme="https://NewJerseyStyle.github.io/tags/Deep-learning/"/>
+    
+      <category term="CUDA" scheme="https://NewJerseyStyle.github.io/tags/CUDA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>在 Ubuntu 18.04 上安裝 ROCm 3.3.0 和 Pytorch</title>
+    <link href="https://newjerseystyle.github.io/zh-TW/2020/%E5%9C%A8-Ubuntu-18-04-%E4%B8%8A%E5%AE%89%E8%A3%9D-ROCm-3.3.0-%E5%92%8C-Pytorch/"/>
+    <id>https://newjerseystyle.github.io/zh-TW/2020/%E5%9C%A8-Ubuntu-18-04-%E4%B8%8A%E5%AE%89%E8%A3%9D-ROCm-3.3.0-%E5%92%8C-Pytorch/</id>
+    <published>2020-04-18T15:43:26.000Z</published>
+    <updated>2020-04-25T16:30:25.466Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;!-- # 在 Ubuntu 18.04 上安裝 ROCm 3.3.0 和 Pytorch --&gt;
+
+        &lt;h2 id=&quot;目標&quot;   &gt;
+          &lt;a href=&quot;#目標&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas
+        
+      
+    
+    </summary>
+    
+    
+    
+      <category term="Pytorch" scheme="https://NewJerseyStyle.github.io/tags/Pytorch/"/>
+    
+      <category term="Deep learning" scheme="https://NewJerseyStyle.github.io/tags/Deep-learning/"/>
+    
+      <category term="AMD" scheme="https://NewJerseyStyle.github.io/tags/AMD/"/>
+    
+      <category term="ROCm" scheme="https://NewJerseyStyle.github.io/tags/ROCm/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>在 Ubuntu 18.04 上安裝 ROCm 3.3.0 和 TensorFlow</title>
+    <link href="https://newjerseystyle.github.io/zh-TW/2020/%E5%9C%A8-Ubuntu-18-04-%E4%B8%8A%E5%AE%89%E8%A3%9D-ROCm-3.3.0-%E5%92%8C-TensorFlow/"/>
+    <id>https://newjerseystyle.github.io/zh-TW/2020/%E5%9C%A8-Ubuntu-18-04-%E4%B8%8A%E5%AE%89%E8%A3%9D-ROCm-3.3.0-%E5%92%8C-TensorFlow/</id>
+    <published>2020-04-18T15:42:33.000Z</published>
+    <updated>2020-04-25T16:38:28.018Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;!-- # 在 Ubuntu 18.04 上安裝 ROCm 3.3.0 和 TensorFlow --&gt;
+
+        &lt;h2 id=&quot;目標&quot;   &gt;
+          &lt;a href=&quot;#目標&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas
+        
+      
+    
+    </summary>
+    
+    
+    
+      <category term="Deep learning" scheme="https://NewJerseyStyle.github.io/tags/Deep-learning/"/>
+    
+      <category term="AMD" scheme="https://NewJerseyStyle.github.io/tags/AMD/"/>
+    
+      <category term="ROCm" scheme="https://NewJerseyStyle.github.io/tags/ROCm/"/>
+    
+      <category term="TensorFlow" scheme="https://NewJerseyStyle.github.io/tags/TensorFlow/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Installing Pytorch with ROCm 3.3.0 on Ubuntu 18.04</title>
     <link href="https://newjerseystyle.github.io/en/2020/Installing-Pytorch-with-ROCm-3.3.0-on-Ubuntu-18.04/"/>
     <id>https://newjerseystyle.github.io/en/2020/Installing-Pytorch-with-ROCm-3.3.0-on-Ubuntu-18.04/</id>
     <published>2020-04-18T15:38:30.000Z</published>
-    <updated>2020-04-24T16:09:27.685Z</updated>
+    <updated>2020-04-25T16:10:59.033Z</updated>
     
     <summary type="html">
     
@@ -40,11 +176,11 @@
     
     
     
-      <category term="AMD" scheme="https://NewJerseyStyle.github.io/tags/AMD/"/>
-    
       <category term="Pytorch" scheme="https://NewJerseyStyle.github.io/tags/Pytorch/"/>
     
       <category term="Deep learning" scheme="https://NewJerseyStyle.github.io/tags/Deep-learning/"/>
+    
+      <category term="AMD" scheme="https://NewJerseyStyle.github.io/tags/AMD/"/>
     
       <category term="ROCm" scheme="https://NewJerseyStyle.github.io/tags/ROCm/"/>
     
@@ -55,7 +191,7 @@
     <link href="https://newjerseystyle.github.io/en/2020/Installing-ROCm-3.3.0-for-Deep-learning-on-Ubuntu-18.04/"/>
     <id>https://newjerseystyle.github.io/en/2020/Installing-ROCm-3.3.0-for-Deep-learning-on-Ubuntu-18.04/</id>
     <published>2020-04-18T15:38:00.000Z</published>
-    <updated>2020-04-22T00:56:05.602Z</updated>
+    <updated>2020-04-25T16:01:33.917Z</updated>
     
     <summary type="html">
     
@@ -74,9 +210,9 @@
     
     
     
-      <category term="AMD" scheme="https://NewJerseyStyle.github.io/tags/AMD/"/>
-    
       <category term="Deep learning" scheme="https://NewJerseyStyle.github.io/tags/Deep-learning/"/>
+    
+      <category term="AMD" scheme="https://NewJerseyStyle.github.io/tags/AMD/"/>
     
       <category term="ROCm" scheme="https://NewJerseyStyle.github.io/tags/ROCm/"/>
     

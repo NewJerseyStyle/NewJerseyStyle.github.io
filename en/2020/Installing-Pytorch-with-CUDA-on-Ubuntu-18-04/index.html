@@ -1,0 +1,355 @@
+<!DOCTYPE html><html lang="[&quot;en&quot;,&quot;zh-TW&quot;,&quot;default&quot;]"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.0.0-rc.0" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.0.0-rc.0" type="image/png" sizes="32x32"><meta name="description" content="Goal       For some reason I need to reinstall operating system and CUDA on a deep learning machine with GTX 1070 Ti. After installed Ubuntu Server 18.04, I was confused with the">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Installing Pytorch with CUDA on Ubuntu 18.04">
+<meta property="og:url" content="https://newjerseystyle.github.io/en/2020/Installing-Pytorch-with-CUDA-on-Ubuntu-18-04/index.html">
+<meta property="og:site_name" content="ExpShare">
+<meta property="og:description" content="Goal       For some reason I need to reinstall operating system and CUDA on a deep learning machine with GTX 1070 Ti. After installed Ubuntu Server 18.04, I was confused with the">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://newjerseystyle.github.io/en/2020/Installing-Pytorch-with-CUDA-on-Ubuntu-18-04/Installing-Pytorch-with-CUDA-on-Ubuntu-18.PNG">
+<meta property="article:published_time" content="2020-04-25T01:56:41.000Z">
+<meta property="article:modified_time" content="2020-04-25T02:23:31.587Z">
+<meta property="article:author" content="NewJerseyStyle">
+<meta property="article:tag" content="NVIDIA">
+<meta property="article:tag" content="Pytorch">
+<meta property="article:tag" content="Deep learning">
+<meta property="article:tag" content="CUDA">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://newjerseystyle.github.io/en/2020/Installing-Pytorch-with-CUDA-on-Ubuntu-18-04/Installing-Pytorch-with-CUDA-on-Ubuntu-18.PNG"><meta name="keywords" content="NewJerseyStyle, ExpShare"><meta name="description" content="Share experience in software development"><title>Installing Pytorch with CUDA on Ubuntu 18.04</title><link ref="canonical" href="https://newjerseystyle.github.io/en/2020/Installing-Pytorch-with-CUDA-on-Ubuntu-18-04/"><link rel="alternate" href="/atom.xml" type="application/atom+xml"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.0.0-rc.0"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":false,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"carbon","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"Copy","copySuccess":"Copy Success","copyError":"Copy Error"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 4.2.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner header-inner--height header-inner--bgcolor"><nav class="header-nav header-nav--sticky"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/softdev/"><span class="header-nav-menu-item__icon"><i class="fas fa-laptop-code"></i></span><span class="header-nav-menu-item__text">Coding</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/toolz/"><span class="header-nav-menu-item__icon"><i class="fas fa-toolbox"></i></span><span class="header-nav-menu-item__text">Tools</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">Tags</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">Search</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">Installing Pytorch with CUDA on Ubuntu 18.04</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2020-04-25</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2020-04-25</span></span></div></header><div class="post-body"><!-- # Installing Pytorch with CUDA on Ubuntu 18.04 -->
+
+        <h2 id="Goal"   >
+          <a href="#Goal" class="heading-link"><i class="fas fa-link"></i></a>Goal</h2>
+      <p>For some reason I need to reinstall operating system and CUDA on a deep learning machine with GTX 1070 Ti. After installed Ubuntu Server 18.04, I was confused with the NVIDIA document, so I write down this notes to keep a reference.</p>
+<p>The procedures are actually very simple, but the document was a bit too detailed or the layout is too complex to find the key points, I was lost in the lines.</p>
+
+        <h2 id="Requirements"   >
+          <a href="#Requirements" class="heading-link"><i class="fas fa-link"></i></a>Requirements</h2>
+      <ul>
+<li>Ubuntu 16.04 or later</li>
+<li>NVIDIA GPU(s) that support CUDA</li>
+</ul>
+
+        <h2 id="Tips-for-LVM"   >
+          <a href="#Tips-for-LVM" class="heading-link"><i class="fas fa-link"></i></a>Tips for LVM</h2>
+      <p>Since I installed the Ubuntu Server 18.04 with LVM, I soon used up all space. It seems the default space is just fit for the operating system. <span class="exturl"><a class="exturl__link"   href="https://askubuntu.com/questions/1106795/ubuntu-server-18-04-lvm-out-of-space-with-improper-default-partitioning"  target="_blank" rel="noopener">Solution to it</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> is to extend the LVM partition.</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ lvm</span><br><span class="line">lvm&gt; lvextend -l +100%FREE /dev/ubuntu-vg/ubuntu-lv</span><br><span class="line">lvm&gt; <span class="built_in">exit</span></span><br><span class="line">$ resize2fs /dev/ubuntu-vg/ubuntu-lv</span><br></pre></td></tr></table></div></figure>
+
+
+        <h2 id="Install-CUDA"   >
+          <a href="#Install-CUDA" class="heading-link"><i class="fas fa-link"></i></a>Install CUDA</h2>
+      <p>CUDA version does not really matter. <span class="exturl"><a class="exturl__link"   href="https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#ubuntu-installation"  target="_blank" rel="noopener">Detailed Installation guide for your reference</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>.</p>
+<p>It is simple as I have installed the latest Ubuntu Server LTS version and I know it is supports CUDA things, I also sure GTX 1070 Ti supports CUDA. All I need to do now is to install GCC compiler and Linux development packages.</p>
+<p>I am so lazy that I just install everything I need to build anything.</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install build-essential</span><br></pre></td></tr></table></div></figure>
+
+<p>Then install the kernel headers and development packages for the currently running kernel.</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install linux-headers-$(uname -r)</span><br></pre></td></tr></table></div></figure>
+
+<p>Now go to <span class="exturl"><a class="exturl__link"   href="https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&target_distro=Ubuntu&target_version=1804&target_type=runfilelocal"  target="_blank" rel="noopener">CUDA Toolkit Download Page</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> download the installation package and follow the guide to install it.</p>
+<p><img src="/en/2020/Installing-Pytorch-with-CUDA-on-Ubuntu-18-04/Installing-Pytorch-with-CUDA-on-Ubuntu-18.PNG" alt="Screen capture for downloading installation package"></p>
+<p>I choosed the easiest way to install, use a automated script. Copy the instructions, enter the terminal, press Enter key and wait… Few agreement will require manual input “accept” for EULA before proceed to install the package.</p>
+
+        <h2 id="Use-docker-for-the-project"   >
+          <a href="#Use-docker-for-the-project" class="heading-link"><i class="fas fa-link"></i></a>Use docker for the project</h2>
+      <p>It will be a good idea to use Docker for each project. It is easy to set up and run. If you know how to work with Docker, check out the <span class="exturl"><a class="exturl__link"   href="https://github.com/NVIDIA/nvidia-docker#ubuntu-16041804-debian-jessiestretchbuster"  target="_blank" rel="noopener">document</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>.</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker run --gpus all nvidia/cuda:10.0-base nvidia-smi</span><br></pre></td></tr></table></div></figure>
+
+
+        <h2 id="Install-Pytorch"   >
+          <a href="#Install-Pytorch" class="heading-link"><i class="fas fa-link"></i></a>Install Pytorch</h2>
+      <p>Make sure <code>pip</code> is available for Python, install it if not.</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install python3-pip</span><br></pre></td></tr></table></div></figure>
+<p>And then install Pytorch.</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pip3 install torch torchvision</span><br></pre></td></tr></table></div></figure>
+<p>Find the command for your environment from Pytorch <span class="exturl"><a class="exturl__link"   href="https://pytorch.org/get-started/locally/"  target="_blank" rel="noopener">Official document</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ END ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">Author: </span><span class="copyright-author__value"><a href="https://NewJerseyStyle.github.io">NewJerseyStyle</a></span></div><div class="copyright-link"><span class="copyright-link__name">Link: </span><span class="copyright-link__value"><a href="https://newjerseystyle.github.io/en/2020/Installing-Pytorch-with-CUDA-on-Ubuntu-18-04/">https://newjerseystyle.github.io/en/2020/Installing-Pytorch-with-CUDA-on-Ubuntu-18-04/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">Copyright: </span><span class="copyright-notice__value">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en zh-tw" rel="external nofollow" target="_blank">BY-SA</a> unless stating additionally</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://newjerseystyle.github.io/tags/NVIDIA/">NVIDIA</a></span><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://newjerseystyle.github.io/tags/Pytorch/">Pytorch</a></span><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://newjerseystyle.github.io/tags/Deep-learning/">Deep learning</a></span><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://newjerseystyle.github.io/tags/CUDA/">CUDA</a></span></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/zh-TW/2020/%E5%9C%A8-Ubuntu-18-04-%E4%B8%8A%E5%AE%89%E8%A3%9D-CUDA-%E5%92%8C-Pytorch/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">在 Ubuntu 18.04 上安裝 CUDA 和 Pytorch</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/zh-TW/2020/%E5%9C%A8-Ubuntu-18-04-%E4%B8%8A%E5%AE%89%E8%A3%9D-ROCm-3.3.0-%E5%92%8C-Pytorch/"><span class="paginator-prev__text">在 Ubuntu 18.04 上安裝 ROCm 3.3.0 和 Pytorch</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">Catalog</span><span class="sidebar-nav-ov">Overview</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Goal"><span class="toc-number">1.</span> <span class="toc-text">
+          Goal</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Requirements"><span class="toc-number">2.</span> <span class="toc-text">
+          Requirements</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Tips-for-LVM"><span class="toc-number">3.</span> <span class="toc-text">
+          Tips for LVM</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Install-CUDA"><span class="toc-number">4.</span> <span class="toc-text">
+          Install CUDA</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Use-docker-for-the-project"><span class="toc-number">5.</span> <span class="toc-text">
+          Use docker for the project</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Install-Pytorch"><span class="toc-number">6.</span> <span class="toc-text">
+          Install Pytorch</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/logo.png" alt="avatar"></div><p class="sidebar-ov-author__text">NewJerseyStyle</p></div><div class="sidebar-ov-feed"><span class="sidebar-ov-feed-rss"><a class="sidebar-ov-feed-rss__link" href="/atom.xml" target="_blank" rel="noopener"><span class="sidebar-ov-feed-rss__icon"><i class="fas fa-rss"></i></span><span>RSS Subscribe</span></a></span></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">18</div><div class="sidebar-ov-state-item__name">Tags</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en zh-tw" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">You have read </span><span class="sidebar-reading-info__num">0</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2020</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>NewJerseyStyle</span></div><div><span>Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span class="footer__devider">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="Search for Posts (Support multiple keywords)"></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="https://cdn.jsdelivr.net/npm/ribbon.js@latest/dist/ribbon.min.js" size="120" alpha="0.6" zIndex="-1"></script><script>function initSearch() {
+  var isXML = true;
+  var search_path = 'search.json';
+
+  if (!search_path) {
+    search_path = 'search.xml';
+  } else if (/json$/i.test(search_path)) {
+    isXML = false;
+  }
+
+  var path = '/' + search_path;
+  $.ajax({
+    url: path,
+    dataType: isXML ? 'xml' : 'json',
+    async: true,
+    success: function (res) {
+      var datas = isXML ? $('entry', res).map(function () {
+        // 将 XML 转为 JSON
+        return {
+          title: $('title', this).text(),
+          content: $('content', this).text(),
+          url: $('url', this).text()
+        };
+      }).get() : res;
+      var $input = $('.search-input input');
+      var $result = $('.search-results');
+      // 搜索对象（标题、内容）的权重，影响显示顺序
+      var WEIGHT = { title: 100, content: 1 };
+      var searchPost = function () {
+        var searchText = $input.val().toLowerCase().trim();
+        // 根据空白字符分隔关键字
+        var keywords = searchText.split(/[\s]+/);
+        // 搜索结果
+        var matchPosts = [];
+
+        // 有多个关键字时，将原文字整个保存下来
+        if (keywords.length > 1) {
+          keywords.push(searchText);
+        }
+        // 防止未输入字符时搜索
+        if (searchText.length > 0) {
+          datas.forEach(function (data) {
+            var isMatch  = false;
+            // 没有标题的文章使用预设的 i18n 变量代替
+            var title = (data.title && data.title.trim()) || '[ Untitled ]';
+            var titleLower = title && title.toLowerCase();
+            // 删除 HTML 标签 和 所有空白字符
+            var content = data.content && data.content.replace(/<[^>]+>/g, '');
+            var contentLower = content && content.toLowerCase();
+            // 删除重复的 /
+            var postURL = data.url && decodeURI(data.url).replace(/\/{2,}/g, '/');
+            // 标题中匹配到的关键词
+            var titleHitSlice = [];
+            // 内容中匹配到的关键词
+            var contentHitSlice = [];
+
+            keywords.forEach(function (keyword) {
+              /**
+              * 获取匹配的关键词的索引
+              * @param {String} keyword 要匹配的关键字
+              * @param {String} text 原文字
+              * @param {Boolean} caseSensitive 是否区分大小写
+              * @param {Number} weight 匹配对象的权重。权重大的优先显示
+              * @return {Array}
+              */
+              function getIndexByword (word, text, caseSensitive, weight) {
+                if (!word || !text) {
+                  return [];
+                };
+
+                var startIndex = 0; // 每次匹配的开始索引
+                var index = -1;     // 匹配到的索引值
+                var result = [];    // 匹配结果
+
+                if (!caseSensitive) {
+                  word = word.toLowerCase();
+                  text = text.toLowerCase();
+                }
+
+                while((index = text.indexOf(word, startIndex)) !== -1) {
+                  var hasMatch = false;
+                  // 索引位置相同的关键词，保留长度较长的
+                  titleHitSlice.forEach(function (hit) {
+                    if (hit.index === index && hit.word.length < word.length) {
+                      hit.word = word;
+                      hasMatch = true;
+                    }
+                  });
+                  startIndex = index + word.length;
+                  !hasMatch && result.push({ index: index, word: word, weight: weight });
+                }
+                return result;
+              }
+              titleHitSlice = titleHitSlice.concat(getIndexByword(keyword, titleLower, false, WEIGHT.title));
+              contentHitSlice = contentHitSlice.concat(getIndexByword(keyword, contentLower, false, WEIGHT.content));
+            });
+
+            var hitTitle = titleHitSlice.length;
+            var hitContent = contentHitSlice.length;
+
+            if (hitTitle > 0 || hitContent > 0) {
+              isMatch = true;
+            }
+            if (isMatch) {
+              ;[titleHitSlice, contentHitSlice].forEach(function (hit) {
+                // 按照匹配文字的索引的递增顺序排序
+                hit.sort(function (left, right) {
+                  return left.index - right.index;
+                });
+              });
+              /**
+              * 给文本中匹配到的关键词添加标记，从而进行高亮显示
+              * @param {String} text 原文本
+              * @param {Array} hitSlice 匹配项的索引信息
+              * @param {Number} start 开始索引
+              * @param {Number} end 结束索引
+              * @return {String}
+              */
+              function highlightKeyword (text, hitSlice, start, end) {
+                if (!text || !hitSlice || !hitSlice.length) {
+                  return;
+                }
+
+                var result = '';
+                var startIndex = start;
+                var endIndex = end;
+                hitSlice.forEach(function (hit) {
+                  if (hit.index < startIndex) {
+                    return;
+                  }
+
+                  var hitWordEnd = hit.index + hit.word.length;
+                  result += text.slice(startIndex, hit.index);
+                  result += '<b>' + text.slice(hit.index, hitWordEnd) + '</b>';
+                  startIndex = hitWordEnd;
+                });
+                result += text.slice(startIndex, endIndex);
+                return result;
+              }
+
+              var postData = {};
+              // 文章总的搜索权重
+              var postWeight = titleHitSlice.length * WEIGHT.title + contentHitSlice.length * WEIGHT.content;
+              // 标记匹配关键词后的标题
+              var postTitle = highlightKeyword(title, titleHitSlice, 0, title.length) || title;
+              // 标记匹配关键词后的内容
+              var postContent;
+              // 显示内容的长度
+              var SHOW_WORD_LENGTH = 200;
+              // 命中关键词前的字符显示长度
+              var SHOW_WORD_FRONT_LENGTH = 20;
+              var SHOW_WORD_END_LENGTH = SHOW_WORD_LENGTH - SHOW_WORD_FRONT_LENGTH;
+
+              // 截取匹配的第一个字符，前后共 200 个字符来显示
+              if (contentHitSlice.length > 0) {
+                var firstIndex = contentHitSlice[0].index;
+                var start = firstIndex > SHOW_WORD_FRONT_LENGTH ? firstIndex - SHOW_WORD_FRONT_LENGTH : 0;
+                var end = firstIndex + SHOW_WORD_END_LENGTH;
+                postContent = highlightKeyword(content, contentHitSlice, start, end);
+              } else { // 未匹配到内容，直接截取前 200 个字符来显示
+                postContent = content.slice(0, SHOW_WORD_LENGTH);
+              }
+              postData.title = postTitle;
+              postData.content = postContent;
+              postData.url = postURL;
+              postData.weight = postWeight;
+              matchPosts.push(postData);
+            }
+          });
+        }
+
+        var resultInnerHtml = '';
+        if (matchPosts.length) {
+          // 按权重递增的顺序排序，使权重大的优先显示
+          matchPosts.sort(function (left, right) {
+            return right.weight - left.weight;
+          });
+          resultInnerHtml += '<ul>';
+          matchPosts.forEach(function (post) {
+            resultInnerHtml += '<li><a class="search-results-title" href="' + post.url + '">';
+            resultInnerHtml += post.title;
+            resultInnerHtml += '</a><div class="search-results-content">';
+            resultInnerHtml += post.content;
+            resultInnerHtml += '</div></li>';
+          });
+          resultInnerHtml += '</ul>';
+        } else {
+          resultInnerHtml += '<div class="search-results-none"><i class="far fa-meh"></i></div>';
+        }
+        $result.html(resultInnerHtml);
+      };
+      $input.on('input', searchPost);
+      $input.on('keyup', function (e) {
+        if (e.keyCode === Stun.utils.codeToKeyCode('Enter')) {
+          searchPost();
+        }
+      });
+    }
+  });
+}
+
+function closeSearch () {
+  $('body').css({ overflow: 'auto' });
+  $('.search-popup').css({ display: 'none' });
+  $('.search-mask').css({ display: 'none' });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  Stun.utils.pjaxReloadLocalSearch = function () {
+    $('.header-nav-search').on('click', function (e) {
+      e.stopPropagation();
+      $('body').css('overflow', 'hidden');
+      $('.search-popup')
+        .velocity('stop')
+        .velocity('transition.expandIn', {
+          duration: 300,
+          complete: function () {
+            $('.search-popup input').focus();
+          }
+        });
+      $('.search-mask')
+        .velocity('stop')
+        .velocity('transition.fadeIn', {
+          duration: 300
+        });
+
+      initSearch();
+    });
+    $('.search-mask, .search-close').on('click', function () {
+      closeSearch();
+    });
+    $(document).on('keydown', function (e) {
+      // Escape <=> 27
+      if (e.keyCode === Stun.utils.codeToKeyCode('Escape')) {
+        closeSearch();
+      }
+    });
+  };
+
+  Stun.utils.pjaxReloadLocalSearch();
+}, false);</script><script src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" async=""></script><script>(adsbygoogle = window.adsbygoogle || []).push({
+  google_ad_client: 'ca-pub-9667639204764993',
+  enable_page_level_ads: true
+});</script><script src="/js/utils.js?v=2.0.0-rc.0"></script><script src="/js/stun-boot.js?v=2.0.0-rc.0"></script><script src="/js/scroll.js?v=2.0.0-rc.0"></script><script src="/js/header.js?v=2.0.0-rc.0"></script><script src="/js/sidebar.js?v=2.0.0-rc.0"></script>
+        <script src="//cdn.jsdelivr.net/npm/js-base64/base64.min.js"></script>
+        <script>
+        $('a').each(function() {
+          const $this = $(this);
+          const href = $this.attr('href');
+          if (href && href.match('^((http|https|thunder|qqdl|ed2k|Flashget|qbrowser|ftp|rtsp|mms)://)')) {
+            const strs = href.split('/');
+            if (strs.length >= 3) {
+                const host = strs[2];
+                if (host !== 'newjerseystyle.github.io' || window.location.host) {
+                    $this.attr('href', '/redirect_page.html?u='+Base64.encode(href)+'').attr('rel', 'external nofollow noopener noreferrer');
+                    if (false) {
+                        $this.attr('target', '_blank');
+                    }
+                }
+            }
+          }
+        });
+        </script></body></html>

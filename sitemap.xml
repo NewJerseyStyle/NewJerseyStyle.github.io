@@ -2,16 +2,44 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://newjerseystyle.github.io/zh-TW/2020/%E5%9C%A8-Ubuntu-18-04-%E4%B8%8A%E5%AE%89%E8%A3%9D-ROCm-3.3.0-%E5%92%8C-TensorFlow/</loc>
+    
+    <lastmod>2020-04-25T16:38:28.018Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://newjerseystyle.github.io/zh-TW/2020/%E5%9C%A8-Ubuntu-18-04-%E4%B8%8A%E5%AE%89%E8%A3%9D-CUDA-%E5%92%8C-Pytorch/</loc>
+    
+    <lastmod>2020-04-25T16:34:35.575Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://newjerseystyle.github.io/zh-TW/2020/%E5%9C%A8-Ubuntu-18-04-%E4%B8%8A%E5%AE%89%E8%A3%9D-ROCm-3.3.0-%E5%92%8C-Pytorch/</loc>
+    
+    <lastmod>2020-04-25T16:30:25.466Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://newjerseystyle.github.io/en/2020/Installing-Pytorch-with-ROCm-3.3.0-on-Ubuntu-18.04/</loc>
     
-    <lastmod>2020-04-24T16:09:27.685Z</lastmod>
+    <lastmod>2020-04-25T16:10:59.033Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://newjerseystyle.github.io/en/2020/Installing-ROCm-3.3.0-for-Deep-learning-on-Ubuntu-18.04/</loc>
     
-    <lastmod>2020-04-22T00:56:05.602Z</lastmod>
+    <lastmod>2020-04-25T16:01:33.917Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://newjerseystyle.github.io/en/2020/Installing-Pytorch-with-CUDA-on-Ubuntu-18-04/</loc>
+    
+    <lastmod>2020-04-25T02:23:31.587Z</lastmod>
     
   </url>
   

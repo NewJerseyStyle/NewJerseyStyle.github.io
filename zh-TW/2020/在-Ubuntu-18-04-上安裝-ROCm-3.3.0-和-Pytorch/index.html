@@ -1,0 +1,410 @@
+<!DOCTYPE html><html lang="[&quot;en&quot;,&quot;zh-TW&quot;,&quot;default&quot;]"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.0.0-rc.0" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.0.0-rc.0" type="image/png" sizes="32x32"><meta name="description" content="目標       現在我有一個可以跑 TensorFlow 的 RX 580 了。可是我還是不滿足，於是買了一個 VEGA 56。10.54 TFLOPS 的 FP32 運算能力現在好像也只要 266 美刀。 和之前一樣，在 Ubuntu Server 18.04 上安裝 ROCm 3.3.0 （參見之前的操作和系統要求)。  RX 580 不能用 Pyt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在 Ubuntu 18.04 上安裝 ROCm 3.3.0 和 Pytorch">
+<meta property="og:url" content="https://newjerseystyle.github.io/zh-TW/2020/%E5%9C%A8-Ubuntu-18-04-%E4%B8%8A%E5%AE%89%E8%A3%9D-ROCm-3.3.0-%E5%92%8C-Pytorch/index.html">
+<meta property="og:site_name" content="ExpShare">
+<meta property="og:description" content="目標       現在我有一個可以跑 TensorFlow 的 RX 580 了。可是我還是不滿足，於是買了一個 VEGA 56。10.54 TFLOPS 的 FP32 運算能力現在好像也只要 266 美刀。 和之前一樣，在 Ubuntu Server 18.04 上安裝 ROCm 3.3.0 （參見之前的操作和系統要求)。  RX 580 不能用 Pyt">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2020-04-18T15:43:26.000Z">
+<meta property="article:modified_time" content="2020-04-25T16:30:25.466Z">
+<meta property="article:author" content="NewJerseyStyle">
+<meta property="article:tag" content="Pytorch">
+<meta property="article:tag" content="Deep learning">
+<meta property="article:tag" content="AMD">
+<meta property="article:tag" content="ROCm">
+<meta name="twitter:card" content="summary"><meta name="keywords" content="NewJerseyStyle, ExpShare"><meta name="description" content="Share experience in software development"><title>在 Ubuntu 18.04 上安裝 ROCm 3.3.0 和 Pytorch</title><link ref="canonical" href="https://newjerseystyle.github.io/zh-TW/2020/%E5%9C%A8-Ubuntu-18-04-%E4%B8%8A%E5%AE%89%E8%A3%9D-ROCm-3.3.0-%E5%92%8C-Pytorch/"><link rel="alternate" href="/atom.xml" type="application/atom+xml"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.0.0-rc.0"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":false,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"carbon","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"複製","copySuccess":"複製成功","copyError":"複製失敗"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 4.2.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner header-inner--height header-inner--bgcolor"><nav class="header-nav header-nav--sticky"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首頁</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/softdev/"><span class="header-nav-menu-item__icon"><i class="fas fa-laptop-code"></i></span><span class="header-nav-menu-item__text">程序園</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/toolz/"><span class="header-nav-menu-item__icon"><i class="fas fa-toolbox"></i></span><span class="header-nav-menu-item__text">工具箱</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">標籤</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">搜索</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">在 Ubuntu 18.04 上安裝 ROCm 3.3.0 和 Pytorch</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">發表於</span><span class="post-meta-item__value">2020-04-18</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新於</span><span class="post-meta-item__value">2020-04-26</span></span></div></header><div class="post-body"><!-- # 在 Ubuntu 18.04 上安裝 ROCm 3.3.0 和 Pytorch -->
+
+        <h2 id="目標"   >
+          <a href="#目標" class="heading-link"><i class="fas fa-link"></i></a>目標</h2>
+      <p>現在我有一個可以跑 TensorFlow 的 RX 580 了。可是我還是不滿足，於是買了一個 VEGA 56。10.54 TFLOPS 的 FP32 運算能力現在好像也只要 266 美刀。</p>
+<p>和之前一樣，在 Ubuntu Server 18.04 上安裝 ROCm 3.3.0 （參見<a href="/en/2020/Installing-ROCm-for-Deep-learning-on-Ubuntu-18.04/">之前的操作和系統要求</a>)。</p>
+<blockquote>
+<p>RX 580 不能用 Pytorch 了，Pytorch 說它太舊了</p>
+</blockquote>
+<p>我基本上是按照 <span class="exturl"><a class="exturl__link"   href="https://rocm-documentation.readthedocs.io/en/latest/Deep_learning/Deep-learning.html"  target="_blank" rel="noopener">ROCm 的官方教學</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> 不過有些地方可能出問題，這邊提供了指引去避免這些坑。</p>
+<p><strong>你至少要 16 GB 記憶體，不然編譯會很慢而且測試的時候會出錯，我試過了</strong></p>
+
+        <h2 id="準備編譯"   >
+          <a href="#準備編譯" class="heading-link"><i class="fas fa-link"></i></a>準備編譯</h2>
+      
+        <h3 id="安裝-Docker"   >
+          <a href="#安裝-Docker" class="heading-link"><i class="fas fa-link"></i></a>安裝 Docker</h3>
+      <p>我們使用 Docker 來編譯，避免污染系統的設置，這樣之後編譯其他版本的時候不會需要卸載和重新安裝。Docker 其實就類似是一個虛擬機，<span class="exturl"><a class="exturl__link"   href="https://www.docker.com/resources/what-container"  target="_blank" rel="noopener">可以去官網瞭解更多</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> 我現在都基本上不用虛擬機，全都用 Docker 了。</p>
+<p><span class="exturl"><a class="exturl__link"   href="https://docs.docker.com/engine/install/ubuntu/"  target="_blank" rel="noopener">參考官方文檔安裝 Docker </a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> 或者你可以學我直接用一鍵安裝的腳本。官方說 <strong>千萬千萬要先自己檢查一下我們的腳本再運行，不然剛好有人惡意黑了我們改了腳本你就糟了</strong>。很貼心的說明。</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ curl -fsSL https://get.docker.com -o get-docker.sh</span><br><span class="line"><span class="comment"># 跑下面這句運行它之前，先打開來看看腳本裏面寫了什麼哦~</span></span><br><span class="line">$ sudo sh get-docker.sh</span><br></pre></td></tr></table></div></figure>
+
+        <h3 id="安裝-ROCm-Dev-開發軟件包"   >
+          <a href="#安裝-ROCm-Dev-開發軟件包" class="heading-link"><i class="fas fa-link"></i></a>安裝 ROCm-Dev 開發軟件包</h3>
+      <p>編譯 Pytorch 之前要先安裝 <code>rocm-dev</code>提供 ROCm 的 API 接口</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get update</span><br><span class="line"> </span><br><span class="line">$ sudo apt-get upgrade</span><br><span class="line"> </span><br><span class="line">$ sudo apt-get install rocm-dev</span><br></pre></td></tr></table></div></figure>
+
+        <h2 id="Docker-鏡像和下載代碼"   >
+          <a href="#Docker-鏡像和下載代碼" class="heading-link"><i class="fas fa-link"></i></a>Docker 鏡像和下載代碼</h2>
+      
+        <h3 id="下載編譯環境"   >
+          <a href="#下載編譯環境" class="heading-link"><i class="fas fa-link"></i></a>下載編譯環境</h3>
+      <p>現在我要編譯配合 ROCm 3.3.0 的 Pytorch了。官方文檔認爲你不可能是白癡，沒有告訴你記得檢查 <code>docker pull rocm/pytorch:rocm3.0_ubuntu16.04_py3.6_pytorch</code> 這句是不是對應你的 ROCm 版本。到 <span class="exturl"><a class="exturl__link"   href="https://hub.docker.com/r/rocm/pytorch/tags"  target="_blank" rel="noopener">DockerHub</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> 尋找你的 ROCm 版本的標籤來換掉文檔中的 <code>rocm3.0_ubuntu16.04_py3.6_pytorch</code>。我的 ROCm 3.3.0 是<code>rocm3.3_ubuntu16.04_py3.6_pytorch</code>。</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo docker pull rocm/pytorch:rocm3.3_ubuntu16.04_py3.6_pytorch</span><br></pre></td></tr></table></div></figure>
+
+        <h3 id="下載-Pytorch-源代碼"   >
+          <a href="#下載-Pytorch-源代碼" class="heading-link"><i class="fas fa-link"></i></a>下載 Pytorch 源代碼</h3>
+      <p>我們用 Git 來下載代碼，沒有的話請自行安裝：<code>sudo apt-get install git</code></p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> ~</span><br><span class="line"> </span><br><span class="line">$ git <span class="built_in">clone</span> https://github.com/pytorch/pytorch.git</span><br></pre></td></tr></table></div></figure>
+<p>然後讓 Git 把其他依賴的代碼一鍵自動下載</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> pytorch</span><br><span class="line"> </span><br><span class="line">$ git submodule init</span><br><span class="line"> </span><br><span class="line">$ git submodule update</span><br></pre></td></tr></table></div></figure>
+<p>可是編譯的時候還是報錯，有部分的依賴好像還有自己的依賴，所以要跑 <code>git submodule update --init --recursive</code> 而不是 <code>git submodule update</code>。用 <code>--recursive</code> 將依賴的依賴的依賴的依賴什麼的都統統下載下來。</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git submodule update --init --recursive</span><br></pre></td></tr></table></div></figure>
+
+
+        <h2 id="編譯！"   >
+          <a href="#編譯！" class="heading-link"><i class="fas fa-link"></i></a>編譯！</h2>
+      <p>先跑一下 <code>rocminfo</code> 並且記下你的 GPU 型號（例如我是 gfx 900）</p>
+
+        <h3 id="進入編譯環境"   >
+          <a href="#進入編譯環境" class="heading-link"><i class="fas fa-link"></i></a>進入編譯環境</h3>
+      <p>這裏，再一次確認你的鏡像標籤，我的標籤是 <code>rocm3.3_ubuntu16.04_py3.6_pytorch</code> 對應 ROCm 3.3.0。你可能是其他版本需要修改再跑。</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo docker run -it -v <span class="variable">$HOME</span>:/data --privileged --rm --device=/dev/kfd --device=/dev/dri --group-add video rocm/pytorch:rocm3.3_ubuntu16.04_py3.6_pytorch</span><br></pre></td></tr></table></div></figure>
+<p>之後應該會看到一個類似這樣的環境。</p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@f78375b1c487:&#x2F;#</span><br></pre></td></tr></table></div></figure>
+<p>切換到代碼的位置</p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@f78375b1c487:&#x2F;# cd &#x2F;data&#x2F;pytorch</span><br></pre></td></tr></table></div></figure>
+
+        <h3 id="開始編譯"   >
+          <a href="#開始編譯" class="heading-link"><i class="fas fa-link"></i></a>開始編譯</h3>
+      <p>你需要先指出你的 GPU 型號。如果你忘記事先用 <code>rocminfo</code> 查看的話，可以去<span class="exturl"><a class="exturl__link"   href="https://llvm.org/docs/AMDGPUUsage.html#processors"  target="_blank" rel="noopener">查表</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> 我是 VEGA 56 是 <code>gfx900</code>，用這行指令指定。</p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@f78375b1c487:&#x2F;# export HCC_AMDGPU_TARGET&#x3D;gfx900</span><br></pre></td></tr></table></div></figure>
+
+<p>然後就用這個自動建構的指令</p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@f78375b1c487:&#x2F;# .jenkins&#x2F;pytorch&#x2F;build.sh</span><br></pre></td></tr></table></div></figure>
+<p>如果你沒有足夠的記憶體，將會花費你很長時間……</p>
+
+        <h2 id="測試"   >
+          <a href="#測試" class="heading-link"><i class="fas fa-link"></i></a>測試</h2>
+      <p>運行自動測試腳本</p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@f78375b1c487:&#x2F;# PYTORCH_TEST_WITH_ROCM&#x3D;1 python test&#x2F;run_test.py --verbose</span><br></pre></td></tr></table></div></figure>
+<p>然後大概你會出現 <code>Import Error : no module named torch</code> 的問題。</p>
+<p>那樣的話，你需要確認你的 Python 版本。我的情況是這樣的：</p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">root@f78375b1c487:&#x2F;# python -V</span><br><span class="line">Python 2.7.18</span><br><span class="line">root@f78375b1c487:&#x2F;# python3 -V</span><br><span class="line">Python 3.5.8</span><br><span class="line">root@f78375b1c487:&#x2F;# python3.6 -V</span><br><span class="line">Python 3.6.10</span><br></pre></td></tr></table></div></figure>
+<p>這個 Pytorch 應該是編譯並且安裝給了 Python 3.6，所以要用 Python 3.6 來測試才對。</p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@f78375b1c487:&#x2F;# PYTORCH_TEST_WITH_ROCM&#x3D;1 python3.6 test&#x2F;run_test.py --verbose</span><br></pre></td></tr></table></div></figure>
+
+        <h3 id="出錯？"   >
+          <a href="#出錯？" class="heading-link"><i class="fas fa-link"></i></a>出錯？</h3>
+      <p>如果沒有 16 GB RAM 就會出現 <code>malloc</code> 無法賦予位置的錯誤</p>
+
+        <h3 id="Install-torchvision"   >
+          <a href="#Install-torchvision" class="heading-link"><i class="fas fa-link"></i></a>Install torchvision</h3>
+      <p>試試安裝 torchvision，應該是在編譯過程中已經一起安裝了的。</p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@f78375b1c487:&#x2F;# pip install torchvision</span><br></pre></td></tr></table></div></figure>
+
+        <h3 id="保存這個-Docker-容器"   >
+          <a href="#保存這個-Docker-容器" class="heading-link"><i class="fas fa-link"></i></a>保存這個 Docker 容器</h3>
+      <p>用容器 ID 來保存它，ID 一直都在上面有顯示，例如我的就是 <code>f78375b1c487</code></p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo docker commit f78375b1c487 -m <span class="string">'pytorch installed'</span></span><br></pre></td></tr></table></div></figure>
+<p>不過如果你直接推出的話好像也會自動保存變成一個鏡像</p>
+
+        <h2 id="DONE"   >
+          <a href="#DONE" class="heading-link"><i class="fas fa-link"></i></a>DONE</h2>
+      <p><span class="exturl"><a class="exturl__link"   href="https://github.com/twtrubiks/docker-tutorial"  target="_blank" rel="noopener">學學如何用 Docker 吧</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>，它與你來日方長。</p>
+<p>Pytorch time! (&gt;w&lt;)b</p>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 完 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="https://NewJerseyStyle.github.io">NewJerseyStyle</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文鏈接: </span><span class="copyright-link__value"><a href="https://newjerseystyle.github.io/zh-TW/2020/%E5%9C%A8-Ubuntu-18-04-%E4%B8%8A%E5%AE%89%E8%A3%9D-ROCm-3.3.0-%E5%92%8C-Pytorch/">https://newjerseystyle.github.io/zh-TW/2020/%E5%9C%A8-Ubuntu-18-04-%E4%B8%8A%E5%AE%89%E8%A3%9D-ROCm-3.3.0-%E5%92%8C-Pytorch/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版權聲明: </span><span class="copyright-notice__value">本博客採用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en zh-tw" rel="external nofollow" target="_blank">BY-SA</a> 版權協議。為免觸犯法律，轉載請註明出處！</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://newjerseystyle.github.io/tags/Pytorch/">Pytorch</a></span><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://newjerseystyle.github.io/tags/Deep-learning/">Deep learning</a></span><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://newjerseystyle.github.io/tags/AMD/">AMD</a></span><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://newjerseystyle.github.io/tags/ROCm/">ROCm</a></span></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/en/2020/Installing-Pytorch-with-CUDA-on-Ubuntu-18-04/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">Installing Pytorch with CUDA on Ubuntu 18.04</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/zh-TW/2020/%E5%9C%A8-Ubuntu-18-04-%E4%B8%8A%E5%AE%89%E8%A3%9D-ROCm-3.3.0-%E5%92%8C-TensorFlow/"><span class="paginator-prev__text">在 Ubuntu 18.04 上安裝 ROCm 3.3.0 和 TensorFlow</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目錄</span><span class="sidebar-nav-ov">站點概覽</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#目標"><span class="toc-number">1.</span> <span class="toc-text">
+          目標</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#準備編譯"><span class="toc-number">2.</span> <span class="toc-text">
+          準備編譯</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安裝-Docker"><span class="toc-number">2.1.</span> <span class="toc-text">
+          安裝 Docker</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安裝-ROCm-Dev-開發軟件包"><span class="toc-number">2.2.</span> <span class="toc-text">
+          安裝 ROCm-Dev 開發軟件包</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker-鏡像和下載代碼"><span class="toc-number">3.</span> <span class="toc-text">
+          Docker 鏡像和下載代碼</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#下載編譯環境"><span class="toc-number">3.1.</span> <span class="toc-text">
+          下載編譯環境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#下載-Pytorch-源代碼"><span class="toc-number">3.2.</span> <span class="toc-text">
+          下載 Pytorch 源代碼</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#編譯！"><span class="toc-number">4.</span> <span class="toc-text">
+          編譯！</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#進入編譯環境"><span class="toc-number">4.1.</span> <span class="toc-text">
+          進入編譯環境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#開始編譯"><span class="toc-number">4.2.</span> <span class="toc-text">
+          開始編譯</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#測試"><span class="toc-number">5.</span> <span class="toc-text">
+          測試</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#出錯？"><span class="toc-number">5.1.</span> <span class="toc-text">
+          出錯？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Install-torchvision"><span class="toc-number">5.2.</span> <span class="toc-text">
+          Install torchvision</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#保存這個-Docker-容器"><span class="toc-number">5.3.</span> <span class="toc-text">
+          保存這個 Docker 容器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DONE"><span class="toc-number">6.</span> <span class="toc-text">
+          DONE</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/logo.png" alt="avatar"></div><p class="sidebar-ov-author__text">NewJerseyStyle</p></div><div class="sidebar-ov-feed"><span class="sidebar-ov-feed-rss"><a class="sidebar-ov-feed-rss__link" href="/atom.xml" target="_blank" rel="noopener"><span class="sidebar-ov-feed-rss__icon"><i class="fas fa-rss"></i></span><span>RSS 訂閱</span></a></span></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">18</div><div class="sidebar-ov-state-item__name">標籤</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en zh-tw" target="_blank" rel="noopener" data-popover="知识共享許可協議" data-popover-pos="up"><img src="/images/cc-by-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已完成閱讀 </span><span class="sidebar-reading-info__num">0</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2020</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>NewJerseyStyle</span></div><div><span>基於 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 運作</span><span class="footer__devider">|</span><span>主題 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="搜索文章（輸入多關鍵詞時  請用空格分隔）"></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="https://cdn.jsdelivr.net/npm/ribbon.js@latest/dist/ribbon.min.js" size="120" alpha="0.6" zIndex="-1"></script><script>function initSearch() {
+  var isXML = true;
+  var search_path = 'search.json';
+
+  if (!search_path) {
+    search_path = 'search.xml';
+  } else if (/json$/i.test(search_path)) {
+    isXML = false;
+  }
+
+  var path = '/' + search_path;
+  $.ajax({
+    url: path,
+    dataType: isXML ? 'xml' : 'json',
+    async: true,
+    success: function (res) {
+      var datas = isXML ? $('entry', res).map(function () {
+        // 将 XML 转为 JSON
+        return {
+          title: $('title', this).text(),
+          content: $('content', this).text(),
+          url: $('url', this).text()
+        };
+      }).get() : res;
+      var $input = $('.search-input input');
+      var $result = $('.search-results');
+      // 搜索对象（标题、内容）的权重，影响显示顺序
+      var WEIGHT = { title: 100, content: 1 };
+      var searchPost = function () {
+        var searchText = $input.val().toLowerCase().trim();
+        // 根据空白字符分隔关键字
+        var keywords = searchText.split(/[\s]+/);
+        // 搜索结果
+        var matchPosts = [];
+
+        // 有多个关键字时，将原文字整个保存下来
+        if (keywords.length > 1) {
+          keywords.push(searchText);
+        }
+        // 防止未输入字符时搜索
+        if (searchText.length > 0) {
+          datas.forEach(function (data) {
+            var isMatch  = false;
+            // 没有标题的文章使用预设的 i18n 变量代替
+            var title = (data.title && data.title.trim()) || '[ 文章無標題 ]';
+            var titleLower = title && title.toLowerCase();
+            // 删除 HTML 标签 和 所有空白字符
+            var content = data.content && data.content.replace(/<[^>]+>/g, '');
+            var contentLower = content && content.toLowerCase();
+            // 删除重复的 /
+            var postURL = data.url && decodeURI(data.url).replace(/\/{2,}/g, '/');
+            // 标题中匹配到的关键词
+            var titleHitSlice = [];
+            // 内容中匹配到的关键词
+            var contentHitSlice = [];
+
+            keywords.forEach(function (keyword) {
+              /**
+              * 获取匹配的关键词的索引
+              * @param {String} keyword 要匹配的关键字
+              * @param {String} text 原文字
+              * @param {Boolean} caseSensitive 是否区分大小写
+              * @param {Number} weight 匹配对象的权重。权重大的优先显示
+              * @return {Array}
+              */
+              function getIndexByword (word, text, caseSensitive, weight) {
+                if (!word || !text) {
+                  return [];
+                };
+
+                var startIndex = 0; // 每次匹配的开始索引
+                var index = -1;     // 匹配到的索引值
+                var result = [];    // 匹配结果
+
+                if (!caseSensitive) {
+                  word = word.toLowerCase();
+                  text = text.toLowerCase();
+                }
+
+                while((index = text.indexOf(word, startIndex)) !== -1) {
+                  var hasMatch = false;
+                  // 索引位置相同的关键词，保留长度较长的
+                  titleHitSlice.forEach(function (hit) {
+                    if (hit.index === index && hit.word.length < word.length) {
+                      hit.word = word;
+                      hasMatch = true;
+                    }
+                  });
+                  startIndex = index + word.length;
+                  !hasMatch && result.push({ index: index, word: word, weight: weight });
+                }
+                return result;
+              }
+              titleHitSlice = titleHitSlice.concat(getIndexByword(keyword, titleLower, false, WEIGHT.title));
+              contentHitSlice = contentHitSlice.concat(getIndexByword(keyword, contentLower, false, WEIGHT.content));
+            });
+
+            var hitTitle = titleHitSlice.length;
+            var hitContent = contentHitSlice.length;
+
+            if (hitTitle > 0 || hitContent > 0) {
+              isMatch = true;
+            }
+            if (isMatch) {
+              ;[titleHitSlice, contentHitSlice].forEach(function (hit) {
+                // 按照匹配文字的索引的递增顺序排序
+                hit.sort(function (left, right) {
+                  return left.index - right.index;
+                });
+              });
+              /**
+              * 给文本中匹配到的关键词添加标记，从而进行高亮显示
+              * @param {String} text 原文本
+              * @param {Array} hitSlice 匹配项的索引信息
+              * @param {Number} start 开始索引
+              * @param {Number} end 结束索引
+              * @return {String}
+              */
+              function highlightKeyword (text, hitSlice, start, end) {
+                if (!text || !hitSlice || !hitSlice.length) {
+                  return;
+                }
+
+                var result = '';
+                var startIndex = start;
+                var endIndex = end;
+                hitSlice.forEach(function (hit) {
+                  if (hit.index < startIndex) {
+                    return;
+                  }
+
+                  var hitWordEnd = hit.index + hit.word.length;
+                  result += text.slice(startIndex, hit.index);
+                  result += '<b>' + text.slice(hit.index, hitWordEnd) + '</b>';
+                  startIndex = hitWordEnd;
+                });
+                result += text.slice(startIndex, endIndex);
+                return result;
+              }
+
+              var postData = {};
+              // 文章总的搜索权重
+              var postWeight = titleHitSlice.length * WEIGHT.title + contentHitSlice.length * WEIGHT.content;
+              // 标记匹配关键词后的标题
+              var postTitle = highlightKeyword(title, titleHitSlice, 0, title.length) || title;
+              // 标记匹配关键词后的内容
+              var postContent;
+              // 显示内容的长度
+              var SHOW_WORD_LENGTH = 200;
+              // 命中关键词前的字符显示长度
+              var SHOW_WORD_FRONT_LENGTH = 20;
+              var SHOW_WORD_END_LENGTH = SHOW_WORD_LENGTH - SHOW_WORD_FRONT_LENGTH;
+
+              // 截取匹配的第一个字符，前后共 200 个字符来显示
+              if (contentHitSlice.length > 0) {
+                var firstIndex = contentHitSlice[0].index;
+                var start = firstIndex > SHOW_WORD_FRONT_LENGTH ? firstIndex - SHOW_WORD_FRONT_LENGTH : 0;
+                var end = firstIndex + SHOW_WORD_END_LENGTH;
+                postContent = highlightKeyword(content, contentHitSlice, start, end);
+              } else { // 未匹配到内容，直接截取前 200 个字符来显示
+                postContent = content.slice(0, SHOW_WORD_LENGTH);
+              }
+              postData.title = postTitle;
+              postData.content = postContent;
+              postData.url = postURL;
+              postData.weight = postWeight;
+              matchPosts.push(postData);
+            }
+          });
+        }
+
+        var resultInnerHtml = '';
+        if (matchPosts.length) {
+          // 按权重递增的顺序排序，使权重大的优先显示
+          matchPosts.sort(function (left, right) {
+            return right.weight - left.weight;
+          });
+          resultInnerHtml += '<ul>';
+          matchPosts.forEach(function (post) {
+            resultInnerHtml += '<li><a class="search-results-title" href="' + post.url + '">';
+            resultInnerHtml += post.title;
+            resultInnerHtml += '</a><div class="search-results-content">';
+            resultInnerHtml += post.content;
+            resultInnerHtml += '</div></li>';
+          });
+          resultInnerHtml += '</ul>';
+        } else {
+          resultInnerHtml += '<div class="search-results-none"><i class="far fa-meh"></i></div>';
+        }
+        $result.html(resultInnerHtml);
+      };
+      $input.on('input', searchPost);
+      $input.on('keyup', function (e) {
+        if (e.keyCode === Stun.utils.codeToKeyCode('Enter')) {
+          searchPost();
+        }
+      });
+    }
+  });
+}
+
+function closeSearch () {
+  $('body').css({ overflow: 'auto' });
+  $('.search-popup').css({ display: 'none' });
+  $('.search-mask').css({ display: 'none' });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  Stun.utils.pjaxReloadLocalSearch = function () {
+    $('.header-nav-search').on('click', function (e) {
+      e.stopPropagation();
+      $('body').css('overflow', 'hidden');
+      $('.search-popup')
+        .velocity('stop')
+        .velocity('transition.expandIn', {
+          duration: 300,
+          complete: function () {
+            $('.search-popup input').focus();
+          }
+        });
+      $('.search-mask')
+        .velocity('stop')
+        .velocity('transition.fadeIn', {
+          duration: 300
+        });
+
+      initSearch();
+    });
+    $('.search-mask, .search-close').on('click', function () {
+      closeSearch();
+    });
+    $(document).on('keydown', function (e) {
+      // Escape <=> 27
+      if (e.keyCode === Stun.utils.codeToKeyCode('Escape')) {
+        closeSearch();
+      }
+    });
+  };
+
+  Stun.utils.pjaxReloadLocalSearch();
+}, false);</script><script src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" async=""></script><script>(adsbygoogle = window.adsbygoogle || []).push({
+  google_ad_client: 'ca-pub-9667639204764993',
+  enable_page_level_ads: true
+});</script><script src="/js/utils.js?v=2.0.0-rc.0"></script><script src="/js/stun-boot.js?v=2.0.0-rc.0"></script><script src="/js/scroll.js?v=2.0.0-rc.0"></script><script src="/js/header.js?v=2.0.0-rc.0"></script><script src="/js/sidebar.js?v=2.0.0-rc.0"></script>
+        <script src="//cdn.jsdelivr.net/npm/js-base64/base64.min.js"></script>
+        <script>
+        $('a').each(function() {
+          const $this = $(this);
+          const href = $this.attr('href');
+          if (href && href.match('^((http|https|thunder|qqdl|ed2k|Flashget|qbrowser|ftp|rtsp|mms)://)')) {
+            const strs = href.split('/');
+            if (strs.length >= 3) {
+                const host = strs[2];
+                if (host !== 'newjerseystyle.github.io' || window.location.host) {
+                    $this.attr('href', '/redirect_page.html?u='+Base64.encode(href)+'').attr('rel', 'external nofollow noopener noreferrer');
+                    if (false) {
+                        $this.attr('target', '_blank');
+                    }
+                }
+            }
+          }
+        });
+        </script></body></html>
