@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://newjerseystyle.github.io/"/>
-  <updated>2020-04-25T16:34:35.575Z</updated>
+  <updated>2020-04-26T09:31:29.130Z</updated>
   <id>https://newjerseystyle.github.io/</id>
   
   <author>
@@ -15,6 +15,40 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Turn Raspberry Pi 3B+ with Ubuntu Server 18.04 into Wired 4G Router</title>
+    <link href="https://newjerseystyle.github.io/en/2020/Turn-Raspberry-Pi-3B-with-Ubuntu-Server-18-04-into-Wired-4G-Router/"/>
+    <id>https://newjerseystyle.github.io/en/2020/Turn-Raspberry-Pi-3B-with-Ubuntu-Server-18-04-into-Wired-4G-Router/</id>
+    <published>2020-04-26T08:47:39.000Z</published>
+    <updated>2020-04-26T09:31:29.130Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;!-- # Turn Raspberry Pi 3B+ with Ubuntu Server 18.04 into Wired 4G Router --&gt;
+
+        &lt;h2 id=&quot;Previous&quot;   &gt;
+          &lt;a href=&quot;#Previous&quot;
+        
+      
+    
+    </summary>
+    
+    
+    
+      <category term="Raspberry Pi" scheme="https://NewJerseyStyle.github.io/tags/Raspberry-Pi/"/>
+    
+      <category term="WWAN" scheme="https://NewJerseyStyle.github.io/tags/WWAN/"/>
+    
+      <category term="4G" scheme="https://NewJerseyStyle.github.io/tags/4G/"/>
+    
+      <category term="LTE" scheme="https://NewJerseyStyle.github.io/tags/LTE/"/>
+    
+  </entry>
   
   <entry>
     <title>在 Ubuntu 18.04 上安裝 CUDA 和 Pytorch</title>
@@ -225,7 +259,7 @@
     <link href="https://newjerseystyle.github.io/zh-TW/2020/Raspberry-Pi-%E5%8C%96%E8%BA%AB-WiFi-%E8%9B%8B/"/>
     <id>https://newjerseystyle.github.io/zh-TW/2020/Raspberry-Pi-%E5%8C%96%E8%BA%AB-WiFi-%E8%9B%8B/</id>
     <published>2020-04-12T04:03:11.000Z</published>
-    <updated>2020-04-12T08:56:48.622Z</updated>
+    <updated>2020-04-26T08:43:56.189Z</updated>
     
     <summary type="html">
     
@@ -363,7 +397,7 @@
     <link href="https://newjerseystyle.github.io/en/2020/Raspberry-Pi-connect-to-4G-LTE/"/>
     <id>https://newjerseystyle.github.io/en/2020/Raspberry-Pi-connect-to-4G-LTE/</id>
     <published>2020-04-10T05:51:19.000Z</published>
-    <updated>2020-04-11T05:04:20.821Z</updated>
+    <updated>2020-04-26T08:53:11.912Z</updated>
     
     <summary type="html">
     
@@ -397,7 +431,7 @@
     <link href="https://newjerseystyle.github.io/en/2020/Raspberry-Pi-as-4G-LTE-Router/"/>
     <id>https://newjerseystyle.github.io/en/2020/Raspberry-Pi-as-4G-LTE-Router/</id>
     <published>2020-04-10T02:53:11.000Z</published>
-    <updated>2020-04-11T05:35:17.418Z</updated>
+    <updated>2020-04-26T08:44:03.237Z</updated>
     
     <summary type="html">
     

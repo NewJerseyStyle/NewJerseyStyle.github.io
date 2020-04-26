@@ -2,6 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://newjerseystyle.github.io/en/2020/Turn-Raspberry-Pi-3B-with-Ubuntu-Server-18-04-into-Wired-4G-Router/</loc>
+    
+    <lastmod>2020-04-26T09:31:29.130Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://newjerseystyle.github.io/en/2020/Raspberry-Pi-connect-to-4G-LTE/</loc>
+    
+    <lastmod>2020-04-26T08:53:11.912Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://newjerseystyle.github.io/en/2020/Raspberry-Pi-as-4G-LTE-Router/</loc>
+    
+    <lastmod>2020-04-26T08:44:03.237Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://newjerseystyle.github.io/zh-TW/2020/Raspberry-Pi-%E5%8C%96%E8%BA%AB-WiFi-%E8%9B%8B/</loc>
+    
+    <lastmod>2020-04-26T08:43:56.189Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://newjerseystyle.github.io/zh-TW/2020/%E5%9C%A8-Ubuntu-18-04-%E4%B8%8A%E5%AE%89%E8%A3%9D-ROCm-3.3.0-%E5%92%8C-TensorFlow/</loc>
     
     <lastmod>2020-04-25T16:38:28.018Z</lastmod>
@@ -51,13 +79,6 @@
   </url>
   
   <url>
-    <loc>https://newjerseystyle.github.io/zh-TW/2020/Raspberry-Pi-%E5%8C%96%E8%BA%AB-WiFi-%E8%9B%8B/</loc>
-    
-    <lastmod>2020-04-12T08:56:48.622Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://newjerseystyle.github.io/en/2020/Video-based-Motion-Detection-in-Python-with-OpenCV/</loc>
     
     <lastmod>2020-04-12T08:55:52.451Z</lastmod>
@@ -68,20 +89,6 @@
     <loc>https://newjerseystyle.github.io/redirect_page.html</loc>
     
     <lastmod>2020-04-11T14:11:05.308Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://newjerseystyle.github.io/en/2020/Raspberry-Pi-as-4G-LTE-Router/</loc>
-    
-    <lastmod>2020-04-11T05:35:17.418Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://newjerseystyle.github.io/en/2020/Raspberry-Pi-connect-to-4G-LTE/</loc>
-    
-    <lastmod>2020-04-11T05:04:20.821Z</lastmod>
     
   </url>
   
