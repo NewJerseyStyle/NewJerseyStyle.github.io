@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://newjerseystyle.github.io/"/>
-  <updated>2020-04-26T09:31:29.130Z</updated>
+  <updated>2020-05-07T14:33:17.672Z</updated>
   <id>https://newjerseystyle.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://newjerseystyle.github.io/en/2020/Turn-Raspberry-Pi-3B-with-Ubuntu-Server-18-04-into-Wired-4G-Router/"/>
     <id>https://newjerseystyle.github.io/en/2020/Turn-Raspberry-Pi-3B-with-Ubuntu-Server-18-04-into-Wired-4G-Router/</id>
     <published>2020-04-26T08:47:39.000Z</published>
-    <updated>2020-04-26T09:31:29.130Z</updated>
+    <updated>2020-05-07T14:33:17.672Z</updated>
     
     <summary type="html">
     
@@ -74,11 +74,11 @@
     
     
     
+      <category term="NVIDIA" scheme="https://NewJerseyStyle.github.io/tags/NVIDIA/"/>
+    
       <category term="Pytorch" scheme="https://NewJerseyStyle.github.io/tags/Pytorch/"/>
     
       <category term="Deep learning" scheme="https://NewJerseyStyle.github.io/tags/Deep-learning/"/>
-    
-      <category term="NVIDIA" scheme="https://NewJerseyStyle.github.io/tags/NVIDIA/"/>
     
       <category term="CUDA" scheme="https://NewJerseyStyle.github.io/tags/CUDA/"/>
     
@@ -108,11 +108,11 @@
     
     
     
+      <category term="NVIDIA" scheme="https://NewJerseyStyle.github.io/tags/NVIDIA/"/>
+    
       <category term="Pytorch" scheme="https://NewJerseyStyle.github.io/tags/Pytorch/"/>
     
       <category term="Deep learning" scheme="https://NewJerseyStyle.github.io/tags/Deep-learning/"/>
-    
-      <category term="NVIDIA" scheme="https://NewJerseyStyle.github.io/tags/NVIDIA/"/>
     
       <category term="CUDA" scheme="https://NewJerseyStyle.github.io/tags/CUDA/"/>
     
@@ -142,11 +142,11 @@
     
     
     
-      <category term="AMD" scheme="https://NewJerseyStyle.github.io/tags/AMD/"/>
-    
       <category term="Pytorch" scheme="https://NewJerseyStyle.github.io/tags/Pytorch/"/>
     
       <category term="Deep learning" scheme="https://NewJerseyStyle.github.io/tags/Deep-learning/"/>
+    
+      <category term="AMD" scheme="https://NewJerseyStyle.github.io/tags/AMD/"/>
     
       <category term="ROCm" scheme="https://NewJerseyStyle.github.io/tags/ROCm/"/>
     
@@ -176,9 +176,9 @@
     
     
     
-      <category term="AMD" scheme="https://NewJerseyStyle.github.io/tags/AMD/"/>
-    
       <category term="Deep learning" scheme="https://NewJerseyStyle.github.io/tags/Deep-learning/"/>
+    
+      <category term="AMD" scheme="https://NewJerseyStyle.github.io/tags/AMD/"/>
     
       <category term="ROCm" scheme="https://NewJerseyStyle.github.io/tags/ROCm/"/>
     
@@ -210,11 +210,11 @@
     
     
     
-      <category term="AMD" scheme="https://NewJerseyStyle.github.io/tags/AMD/"/>
-    
       <category term="Pytorch" scheme="https://NewJerseyStyle.github.io/tags/Pytorch/"/>
     
       <category term="Deep learning" scheme="https://NewJerseyStyle.github.io/tags/Deep-learning/"/>
+    
+      <category term="AMD" scheme="https://NewJerseyStyle.github.io/tags/AMD/"/>
     
       <category term="ROCm" scheme="https://NewJerseyStyle.github.io/tags/ROCm/"/>
     
@@ -244,9 +244,9 @@
     
     
     
-      <category term="AMD" scheme="https://NewJerseyStyle.github.io/tags/AMD/"/>
-    
       <category term="Deep learning" scheme="https://NewJerseyStyle.github.io/tags/Deep-learning/"/>
+    
+      <category term="AMD" scheme="https://NewJerseyStyle.github.io/tags/AMD/"/>
     
       <category term="ROCm" scheme="https://NewJerseyStyle.github.io/tags/ROCm/"/>
     
@@ -259,7 +259,7 @@
     <link href="https://newjerseystyle.github.io/zh-TW/2020/Raspberry-Pi-%E5%8C%96%E8%BA%AB-WiFi-%E8%9B%8B/"/>
     <id>https://newjerseystyle.github.io/zh-TW/2020/Raspberry-Pi-%E5%8C%96%E8%BA%AB-WiFi-%E8%9B%8B/</id>
     <published>2020-04-12T04:03:11.000Z</published>
-    <updated>2020-04-26T08:43:56.189Z</updated>
+    <updated>2020-05-07T14:30:08.185Z</updated>
     
     <summary type="html">
     
@@ -431,7 +431,7 @@
     <link href="https://newjerseystyle.github.io/en/2020/Raspberry-Pi-as-4G-LTE-Router/"/>
     <id>https://newjerseystyle.github.io/en/2020/Raspberry-Pi-as-4G-LTE-Router/</id>
     <published>2020-04-10T02:53:11.000Z</published>
-    <updated>2020-04-26T08:44:03.237Z</updated>
+    <updated>2020-05-07T14:31:28.343Z</updated>
     
     <summary type="html">
     
