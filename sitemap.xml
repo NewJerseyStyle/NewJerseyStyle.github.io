@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://newjerseystyle.github.io/en/2020/Pytorch-with-nvidia-docker-on-Ubuntu-18-04/</loc>
+    
+    <lastmod>2020-06-18T04:57:01.247Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://newjerseystyle.github.io/en/2020/Installing-Pytorch-with-CUDA-on-Ubuntu-18-04/</loc>
+    
+    <lastmod>2020-06-18T04:32:43.991Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://newjerseystyle.github.io/en/2020/Turn-Raspberry-Pi-3B-with-Ubuntu-Server-18-04-into-Wired-4G-Router/</loc>
     
     <lastmod>2020-05-07T14:33:17.672Z</lastmod>
@@ -61,13 +75,6 @@
     <loc>https://newjerseystyle.github.io/en/2020/Installing-ROCm-3.3.0-for-Deep-learning-on-Ubuntu-18.04/</loc>
     
     <lastmod>2020-04-25T16:01:33.917Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://newjerseystyle.github.io/en/2020/Installing-Pytorch-with-CUDA-on-Ubuntu-18-04/</loc>
-    
-    <lastmod>2020-04-25T02:23:31.587Z</lastmod>
     
   </url>
   

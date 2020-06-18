@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://newjerseystyle.github.io/"/>
-  <updated>2020-05-07T14:33:17.672Z</updated>
+  <updated>2020-06-18T04:57:01.247Z</updated>
   <id>https://newjerseystyle.github.io/</id>
   
   <author>
@@ -15,6 +15,40 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Pytorch with nvidia-docker on Ubuntu 18.04</title>
+    <link href="https://newjerseystyle.github.io/en/2020/Pytorch-with-nvidia-docker-on-Ubuntu-18-04/"/>
+    <id>https://newjerseystyle.github.io/en/2020/Pytorch-with-nvidia-docker-on-Ubuntu-18-04/</id>
+    <published>2020-06-18T04:21:47.000Z</published>
+    <updated>2020-06-18T04:57:01.247Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;!-- # Pytorch with nvidia-docker on Ubuntu 18.04 --&gt;
+
+        &lt;h2 id=&quot;Goal&quot;   &gt;
+          &lt;a href=&quot;#Goal&quot; class=&quot;heading-link&quot;&gt;&lt;i
+        
+      
+    
+    </summary>
+    
+    
+    
+      <category term="NVIDIA" scheme="https://NewJerseyStyle.github.io/tags/NVIDIA/"/>
+    
+      <category term="Pytorch" scheme="https://NewJerseyStyle.github.io/tags/Pytorch/"/>
+    
+      <category term="Deep learning" scheme="https://NewJerseyStyle.github.io/tags/Deep-learning/"/>
+    
+      <category term="nvidia-docker" scheme="https://NewJerseyStyle.github.io/tags/nvidia-docker/"/>
+    
+  </entry>
   
   <entry>
     <title>Turn Raspberry Pi 3B+ with Ubuntu Server 18.04 into Wired 4G Router</title>
@@ -89,7 +123,7 @@
     <link href="https://newjerseystyle.github.io/en/2020/Installing-Pytorch-with-CUDA-on-Ubuntu-18-04/"/>
     <id>https://newjerseystyle.github.io/en/2020/Installing-Pytorch-with-CUDA-on-Ubuntu-18-04/</id>
     <published>2020-04-25T01:56:41.000Z</published>
-    <updated>2020-04-25T02:23:31.587Z</updated>
+    <updated>2020-06-18T04:32:43.991Z</updated>
     
     <summary type="html">
     
@@ -280,11 +314,11 @@
     
       <category term="Raspberry Pi" scheme="https://NewJerseyStyle.github.io/tags/Raspberry-Pi/"/>
     
-      <category term="NAT" scheme="https://NewJerseyStyle.github.io/tags/NAT/"/>
-    
       <category term="WWAN" scheme="https://NewJerseyStyle.github.io/tags/WWAN/"/>
     
       <category term="4G" scheme="https://NewJerseyStyle.github.io/tags/4G/"/>
+    
+      <category term="NAT" scheme="https://NewJerseyStyle.github.io/tags/NAT/"/>
     
       <category term="Router" scheme="https://NewJerseyStyle.github.io/tags/Router/"/>
     
@@ -452,11 +486,11 @@
     
       <category term="Raspberry Pi" scheme="https://NewJerseyStyle.github.io/tags/Raspberry-Pi/"/>
     
-      <category term="NAT" scheme="https://NewJerseyStyle.github.io/tags/NAT/"/>
-    
       <category term="WWAN" scheme="https://NewJerseyStyle.github.io/tags/WWAN/"/>
     
       <category term="4G" scheme="https://NewJerseyStyle.github.io/tags/4G/"/>
+    
+      <category term="NAT" scheme="https://NewJerseyStyle.github.io/tags/NAT/"/>
     
       <category term="Router" scheme="https://NewJerseyStyle.github.io/tags/Router/"/>
     
