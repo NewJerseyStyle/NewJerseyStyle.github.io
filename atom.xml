@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://newjerseystyle.github.io/"/>
-  <updated>2020-06-18T04:57:01.247Z</updated>
+  <updated>2020-08-23T05:16:49.501Z</updated>
   <id>https://newjerseystyle.github.io/</id>
   
   <author>
@@ -17,11 +17,39 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Why Game Theory works</title>
+    <link href="https://newjerseystyle.github.io/en/2020/Why-Game-Theory-works/"/>
+    <id>https://newjerseystyle.github.io/en/2020/Why-Game-Theory-works/</id>
+    <published>2020-08-23T04:54:32.000Z</published>
+    <updated>2020-08-23T05:16:49.501Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;!-- # Why Game Theory works --&gt;
+
+        &lt;h2 id=&quot;Think-Forward&quot;   &gt;
+          &lt;a href=&quot;#Think-Forward&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas
+        
+      
+    
+    </summary>
+    
+    
+    
+      <category term="Game Theory" scheme="https://NewJerseyStyle.github.io/tags/Game-Theory/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Pytorch with nvidia-docker on Ubuntu 18.04</title>
     <link href="https://newjerseystyle.github.io/en/2020/Pytorch-with-nvidia-docker-on-Ubuntu-18-04/"/>
     <id>https://newjerseystyle.github.io/en/2020/Pytorch-with-nvidia-docker-on-Ubuntu-18-04/</id>
     <published>2020-06-18T04:21:47.000Z</published>
-    <updated>2020-06-18T04:57:01.247Z</updated>
+    <updated>2020-08-23T04:52:20.986Z</updated>
     
     <summary type="html">
     
@@ -55,7 +83,7 @@
     <link href="https://newjerseystyle.github.io/en/2020/Turn-Raspberry-Pi-3B-with-Ubuntu-Server-18-04-into-Wired-4G-Router/"/>
     <id>https://newjerseystyle.github.io/en/2020/Turn-Raspberry-Pi-3B-with-Ubuntu-Server-18-04-into-Wired-4G-Router/</id>
     <published>2020-04-26T08:47:39.000Z</published>
-    <updated>2020-05-07T14:33:17.672Z</updated>
+    <updated>2020-08-23T04:52:20.987Z</updated>
     
     <summary type="html">
     
@@ -89,7 +117,7 @@
     <link href="https://newjerseystyle.github.io/zh-TW/2020/%E5%9C%A8-Ubuntu-18-04-%E4%B8%8A%E5%AE%89%E8%A3%9D-CUDA-%E5%92%8C-Pytorch/"/>
     <id>https://newjerseystyle.github.io/zh-TW/2020/%E5%9C%A8-Ubuntu-18-04-%E4%B8%8A%E5%AE%89%E8%A3%9D-CUDA-%E5%92%8C-Pytorch/</id>
     <published>2020-04-25T16:31:49.000Z</published>
-    <updated>2020-04-25T16:34:35.575Z</updated>
+    <updated>2020-08-23T04:52:20.988Z</updated>
     
     <summary type="html">
     
@@ -123,7 +151,7 @@
     <link href="https://newjerseystyle.github.io/en/2020/Installing-Pytorch-with-CUDA-on-Ubuntu-18-04/"/>
     <id>https://newjerseystyle.github.io/en/2020/Installing-Pytorch-with-CUDA-on-Ubuntu-18-04/</id>
     <published>2020-04-25T01:56:41.000Z</published>
-    <updated>2020-06-18T04:32:43.991Z</updated>
+    <updated>2020-08-23T04:52:20.985Z</updated>
     
     <summary type="html">
     
@@ -157,7 +185,7 @@
     <link href="https://newjerseystyle.github.io/zh-TW/2020/%E5%9C%A8-Ubuntu-18-04-%E4%B8%8A%E5%AE%89%E8%A3%9D-ROCm-3.3.0-%E5%92%8C-Pytorch/"/>
     <id>https://newjerseystyle.github.io/zh-TW/2020/%E5%9C%A8-Ubuntu-18-04-%E4%B8%8A%E5%AE%89%E8%A3%9D-ROCm-3.3.0-%E5%92%8C-Pytorch/</id>
     <published>2020-04-18T15:43:26.000Z</published>
-    <updated>2020-05-01T03:46:41.490Z</updated>
+    <updated>2020-08-23T04:52:20.989Z</updated>
     
     <summary type="html">
     
@@ -191,7 +219,7 @@
     <link href="https://newjerseystyle.github.io/zh-TW/2020/%E5%9C%A8-Ubuntu-18-04-%E4%B8%8A%E5%AE%89%E8%A3%9D-ROCm-3.3.0-%E5%92%8C-TensorFlow/"/>
     <id>https://newjerseystyle.github.io/zh-TW/2020/%E5%9C%A8-Ubuntu-18-04-%E4%B8%8A%E5%AE%89%E8%A3%9D-ROCm-3.3.0-%E5%92%8C-TensorFlow/</id>
     <published>2020-04-18T15:42:33.000Z</published>
-    <updated>2020-04-25T16:38:28.018Z</updated>
+    <updated>2020-08-23T04:52:20.989Z</updated>
     
     <summary type="html">
     
@@ -225,7 +253,7 @@
     <link href="https://newjerseystyle.github.io/en/2020/Installing-Pytorch-with-ROCm-3.3.0-on-Ubuntu-18.04/"/>
     <id>https://newjerseystyle.github.io/en/2020/Installing-Pytorch-with-ROCm-3.3.0-on-Ubuntu-18.04/</id>
     <published>2020-04-18T15:38:30.000Z</published>
-    <updated>2020-05-01T03:36:48.025Z</updated>
+    <updated>2020-08-23T04:52:20.985Z</updated>
     
     <summary type="html">
     
@@ -259,7 +287,7 @@
     <link href="https://newjerseystyle.github.io/en/2020/Installing-ROCm-3.3.0-for-Deep-learning-on-Ubuntu-18.04/"/>
     <id>https://newjerseystyle.github.io/en/2020/Installing-ROCm-3.3.0-for-Deep-learning-on-Ubuntu-18.04/</id>
     <published>2020-04-18T15:38:00.000Z</published>
-    <updated>2020-04-25T16:01:33.917Z</updated>
+    <updated>2020-08-23T04:52:20.985Z</updated>
     
     <summary type="html">
     
@@ -293,7 +321,7 @@
     <link href="https://newjerseystyle.github.io/zh-TW/2020/Raspberry-Pi-%E5%8C%96%E8%BA%AB-WiFi-%E8%9B%8B/"/>
     <id>https://newjerseystyle.github.io/zh-TW/2020/Raspberry-Pi-%E5%8C%96%E8%BA%AB-WiFi-%E8%9B%8B/</id>
     <published>2020-04-12T04:03:11.000Z</published>
-    <updated>2020-05-07T14:30:08.185Z</updated>
+    <updated>2020-08-23T04:52:20.988Z</updated>
     
     <summary type="html">
     
@@ -314,11 +342,11 @@
     
       <category term="Raspberry Pi" scheme="https://NewJerseyStyle.github.io/tags/Raspberry-Pi/"/>
     
+      <category term="NAT" scheme="https://NewJerseyStyle.github.io/tags/NAT/"/>
+    
       <category term="WWAN" scheme="https://NewJerseyStyle.github.io/tags/WWAN/"/>
     
       <category term="4G" scheme="https://NewJerseyStyle.github.io/tags/4G/"/>
-    
-      <category term="NAT" scheme="https://NewJerseyStyle.github.io/tags/NAT/"/>
     
       <category term="Router" scheme="https://NewJerseyStyle.github.io/tags/Router/"/>
     
@@ -329,7 +357,7 @@
     <link href="https://newjerseystyle.github.io/en/2020/Video-based-Motion-Detection-in-Python-with-OpenCV/"/>
     <id>https://newjerseystyle.github.io/en/2020/Video-based-Motion-Detection-in-Python-with-OpenCV/</id>
     <published>2020-04-11T05:08:20.000Z</published>
-    <updated>2020-04-12T08:55:52.451Z</updated>
+    <updated>2020-08-23T04:55:40.229Z</updated>
     
     <summary type="html">
     
@@ -361,7 +389,7 @@
     <link href="https://newjerseystyle.github.io/zh-TW/2020/Raspberry-Pi-%E4%BD%BF%E7%94%A8-4G-%E6%95%B8%E6%93%9A%E7%B6%B2%E8%B7%AF/"/>
     <id>https://newjerseystyle.github.io/zh-TW/2020/Raspberry-Pi-%E4%BD%BF%E7%94%A8-4G-%E6%95%B8%E6%93%9A%E7%B6%B2%E8%B7%AF/</id>
     <published>2020-04-11T03:01:55.000Z</published>
-    <updated>2020-04-19T13:07:26.804Z</updated>
+    <updated>2020-08-23T04:52:20.988Z</updated>
     
     <summary type="html">
     
@@ -395,7 +423,7 @@
     <link href="https://newjerseystyle.github.io/en/2020/Network-usage-monitor-using-Python/"/>
     <id>https://newjerseystyle.github.io/en/2020/Network-usage-monitor-using-Python/</id>
     <published>2020-04-10T09:15:36.000Z</published>
-    <updated>2020-04-10T10:49:51.875Z</updated>
+    <updated>2020-08-23T04:52:20.986Z</updated>
     
     <summary type="html">
     
@@ -431,7 +459,7 @@
     <link href="https://newjerseystyle.github.io/en/2020/Raspberry-Pi-connect-to-4G-LTE/"/>
     <id>https://newjerseystyle.github.io/en/2020/Raspberry-Pi-connect-to-4G-LTE/</id>
     <published>2020-04-10T05:51:19.000Z</published>
-    <updated>2020-04-26T08:53:11.912Z</updated>
+    <updated>2020-08-23T04:52:20.987Z</updated>
     
     <summary type="html">
     
@@ -465,7 +493,7 @@
     <link href="https://newjerseystyle.github.io/en/2020/Raspberry-Pi-as-4G-LTE-Router/"/>
     <id>https://newjerseystyle.github.io/en/2020/Raspberry-Pi-as-4G-LTE-Router/</id>
     <published>2020-04-10T02:53:11.000Z</published>
-    <updated>2020-05-07T14:31:28.343Z</updated>
+    <updated>2020-08-23T04:52:20.986Z</updated>
     
     <summary type="html">
     
@@ -486,11 +514,11 @@
     
       <category term="Raspberry Pi" scheme="https://NewJerseyStyle.github.io/tags/Raspberry-Pi/"/>
     
+      <category term="NAT" scheme="https://NewJerseyStyle.github.io/tags/NAT/"/>
+    
       <category term="WWAN" scheme="https://NewJerseyStyle.github.io/tags/WWAN/"/>
     
       <category term="4G" scheme="https://NewJerseyStyle.github.io/tags/4G/"/>
-    
-      <category term="NAT" scheme="https://NewJerseyStyle.github.io/tags/NAT/"/>
     
       <category term="Router" scheme="https://NewJerseyStyle.github.io/tags/Router/"/>
     
