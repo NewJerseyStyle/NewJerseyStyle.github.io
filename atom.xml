@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://newjerseystyle.github.io/"/>
-  <updated>2020-08-23T05:28:16.032Z</updated>
+  <updated>2020-08-29T05:50:45.638Z</updated>
   <id>https://newjerseystyle.github.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Why GPT works</title>
+    <link href="https://newjerseystyle.github.io/en/2020/Why-GPT-works/"/>
+    <id>https://newjerseystyle.github.io/en/2020/Why-GPT-works/</id>
+    <published>2020-08-23T05:19:48.000Z</published>
+    <updated>2020-08-29T05:50:45.638Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;!-- # Why GPT works --&gt;
+
+        &lt;h2 id=&quot;GPT-DNN-approximation&quot;   &gt;
+          &lt;a href=&quot;#GPT-DNN-approximation&quot; class=&quot;heading-link&quot;&gt;&lt;i
+        
+      
+    
+    </summary>
+    
+    
+    
+      <category term="Deep learning" scheme="https://NewJerseyStyle.github.io/tags/Deep-learning/"/>
+    
+  </entry>
   
   <entry>
     <title>Why Game Theory works</title>
@@ -342,11 +370,11 @@
     
       <category term="Raspberry Pi" scheme="https://NewJerseyStyle.github.io/tags/Raspberry-Pi/"/>
     
-      <category term="NAT" scheme="https://NewJerseyStyle.github.io/tags/NAT/"/>
-    
       <category term="WWAN" scheme="https://NewJerseyStyle.github.io/tags/WWAN/"/>
     
       <category term="4G" scheme="https://NewJerseyStyle.github.io/tags/4G/"/>
+    
+      <category term="NAT" scheme="https://NewJerseyStyle.github.io/tags/NAT/"/>
     
       <category term="Router" scheme="https://NewJerseyStyle.github.io/tags/Router/"/>
     
@@ -389,7 +417,7 @@
     <link href="https://newjerseystyle.github.io/zh-TW/2020/Raspberry-Pi-%E4%BD%BF%E7%94%A8-4G-%E6%95%B8%E6%93%9A%E7%B6%B2%E8%B7%AF/"/>
     <id>https://newjerseystyle.github.io/zh-TW/2020/Raspberry-Pi-%E4%BD%BF%E7%94%A8-4G-%E6%95%B8%E6%93%9A%E7%B6%B2%E8%B7%AF/</id>
     <published>2020-04-11T03:01:55.000Z</published>
-    <updated>2020-08-23T04:52:20.988Z</updated>
+    <updated>2020-08-29T05:53:18.794Z</updated>
     
     <summary type="html">
     
@@ -459,7 +487,7 @@
     <link href="https://newjerseystyle.github.io/en/2020/Raspberry-Pi-connect-to-4G-LTE/"/>
     <id>https://newjerseystyle.github.io/en/2020/Raspberry-Pi-connect-to-4G-LTE/</id>
     <published>2020-04-10T05:51:19.000Z</published>
-    <updated>2020-08-23T04:52:20.987Z</updated>
+    <updated>2020-08-29T05:52:27.449Z</updated>
     
     <summary type="html">
     
@@ -514,11 +542,11 @@
     
       <category term="Raspberry Pi" scheme="https://NewJerseyStyle.github.io/tags/Raspberry-Pi/"/>
     
-      <category term="NAT" scheme="https://NewJerseyStyle.github.io/tags/NAT/"/>
-    
       <category term="WWAN" scheme="https://NewJerseyStyle.github.io/tags/WWAN/"/>
     
       <category term="4G" scheme="https://NewJerseyStyle.github.io/tags/4G/"/>
+    
+      <category term="NAT" scheme="https://NewJerseyStyle.github.io/tags/NAT/"/>
     
       <category term="Router" scheme="https://NewJerseyStyle.github.io/tags/Router/"/>
     
