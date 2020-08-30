@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://newjerseystyle.github.io/"/>
-  <updated>2020-08-29T05:50:45.638Z</updated>
+  <updated>2020-08-30T05:55:29.412Z</updated>
   <id>https://newjerseystyle.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://newjerseystyle.github.io/en/2020/Why-GPT-works/"/>
     <id>https://newjerseystyle.github.io/en/2020/Why-GPT-works/</id>
     <published>2020-08-23T05:19:48.000Z</published>
-    <updated>2020-08-29T05:50:45.638Z</updated>
+    <updated>2020-08-30T05:55:29.412Z</updated>
     
     <summary type="html">
     
@@ -370,11 +370,11 @@
     
       <category term="Raspberry Pi" scheme="https://NewJerseyStyle.github.io/tags/Raspberry-Pi/"/>
     
+      <category term="NAT" scheme="https://NewJerseyStyle.github.io/tags/NAT/"/>
+    
       <category term="WWAN" scheme="https://NewJerseyStyle.github.io/tags/WWAN/"/>
     
       <category term="4G" scheme="https://NewJerseyStyle.github.io/tags/4G/"/>
-    
-      <category term="NAT" scheme="https://NewJerseyStyle.github.io/tags/NAT/"/>
     
       <category term="Router" scheme="https://NewJerseyStyle.github.io/tags/Router/"/>
     
@@ -542,11 +542,11 @@
     
       <category term="Raspberry Pi" scheme="https://NewJerseyStyle.github.io/tags/Raspberry-Pi/"/>
     
+      <category term="NAT" scheme="https://NewJerseyStyle.github.io/tags/NAT/"/>
+    
       <category term="WWAN" scheme="https://NewJerseyStyle.github.io/tags/WWAN/"/>
     
       <category term="4G" scheme="https://NewJerseyStyle.github.io/tags/4G/"/>
-    
-      <category term="NAT" scheme="https://NewJerseyStyle.github.io/tags/NAT/"/>
     
       <category term="Router" scheme="https://NewJerseyStyle.github.io/tags/Router/"/>
     
