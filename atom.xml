@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://newjerseystyle.github.io/"/>
-  <updated>2020-08-30T05:55:29.412Z</updated>
+  <updated>2021-04-03T04:29:16.531Z</updated>
   <id>https://newjerseystyle.github.io/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>YoloV5 Wheelchair detector</title>
+    <link href="https://newjerseystyle.github.io/en/2021/YoloV5-Wheelchair-detector/"/>
+    <id>https://newjerseystyle.github.io/en/2021/YoloV5-Wheelchair-detector/</id>
+    <published>2021-04-01T06:19:48.000Z</published>
+    <updated>2021-04-03T04:29:16.531Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;!-- # YoloV5 Wheelchair detector --&gt;
+
+        &lt;h1 id=&quot;YoloV5-Wheelchair-detector&quot;   &gt;
+          &lt;a href=&quot;#YoloV5-Wheelchair-detector&quot;
+        
+      
+    
+    </summary>
+    
+    
+    
+      <category term="Deep learning" scheme="https://NewJerseyStyle.github.io/tags/Deep-learning/"/>
+    
+      <category term="Object Detection" scheme="https://NewJerseyStyle.github.io/tags/Object-Detection/"/>
+    
+  </entry>
   
   <entry>
     <title>Why GPT works</title>
@@ -270,9 +300,9 @@
     
       <category term="AMD" scheme="https://NewJerseyStyle.github.io/tags/AMD/"/>
     
-      <category term="ROCm" scheme="https://NewJerseyStyle.github.io/tags/ROCm/"/>
-    
       <category term="TensorFlow" scheme="https://NewJerseyStyle.github.io/tags/TensorFlow/"/>
+    
+      <category term="ROCm" scheme="https://NewJerseyStyle.github.io/tags/ROCm/"/>
     
   </entry>
   
@@ -338,9 +368,9 @@
     
       <category term="AMD" scheme="https://NewJerseyStyle.github.io/tags/AMD/"/>
     
-      <category term="ROCm" scheme="https://NewJerseyStyle.github.io/tags/ROCm/"/>
-    
       <category term="TensorFlow" scheme="https://NewJerseyStyle.github.io/tags/TensorFlow/"/>
+    
+      <category term="ROCm" scheme="https://NewJerseyStyle.github.io/tags/ROCm/"/>
     
   </entry>
   
